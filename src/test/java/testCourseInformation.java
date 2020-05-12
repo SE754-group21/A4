@@ -2,6 +2,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
@@ -58,14 +59,20 @@ public class testCourseInformation {
     @Test
     public void testGetStaff() {
         String cid = "SOFTENG754";
-        List<Staff> staff = new ArrayList<Staff>();
-        CourseHandler handler = new CourseHandler();
+        String sid = "KEJ372";
+        List<Staff> staffList = new ArrayList<Staff>();
+        Staff staff = Mockito.mock(Staff.class);
+        Mockito.when(staff.getID()).thenReturn(sid);
+        staffList.add(staff);
+
         Course course = Mockito.mock(Course.class);
         Mockito.when(course.getCid()).thenReturn(cid);
-        Mockito.when(course.getStaff()).thenReturn(staff);
+        Mockito.when(course.getStaff()).thenReturn(staffList);
+
+        CourseHandler handler = new CourseHandler();
         handler.addCourse(course);
-        List<Staff> s = handler.getStaff(cid);
-        assertEquals(s.size(), 0);
+        List<String> staffnames = handler.getStaff(cid);
+        assertEquals(staffnames.get(0), sid);
     }
 
 
