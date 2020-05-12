@@ -12,6 +12,7 @@ public class DegreeHandler {
     }
 
     public String getDname(String did){
+        if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
         return degrees.get(did).getDname();
     }
 
