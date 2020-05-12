@@ -75,5 +75,12 @@ public class testCourseInformation {
         assertEquals(staffnames.get(0), sid);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testGetStaffInvalidID() {
+        String cid = "SOFTENG754";
+        CourseHandler handler = new CourseHandler();
+        handler.getStaff(cid);
+    }
+
 
 }
