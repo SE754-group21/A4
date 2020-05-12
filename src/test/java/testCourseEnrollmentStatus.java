@@ -44,6 +44,20 @@ public class testCourseEnrollmentStatus {
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
     }
 
+    @Test (expected = NoSuchElementException.class)
+    public void testGetCourseEnrollmentStatusInvalidStudent() {
+
+        Course course = Mockito.mock(Course.class);
+
+        String sid = "oldStduent";
+        String cid = "SE754";
+        Mockito.when(course.getCid()).thenReturn(cid);
+
+        EnrollmentHandler enrollmentHandler = new EnrollmentHandler();
+        enrollmentHandler.addCourse(course);
+        EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
+    }
+
 
 
 
