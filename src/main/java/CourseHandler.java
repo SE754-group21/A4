@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class CourseHandler {
     private Map<String, Course> courses;
@@ -20,5 +18,14 @@ public class CourseHandler {
     public String getCdesc(String cid) {
         if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         return courses.get(cid).getCdesc();
+    }
+
+    public List<String> getStaff(String cid) {
+        List<String> sids = new ArrayList<>();
+        List<Staff> allstaff = courses.get(cid).getStaff();
+        for (Staff s : allstaff) {
+            sids.add(s.getID());
+        }
+        return sids;
     }
 }

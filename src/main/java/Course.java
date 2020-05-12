@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Course {
 
     public Course() {
@@ -14,6 +16,10 @@ public class Course {
 
     public String getCdesc(){
         return "";
+    }
+
+    public List<Staff> getStaff() {
+        return null;
     }
 
 }
