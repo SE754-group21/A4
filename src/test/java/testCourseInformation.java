@@ -91,7 +91,7 @@ public class testCourseInformation {
         Mockito.when(course.getCid()).thenReturn(cid);
         Mockito.when(course.getCHours()).thenReturn(hours);
         handler.addCourse(course);
-        String h = handler.getCHours(cid);
+        List<String> h = handler.getCHours(cid);
         assertEquals(h.size(), 0);
     }
 

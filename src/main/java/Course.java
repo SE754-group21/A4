@@ -22,4 +22,8 @@ public class Course {
         return null;
     }
 
+    public List<String> getCHours() {
+        return null;
+    }
+
 }

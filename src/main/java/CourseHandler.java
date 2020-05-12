@@ -29,4 +29,8 @@ public class CourseHandler {
         }
         return sids;
     }
+
+    public List<String> getCHours(String cid) {
+        return courses.get(cid).getCHours();
+    }
 }
