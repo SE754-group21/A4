@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class EnrollmentHandler {
 
@@ -23,10 +24,17 @@ public class EnrollmentHandler {
 
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {
+
         Student student = students.get(sid);
         Course course = courses.get(cid);
 
-        return student.getEnrollmentStatusForCourse(course);
+        EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
+
+        if (status == null) {
+            throw new NoSuchElementException("course with id not found");
+        }
+
+        return status;
 
     }
 }
