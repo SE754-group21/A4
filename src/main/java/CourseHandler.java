@@ -41,6 +41,7 @@ public class CourseHandler {
     }
 
     public int getRemainingSeats(String cid) {
+        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         return courses.get(cid).getRemainingSeats();
     }
 }
