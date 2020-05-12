@@ -95,5 +95,12 @@ public class testCourseInformation {
         assertEquals(h.size(), 0);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testGetCourseHoursInvalidID() {
+        String cid = "SOFTENG754";
+        CourseHandler handler = new CourseHandler();
+        handler.getCHours(cid);
+    }
+
 
 }
