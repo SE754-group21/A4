@@ -17,6 +17,6 @@ public class DegreeHandler {
     }
 
     public List<Course> getCompulsoryCourses(String did) {
-        return null;
+        return degrees.get(did).getCompulsoryCourses();
     }
 }

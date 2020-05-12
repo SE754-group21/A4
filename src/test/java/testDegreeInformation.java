@@ -50,7 +50,7 @@ public class testDegreeInformation {
         Mockito.when(degree.getCompulsoryCourses()).thenReturn(compulsoryCourses);
         handler.addDegree(degree);
         List<Course> courses = handler.getCompulsoryCourses(did);
-        assertEquals(dname, courses);
+        assertEquals(compulsoryCourses, courses);
     }
 
 }
