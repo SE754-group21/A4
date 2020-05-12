@@ -30,4 +30,8 @@ public class Course {
         return 0;
     }
 
+    public int getRemainingSeats() {
+        return 0; 
+    }
+
 }
