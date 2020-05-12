@@ -26,6 +26,10 @@ public class EnrollmentHandler {
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {
 
         Student student = students.get(sid);
+        if (student == null) {
+            throw new NoSuchElementException("student with id not found");
+        }
+
         Course course = courses.get(cid);
 
         EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
