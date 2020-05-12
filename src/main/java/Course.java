@@ -12,4 +12,8 @@ public class Course {
         return "";
     }
 
+    public String getCdesc(){
+        return "";
+    }
+
 }
