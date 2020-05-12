@@ -82,5 +82,18 @@ public class testCourseInformation {
         handler.getStaff(cid);
     }
 
+    @Test
+    public void testGetCourseHours() {
+        String cid = "SOFTENG754";
+        List<String> hours = new ArrayList<>();
+        CourseHandler handler = new CourseHandler();
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getCHours()).thenReturn(hours);
+        handler.addCourse(course);
+        String h = handler.getCHours(cid);
+        assertEquals(h.size(), 0);
+    }
+
 
 }
