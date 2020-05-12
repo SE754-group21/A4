@@ -102,5 +102,18 @@ public class testCourseInformation {
         handler.getCHours(cid);
     }
 
+    @Test
+    public void testGetTotalSets() {
+        String cid = "SOFTENG754";
+        int total = 1000;
+        CourseHandler handler = new CourseHandler();
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getTotalSeats()).thenReturn(total);
+        handler.addCourse(course);
+        int name = handler.getTotalSeats(cid);
+        assertEquals(name, total);
+    }
+
 
 }
