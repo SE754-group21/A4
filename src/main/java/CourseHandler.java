@@ -21,6 +21,7 @@ public class CourseHandler {
     }
 
     public List<String> getStaff(String cid) {
+        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         List<String> sids = new ArrayList<>();
         List<Staff> allstaff = courses.get(cid).getStaff();
         for (Staff s : allstaff) {
