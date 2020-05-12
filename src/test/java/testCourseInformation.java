@@ -161,5 +161,12 @@ public class testCourseInformation {
         assertEquals(cids.get(0), sid);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testGetPrerequisitesInvalidID() {
+        String cid = "SOFTENG754";
+        CourseHandler handler = new CourseHandler();
+        handler.getPrerequisites(cid);
+    }
+
 
 }
