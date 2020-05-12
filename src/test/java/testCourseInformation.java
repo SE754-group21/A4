@@ -115,5 +115,12 @@ public class testCourseInformation {
         assertEquals(name, total);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testGetTotalSetsInvalidID() {
+        String cid = "SOFTENG754";
+        CourseHandler handler = new CourseHandler();
+        handler.getTotalSeats(cid);
+    }
+
 
 }
