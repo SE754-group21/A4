@@ -142,5 +142,24 @@ public class testCourseInformation {
         handler.getRemainingSeats(cid);
     }
 
+    @Test
+    public void testGetPrerequisites() {
+        String cid = "SOFTENG754";
+        String sid = "KEJ372";
+        List<Course> prereqlist = new ArrayList<Course>();
+        Course prereq = Mockito.mock(Course.class);
+        Mockito.when(prereq.getCid()).thenReturn(sid);
+        prereqlist.add(prereq);
+
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getPrerequisites()).thenReturn(prereqlist);
+
+        CourseHandler handler = new CourseHandler();
+        handler.addCourse(course);
+        List<String> cids = handler.getPrerequisites(cid);
+        assertEquals(cids.get(0), sid);
+    }
+
 
 }
