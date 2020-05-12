@@ -1,4 +1,4 @@
-
+import java.util.List;
 
 public class Degree {
 
@@ -12,5 +12,9 @@ public class Degree {
 
     public String getDname(){
         return "";
+    }
+
+    public List<Course> getCompulsoryCourses() {
+        return null;
     }
 }
