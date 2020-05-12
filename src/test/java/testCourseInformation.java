@@ -42,5 +42,16 @@ public class testCourseInformation {
         assertEquals(name, cdesc);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testGetCourseDescriptionInvalidID() {
+        String cid = "SOFTENG754";
+        String cdesc = "Description of course";
+        CourseHandler handler = new CourseHandler();
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getCdesc()).thenReturn(cdesc);
+        handler.getCdesc(cid);
+    }
+
 
 }
