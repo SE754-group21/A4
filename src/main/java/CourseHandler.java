@@ -13,6 +13,7 @@ public class CourseHandler {
     }
 
     public String getCname(String cid) {
+        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         return courses.get(cid).getCname();
     }
 }
