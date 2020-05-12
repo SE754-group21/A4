@@ -26,4 +26,8 @@ public class Course {
         return null;
     }
 
+    public int getTotalSeats() {
+        return 0;
+    }
+
 }
