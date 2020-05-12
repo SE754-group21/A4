@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class testCourseInformation {
     @Test
-    public void testGetCourseName(){
+    public void testGetCourseName() {
         String cid = "SOFTENG754";
         String cname = "Requirements";
         CourseHandler handler = new CourseHandler();
@@ -19,3 +19,4 @@ public class testCourseInformation {
         String name = handler.getCname(cid);
         assertEquals(name, cname);
     }
+}
