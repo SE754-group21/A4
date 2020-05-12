@@ -44,4 +44,15 @@ public class CourseHandler {
         if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         return courses.get(cid).getRemainingSeats();
     }
+
+    public List<String> getPrerequisites(String cid) {
+        List<String> sids = new ArrayList<>();
+        List<Course> prereqs = courses.get(cid).getPrerequisites();
+        for (Course s : prereqs) {
+            sids.add(s.getCid());
+        }
+        return sids;
+    }
+
+
 }

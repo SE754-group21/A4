@@ -22,6 +22,10 @@ public class Course {
         return null;
     }
 
+    public List<Course> getPrerequisites() {
+        return null;
+    }
+
     public List<String> getCHours() {
         return null;
     }
@@ -31,7 +35,7 @@ public class Course {
     }
 
     public int getRemainingSeats() {
-        return 0; 
+        return 0;
     }
 
 }
