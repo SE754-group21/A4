@@ -99,7 +99,7 @@ public class testCourseEnrollmentStatus {
     }
 
     @Test
-    public void testGetAwaitingConcessionCourseEnrollmentStatus() {
+    public void testGetAwaitingConcessionApplicationStatus() {
 
         String sid = "A123";
         Mockito.when(student.getSid()).thenReturn(sid);
@@ -126,7 +126,7 @@ public class testCourseEnrollmentStatus {
     }
 
     @Test
-    public void testGetConcessionDeniedCourseEnrollmentStatusWithStatusReason() {
+    public void testGetDeniedConcessionApplicationStatusWithStatusReason() {
 
         String sid = "A123";
         Mockito.when(student.getSid()).thenReturn(sid);
@@ -150,4 +150,28 @@ public class testCourseEnrollmentStatus {
         Assert.assertEquals(EnrollmentStatusEnum.concession_denied, status);
         Assert.assertEquals("Denied because the prerequisites do not match", statusReason);
     }
+
+    @Test
+    public void testGetApprovedConcessionApplicationStatus() {
+
+        String sid = "A123";
+        Mockito.when(student.getSid()).thenReturn(sid);
+        String cid = "SE701";
+        Mockito.when(course.getCid()).thenReturn(cid);
+
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApp);
+
+        Mockito.when(concessionApp.getConcessionStatus()).thenReturn(ConcessionStatusEnum.approved);
+        Mockito.when(concessionApp.getStatusReason()).thenReturn("Approved because the faculty agrees this covers the prerequisite");
+
+        enrollmentHandler.addCourse(course);
+        enrollmentHandler.addStudent(student);
+        String statusReason = enrollmentHandler.getStatusReason(sid, cid);
+        String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
+
+        Assert.assertEquals("Approved - concession accepted and enrollment complete", concessionStatus);
+        Assert.assertEquals("Approved because the faculty agrees this covers the prerequisite", statusReason);
+    }
+
 }
