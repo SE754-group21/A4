@@ -21,7 +21,6 @@ public class testDegreeInformation {
         assertEquals(dname, name);
     }
 
-
     @Test(expected = NoSuchElementException.class)
     public void testGetDegreeNameInvalidID() {
         String did = "SOFTENG";
@@ -53,7 +52,6 @@ public class testDegreeInformation {
         assertEquals(compulsoryCourses, courses);
     }
 
-
     @Test(expected = NoSuchElementException.class)
     public void testGetCompulsoryCoursesInvalidID() {
         String did = "SOFTENG";
@@ -70,9 +68,7 @@ public class testDegreeInformation {
 
         DegreeHandler handler = new DegreeHandler();
         List<Course> courses = handler.getCompulsoryCourses(did);
-
     }
-
 
     @Test
     public void testGetElectiveCourses() {
@@ -92,6 +88,25 @@ public class testDegreeInformation {
         handler.addDegree(degree);
         List<Course> courses = handler.getElectiveCourses(did);
         assertEquals(electiveCourses, courses);
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testGetElectiveCoursesInvalidID() {
+        String did = "SOFTENG";
+        String dname = "Software Engineering";
+        String cid = "COMPSCI373";
+
+        List<Course> electiveCourses = new ArrayList<Course>();
+        Course electiveCourse1 = Mockito.mock(Course.class);
+        Mockito.when(electiveCourse1.getCid()).thenReturn(cid);
+        electiveCourses.add(electiveCourse1);
+
+        DegreeHandler handler = new DegreeHandler();
+        Degree degree = Mockito.mock(Degree.class);
+        Mockito.when(degree.getDid()).thenReturn(did);
+        Mockito.when(degree.getElectiveCourses()).thenReturn(electiveCourses);
+
+        List<Course> courses = handler.getElectiveCourses(did);
     }
 
 
