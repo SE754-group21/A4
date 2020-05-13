@@ -87,7 +87,7 @@ public class testCourseEnrollmentStatus {
         Student student = Mockito.mock(Student.class);
         Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.enrolled);
 
-        Mockito.when(student.getWaitingListNumber(course)).thenReturn(null);
+        Mockito.when(student.getWaitingListNumber(course)).thenReturn(-1);
 
         String sid = "A123";
         Mockito.when(student.getSid()).thenReturn(sid);

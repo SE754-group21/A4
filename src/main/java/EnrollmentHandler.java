@@ -45,6 +45,14 @@ public class EnrollmentHandler {
     public int getWaitingListPositionForStudent(String sid, String cid) {
         Student student = students.get(sid);
         Course course = courses.get(cid);
-        return student.getWaitingListNumber(course);
+
+        EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
+
+        if (status != EnrollmentStatusEnum.waiting_list) {
+            throw new NoSuchElementException("student is not on the waiting list for this course");
+        }
+        int waitingListPosition = student.getWaitingListNumber(course);
+
+        return waitingListPosition;
     }
 }
