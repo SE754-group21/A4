@@ -53,4 +53,25 @@ public class testDegreeInformation {
         assertEquals(compulsoryCourses, courses);
     }
 
+
+    @Test(expected = NoSuchElementException.class)
+    public void testGetCompulsoryCoursesInvalidID() {
+        String did = "SOFTENG";
+        String cid = "ENGGEN303";
+        List<Course> compulsoryCourses = new ArrayList<Course>();
+
+        Course compulsoryCourse1 = Mockito.mock(Course.class);
+        Mockito.when(compulsoryCourse1.getCid()).thenReturn(cid);
+        compulsoryCourses.add(compulsoryCourse1);
+
+        Degree degree = Mockito.mock(Degree.class);
+        Mockito.when(degree.getDid()).thenReturn(did);
+        Mockito.when(degree.getCompulsoryCourses()).thenReturn(compulsoryCourses);
+
+        DegreeHandler handler = new DegreeHandler();
+        List<Course> courses = handler.getCompulsoryCourses(did);
+
+    }
+
+
 }
