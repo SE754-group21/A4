@@ -20,4 +20,10 @@ public class DegreeHandler {
         if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
         return degrees.get(did).getCompulsoryCourses();
     }
+
+
+    public List<Course> getElectiveCourses(String did) {
+        return null;
+    }
+
 }

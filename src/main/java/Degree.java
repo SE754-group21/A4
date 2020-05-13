@@ -17,4 +17,9 @@ public class Degree {
     public List<Course> getCompulsoryCourses() {
         return null;
     }
+
+    public List<Course> getElectiveCourses() {
+        return null;
+    }
+
 }
