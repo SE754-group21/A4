@@ -74,4 +74,25 @@ public class testDegreeInformation {
     }
 
 
+    @Test
+    public void testGetElectiveCourses() {
+        String did = "SOFTENG";
+        String dname = "Software Engineering";
+        String cid = "COMPSCI373";
+
+        List<Course> electiveCourses = new ArrayList<Course>();
+        Course electiveCourse1 = Mockito.mock(Course.class);
+        Mockito.when(electiveCourse1.getCid()).thenReturn(cid);
+        electiveCourses.add(electiveCourse1);
+
+        DegreeHandler handler = new DegreeHandler();
+        Degree degree = Mockito.mock(Degree.class);
+        Mockito.when(degree.getDid()).thenReturn(did);
+        Mockito.when(degree.getElectiveCourses()).thenReturn(electiveCourses);
+        handler.addDegree(degree);
+        List<Course> courses = handler.getElectiveCourses(did);
+        assertEquals(electiveCourses, courses);
+    }
+
+
 }
