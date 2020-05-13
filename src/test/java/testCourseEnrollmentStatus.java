@@ -130,7 +130,32 @@ public class testCourseEnrollmentStatus {
         Assert.assertEquals(EnrollmentStatusEnum.awaiting_concession, status);
         Assert.assertEquals("Class is full", concessionReason);
         Assert.assertEquals("Pending - awaiting course approval", concessionStatus);
+    }
 
+    @Test
+    public void testGetConcessionDeniedCourseEnrollmentStatusWithStatus() {
+        Course course = Mockito.mock(Course.class);
+        Student student = Mockito.mock(Student.class);
+
+        String sid = "A123";
+        Mockito.when(student.getSid()).thenReturn(sid);
+        String cid = "SE701";
+        Mockito.when(course.getCid()).thenReturn(cid);
+
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.concession_denied);
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApp);
+
+        Mockito.when(concessionApp.getStatusReason()).thenReturn("Denied because the prerequisites do not match");
+
+        EnrollmentHandler enrollmentHandler = new EnrollmentHandler();
+        enrollmentHandler.addCourse(course);
+        enrollmentHandler.addStudent(student);
+        EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
+        String statusReason = enrollmentHandler.getStatusReason(sid, cid);
+
+        Assert.assertEquals(EnrollmentStatusEnum.concession_denied, status);
+        Assert.assertEquals("Denied because the prerequisites do not match", statusReason);
     }
 
 

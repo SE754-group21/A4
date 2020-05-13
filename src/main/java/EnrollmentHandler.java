@@ -78,4 +78,8 @@ public class EnrollmentHandler {
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         return concessionApplication.getConcessionReason();
     }
+
+    public String getStatusReason(String sid, String cid) {
+        return "";
+    }
 }

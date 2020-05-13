@@ -12,4 +12,8 @@ public class ConcessionApplication {
     public ConcessionStatusEnum getConcessionStatus() {
         return null;
     }
+
+    public String getStatusReason() {
+        return "";
+    }
 }
