@@ -23,7 +23,7 @@ public class DegreeHandler {
 
 
     public List<Course> getElectiveCourses(String did) {
-        return null;
+        return degrees.get(did).getElectiveCourses();
     }
 
 }
