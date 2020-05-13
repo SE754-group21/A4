@@ -11,4 +11,8 @@ public class Student {
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
         return null;
     }
+
+    public int getWaitingListNumber(Course course) {
+        return 0;
+    }
 }

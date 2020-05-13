@@ -1,3 +1,3 @@
 public enum EnrollmentStatusEnum {
-    enrolled
+    waiting_list, enrolled
 }

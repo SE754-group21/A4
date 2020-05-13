@@ -41,4 +41,8 @@ public class EnrollmentHandler {
         return status;
 
     }
+
+    public int getWaitingListPositionForStudent(String sid, String cid) {
+        return 0;
+    }
 }
