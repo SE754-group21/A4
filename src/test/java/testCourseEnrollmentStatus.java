@@ -191,7 +191,7 @@ public class testCourseEnrollmentStatus {
         enrollmentHandler.addStudent(student);
         String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
 
-        Assert.assertEquals("There is not concession for this course", concessionStatus);
+        Assert.assertEquals("There is no concession for this course", concessionStatus);
     }
 
 }

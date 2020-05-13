@@ -72,8 +72,9 @@ public class EnrollmentHandler {
         else if (concessionStatus == ConcessionStatusEnum.approved) {
             return "Approved - concession accepted and enrollment complete";
         }
-
-        return "";
+        else {
+            return "There is no concession for this course";
+        }
     }
 
     public String getConcessionReason(String sid, String cid) {
