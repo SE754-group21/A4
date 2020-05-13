@@ -11,7 +11,6 @@ public class EnrollmentHandler {
     public EnrollmentHandler() {
         students = new HashMap<String, Student>();
         courses = new HashMap<String, Course>();
-
     }
 
     public void addCourse(Course course) {
@@ -27,7 +26,7 @@ public class EnrollmentHandler {
 
         Student student = students.get(sid);
         if (student == null) {
-            throw new NoSuchElementException("student with id not found");
+            throw new NoSuchElementException("Student with id not found");
         }
 
         Course course = courses.get(cid);
@@ -35,7 +34,7 @@ public class EnrollmentHandler {
         EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
 
         if (status == null) {
-            throw new NoSuchElementException("course with id not found");
+            throw new NoSuchElementException("Student not enrolled in this course");
         }
 
         return status;
@@ -73,7 +72,7 @@ public class EnrollmentHandler {
             return "Approved - concession accepted and enrollment complete";
         }
         else {
-            return "There is no concession for this course";
+            return "The student has no concession for this course";
         }
     }
 
