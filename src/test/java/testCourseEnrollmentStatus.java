@@ -81,6 +81,26 @@ public class testCourseEnrollmentStatus {
         Assert.assertEquals(62, waitingListPosition);
     }
 
+    @Test (expected = NoSuchElementException.class)
+    public void testGetWaitingListPositionInvalidCourseEnrollmentStatus() {
+        Course course = Mockito.mock(Course.class);
+        Student student = Mockito.mock(Student.class);
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.enrolled);
+
+        Mockito.when(student.getWaitingListNumber(course)).thenReturn(null);
+
+        String sid = "A123";
+        Mockito.when(student.getSid()).thenReturn(sid);
+        String cid = "SE701";
+        Mockito.when(course.getCid()).thenReturn(cid);
+
+        EnrollmentHandler enrollmentHandler = new EnrollmentHandler();
+        enrollmentHandler.addCourse(course);
+        enrollmentHandler.addStudent(student);
+        EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
+        int waitingListPosition = enrollmentHandler.getWaitingListPositionForStudent(sid, cid);
+    }
+
 
 
 
