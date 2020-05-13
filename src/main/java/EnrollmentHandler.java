@@ -43,6 +43,8 @@ public class EnrollmentHandler {
     }
 
     public int getWaitingListPositionForStudent(String sid, String cid) {
-        return 0;
+        Student student = students.get(sid);
+        Course course = courses.get(cid);
+        return student.getWaitingListNumber(course);
     }
 }
