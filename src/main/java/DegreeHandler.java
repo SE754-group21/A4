@@ -23,6 +23,7 @@ public class DegreeHandler {
 
 
     public List<Course> getElectiveCourses(String did) {
+        if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
         return degrees.get(did).getElectiveCourses();
     }
 
