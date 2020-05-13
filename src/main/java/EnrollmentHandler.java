@@ -69,7 +69,9 @@ public class EnrollmentHandler {
         else if (concessionStatus == ConcessionStatusEnum.denied) {
             return "Denied - concession not approved";
         }
-
+        else if (concessionStatus == ConcessionStatusEnum.approved) {
+            return "Approved - concession accepted and enrollment complete";
+        }
 
         return "";
     }
