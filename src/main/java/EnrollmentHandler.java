@@ -57,10 +57,25 @@ public class EnrollmentHandler {
     }
 
     public String getConcessionStatus(String sid, String cid) {
+        Student student = students.get(sid);
+        Course course = courses.get(cid);
+
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        ConcessionStatusEnum concessionStatus = concessionApplication.getConcessionStatus();
+
+        if (concessionStatus == ConcessionStatusEnum.pending) {
+            return "Pending - awaiting course approval";
+        }
+
+
         return "";
     }
 
     public String getConcessionReason(String sid, String cid) {
-        return "";
+        Student student = students.get(sid);
+        Course course = courses.get(cid);
+
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        return concessionApplication.getConcessionReason();
     }
 }

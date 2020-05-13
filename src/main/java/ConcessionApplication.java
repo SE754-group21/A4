@@ -1,11 +1,15 @@
 public class ConcessionApplication {
 
 
-    public String getConcessionReason(String sid, String cid) {
+    public String getConcessionReason() {
         return "";
     }
 
-    public boolean isConcessionApproved(String sid, String cid) {
+    public boolean isConcessionApproved() {
         return false;
+    }
+
+    public ConcessionStatusEnum getConcessionStatus() {
+        return null;
     }
 }

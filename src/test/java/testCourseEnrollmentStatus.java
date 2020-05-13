@@ -116,8 +116,9 @@ public class testCourseEnrollmentStatus {
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApp);
 
-        Mockito.when(concessionApp.isConcessionApproved(sid, cid)).thenReturn(false);
-        Mockito.when(concessionApp.getConcessionReason(sid, cid)).thenReturn("Class is full");
+        Mockito.when(concessionApp.isConcessionApproved()).thenReturn(false);
+        Mockito.when(concessionApp.getConcessionReason()).thenReturn("Class is full");
+        Mockito.when(concessionApp.getConcessionStatus()).thenReturn(ConcessionStatusEnum.pending);
 
         EnrollmentHandler enrollmentHandler = new EnrollmentHandler();
         enrollmentHandler.addCourse(course);
@@ -126,10 +127,9 @@ public class testCourseEnrollmentStatus {
         String concessionReason = enrollmentHandler.getConcessionReason(sid, cid);
         String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
 
-
         Assert.assertEquals(EnrollmentStatusEnum.awaiting_concession, status);
         Assert.assertEquals("Class is full", concessionReason);
-        Assert.assertEquals("Pending - awaiting course approval ", concessionStatus);
+        Assert.assertEquals("Pending - awaiting course approval", concessionStatus);
 
     }
 
