@@ -15,4 +15,8 @@ public class Student {
     public int getWaitingListNumber(Course course) {
         return 0;
     }
+
+    public ConcessionApplication getConcessionApplication(Course course) {
+        return null;
+    }
 }

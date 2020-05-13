@@ -55,4 +55,12 @@ public class EnrollmentHandler {
 
         return waitingListPosition;
     }
+
+    public String getConcessionStatus(String sid, String cid) {
+        return "";
+    }
+
+    public String getConcessionReason(String sid, String cid) {
+        return "";
+    }
 }
