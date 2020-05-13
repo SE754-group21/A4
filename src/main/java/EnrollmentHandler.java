@@ -66,6 +66,9 @@ public class EnrollmentHandler {
         if (concessionStatus == ConcessionStatusEnum.pending) {
             return "Pending - awaiting course approval";
         }
+        else if (concessionStatus == ConcessionStatusEnum.denied) {
+            return "Denied - concession not approved";
+        }
 
 
         return "";
@@ -80,6 +83,10 @@ public class EnrollmentHandler {
     }
 
     public String getStatusReason(String sid, String cid) {
-        return "";
+        Student student = students.get(sid);
+        Course course = courses.get(cid);
+
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        return concessionApplication.getStatusReason();
     }
 }

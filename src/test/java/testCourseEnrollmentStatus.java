@@ -146,6 +146,7 @@ public class testCourseEnrollmentStatus {
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApp);
 
+        Mockito.when(concessionApp.getConcessionStatus()).thenReturn(ConcessionStatusEnum.denied);
         Mockito.when(concessionApp.getStatusReason()).thenReturn("Denied because the prerequisites do not match");
 
         EnrollmentHandler enrollmentHandler = new EnrollmentHandler();
@@ -153,13 +154,11 @@ public class testCourseEnrollmentStatus {
         enrollmentHandler.addStudent(student);
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
         String statusReason = enrollmentHandler.getStatusReason(sid, cid);
+        String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
 
+        Assert.assertEquals("Denied - concession not approved", concessionStatus);
         Assert.assertEquals(EnrollmentStatusEnum.concession_denied, status);
         Assert.assertEquals("Denied because the prerequisites do not match", statusReason);
     }
-
-
-
-
 
 }
