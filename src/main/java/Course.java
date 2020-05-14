@@ -38,4 +38,6 @@ public class Course {
         return 0;
     }
 
+    public void addStudent() {}
+
 }

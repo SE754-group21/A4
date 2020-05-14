@@ -48,7 +48,7 @@ public class CourseInformationTest {
         String sid = "KEJ372";
         List<Staff> staffList = new ArrayList<Staff>();
         Staff staff = Mockito.mock(Staff.class);
-        Mockito.when(staff.getID()).thenReturn(sid);
+        Mockito.when(staff.getSid()).thenReturn(sid);
         staffList.add(staff);
 
         Course course = Mockito.mock(Course.class);
