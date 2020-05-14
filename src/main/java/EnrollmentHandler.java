@@ -22,6 +22,10 @@ public class EnrollmentHandler {
         students.put(student.getSid(), student);
     }
 
+    public boolean enrollStudentCourse(String sid, String cid) {
+
+    }
+
     public boolean studentMeetsPrerequisites(String sid, String cid) {
         if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         if (students.get(sid) == null) throw new NoSuchElementException("student with id not found");
@@ -30,6 +34,10 @@ public class EnrollmentHandler {
         List<Course> studentTaken = student.getTakenCourses();
         List<Course> prereqs = course.getPrerequisites();
         return studentTaken.containsAll(prereqs);
+    }
+
+    public boolean seatsRemaining(String cid) {
+        return true;
     }
 
 
