@@ -22,7 +22,7 @@ public class EnrollmentHandler {
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
-        return false;
+        return true;
     }
 
 

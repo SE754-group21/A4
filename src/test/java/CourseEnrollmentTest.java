@@ -20,6 +20,5 @@ public class CourseEnrollmentTest {
         EnrollmentHandler handler = new EnrollmentHandler();
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertTrue(meets);
-
     }
 }
