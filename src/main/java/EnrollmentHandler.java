@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -22,7 +23,11 @@ public class EnrollmentHandler {
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
-        return true;
+        Student student = students.get(sid);
+        Course course = courses.get(cid);
+        List<Course> studentTaken = student.getTakenCourses();
+        List<Course> prereqs = course.getPrerequisites();
+        return studentTaken.containsAll(prereqs);
     }
 
 

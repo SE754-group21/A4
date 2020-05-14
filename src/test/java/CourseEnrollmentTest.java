@@ -20,6 +20,8 @@ public class CourseEnrollmentTest {
         Mockito.when(student.getTakenCourses()).thenReturn(courses);
         Mockito.when(course.getPrerequisites()).thenReturn(courses);
         EnrollmentHandler handler = new EnrollmentHandler();
+        handler.addCourse(course);
+        handler.addStudent(student);
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertTrue(meets);
     }
@@ -38,6 +40,8 @@ public class CourseEnrollmentTest {
         Mockito.when(student.getTakenCourses()).thenReturn(new ArrayList<>());
         Mockito.when(course.getPrerequisites()).thenReturn(courses);
         EnrollmentHandler handler = new EnrollmentHandler();
+        handler.addCourse(course);
+        handler.addStudent(student);
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertFalse(meets);
     }
