@@ -111,7 +111,12 @@ public class CourseEnrollmentTest {
 
     @Test
     public void testGetSeatsAvailableNone() {
+        String cid = "SE754";
+        String sid = "12345";
+        Student student = Mockito.mock(Student.class);
         Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(student.getSid()).thenReturn(sid);
         EnrollmentHandler handler = new EnrollmentHandler(db);
         Mockito.when(course.getRemainingSeats()).thenReturn(0);
         boolean remaining = handler.seatsRemaining(course);
@@ -120,7 +125,12 @@ public class CourseEnrollmentTest {
 
     @Test
     public void testGetSeatsAvailable() {
+        String cid = "SE754";
+        String sid = "12345";
+        Student student = Mockito.mock(Student.class);
         Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(student.getSid()).thenReturn(sid);
         EnrollmentHandler handler = new EnrollmentHandler(db);
         Mockito.when(course.getRemainingSeats()).thenReturn(1);
         boolean remaining = handler.seatsRemaining(course);

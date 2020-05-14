@@ -10,6 +10,8 @@ public class Student {
         return "";
     }
 
+    public void addEnrolledCourse(Course course) {}
+
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
         return null;
     }
