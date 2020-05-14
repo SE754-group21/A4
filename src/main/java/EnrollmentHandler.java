@@ -26,7 +26,7 @@ public class EnrollmentHandler {
     }
 
     public boolean seatsRemaining(Course course) {
-        return true;
+        return course.getRemainingSeats() > 0;
     }
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {

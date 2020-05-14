@@ -111,9 +111,7 @@ public class CourseEnrollmentTest {
 
     @Test
     public void testGetSeatsAvailableNone() {
-        String cid = "SE754";
         Course course = Mockito.mock(Course.class);
-        Mockito.when(db.getCourse(cid)).thenReturn(course);
         EnrollmentHandler handler = new EnrollmentHandler(db);
         Mockito.when(course.getRemainingSeats()).thenReturn(0);
         boolean remaining = handler.seatsRemaining(course);
