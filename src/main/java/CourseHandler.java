@@ -18,7 +18,7 @@ public class CourseHandler {
         List<String> sids = new ArrayList<>();
         List<Staff> allstaff = db.getCourse(cid).getStaff();
         for (Staff s : allstaff) {
-            sids.add(s.getID());
+            sids.add(s.getSid());
         }
         return sids;
     }

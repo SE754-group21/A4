@@ -1,13 +1,9 @@
 import java.util.List;
 
-public class Student {
+public class Student extends User {
 
     public Student() {
 
-    }
-
-    public String getSid() {
-        return "";
     }
 
     public void addEnrolledCourse(Course course) {}
