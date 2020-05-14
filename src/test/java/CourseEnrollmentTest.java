@@ -117,4 +117,13 @@ public class CourseEnrollmentTest {
         boolean remaining = handler.seatsRemaining(course);
         assertFalse(remaining);
     }
+
+    @Test
+    public void testGetSeatsAvailable() {
+        Course course = Mockito.mock(Course.class);
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        Mockito.when(course.getRemainingSeats()).thenReturn(1);
+        boolean remaining = handler.seatsRemaining(course);
+        assertTrue(remaining);
+    }
 }
