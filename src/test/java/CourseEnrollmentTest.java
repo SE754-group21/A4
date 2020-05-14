@@ -80,8 +80,8 @@ public class CourseEnrollmentTest {
         Mockito.when(handler.seatsRemaining(cid)).thenReturn(true);
         Mockito.when(handler.studentMeetsPrerequisites(sid, cid)).thenReturn(true);
         Mockito.when(handler.enrollStudentCourse(sid, cid)).thenCallRealMethod();
-        handler.addCourse(student);
-        handler.addStudent(course);
+        handler.addCourse(course);
+        handler.addStudent(student);
         boolean success = handler.enrollStudentCourse(sid, cid);
         assertTrue(success);
     }
