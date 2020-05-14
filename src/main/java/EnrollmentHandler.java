@@ -23,6 +23,7 @@ public class EnrollmentHandler {
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
+        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         Student student = students.get(sid);
         Course course = courses.get(cid);
         List<Course> studentTaken = student.getTakenCourses();
