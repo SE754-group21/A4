@@ -6,15 +6,17 @@ import org.mockito.Mockito;
 import java.util.NoSuchElementException;
 
 public class CourseEnrollmentStatusTest {
-    Course course;
-    Student student;
-    EnrollmentHandler enrollmentHandler;
+    private Course course;
+    private Student student;
+    private EnrollmentHandler enrollmentHandler;
+    private Database db;
 
     @Before
     public void setUp() {
         course = Mockito.mock(Course.class);
         student = Mockito.mock(Student.class);
-        enrollmentHandler =  new EnrollmentHandler();
+        db = Mockito.mock(Database.class);
+        enrollmentHandler =  new EnrollmentHandler(db);
     }
 
     @Test
@@ -27,8 +29,8 @@ public class CourseEnrollmentStatusTest {
         String cid = "SE754";
         Mockito.when(course.getCid()).thenReturn(cid);
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
 
         Assert.assertEquals(EnrollmentStatusEnum.enrolled, status);
@@ -45,7 +47,7 @@ public class CourseEnrollmentStatusTest {
         String cid = "SE867";
         Mockito.when(course.getCid()).thenReturn(cid);
 
-        enrollmentHandler.addStudent(student);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
     }
 
@@ -56,7 +58,7 @@ public class CourseEnrollmentStatusTest {
         String cid = "SE754";
         Mockito.when(course.getCid()).thenReturn(cid);
 
-        enrollmentHandler.addCourse(course);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
     }
 
@@ -71,8 +73,8 @@ public class CourseEnrollmentStatusTest {
         String cid = "SE701";
         Mockito.when(course.getCid()).thenReturn(cid);
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
         int waitingListPosition = enrollmentHandler.getWaitingListPositionForStudent(sid, cid);
 
@@ -90,8 +92,8 @@ public class CourseEnrollmentStatusTest {
         String cid = "SE701";
         Mockito.when(course.getCid()).thenReturn(cid);
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
         enrollmentHandler.getWaitingListPositionForStudent(sid, cid);
     }

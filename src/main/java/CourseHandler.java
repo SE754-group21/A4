@@ -1,29 +1,22 @@
 import java.util.*;
 
 public class CourseHandler {
-    private Map<String, Course> courses;
-    public CourseHandler() {
-        courses = new HashMap<String, Course>();
-    }
-
-    public void addCourse(Course course) {
-        courses.put(course.getCid(), course);
+    private Database db;
+    public CourseHandler(Database db) {
+        this.db = db;
     }
 
     public String getCname(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getCname();
+        return db.getCourse(cid).getCname();
     }
 
     public String getCdesc(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getCdesc();
+        return db.getCourse(cid).getCdesc();
     }
 
     public List<String> getStaff(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         List<String> sids = new ArrayList<>();
-        List<Staff> allstaff = courses.get(cid).getStaff();
+        List<Staff> allstaff = db.getCourse(cid).getStaff();
         for (Staff s : allstaff) {
             sids.add(s.getID());
         }
@@ -31,24 +24,21 @@ public class CourseHandler {
     }
 
     public List<String> getCHours(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getCHours();
+        return db.getCourse(cid).getCHours();
     }
 
     public int getTotalSeats(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getTotalSeats();
+        return db.getCourse(cid).getTotalSeats();
     }
 
     public int getRemainingSeats(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getRemainingSeats();
+        return db.getCourse(cid).getRemainingSeats();
     }
 
     public List<String> getPrerequisites(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         List<String> sids = new ArrayList<>();
-        List<Course> prereqs = courses.get(cid).getPrerequisites();
+        Course course = db.getCourse(cid);
+        List<Course> prereqs = course.getPrerequisites();
         for (Course s : prereqs) {
             sids.add(s.getCid());
         }
