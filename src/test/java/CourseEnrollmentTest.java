@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.logging.Handler;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -106,5 +107,16 @@ public class CourseEnrollmentTest {
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         boolean success = handler.enrollStudentCourse(sid, cid);
         assertFalse(success);
+    }
+
+    @Test
+    public void testGetSeatsAvailableNone() {
+        String cid = "SE754";
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        Mockito.when(course.getRemainingSeats()).thenReturn(0);
+        boolean remaining = handler.seatsRemaining(course);
+        assertFalse(remaining);
     }
 }

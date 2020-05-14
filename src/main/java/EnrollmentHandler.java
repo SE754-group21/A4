@@ -29,8 +29,6 @@ public class EnrollmentHandler {
         return true;
     }
 
-
-
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {
 
         Student student = db.getStudent(sid);
