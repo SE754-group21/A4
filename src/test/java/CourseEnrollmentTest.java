@@ -71,4 +71,22 @@ public class CourseEnrollmentTest {
         boolean success = handler.enrollStudentCourse(sid, cid);
         assertTrue(success);
     }
+
+    @Test
+    public void testEnrolPrerequisitesMetNoSeatsAvailable() {
+        String cid = "SE754";
+        String sid = "12345";
+        Student student = Mockito.mock(Student.class);
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(student.getSid()).thenReturn(sid);
+        EnrollmentHandler h = new EnrollmentHandler(db);
+        EnrollmentHandler handler = Mockito.spy(h);
+        Mockito.doReturn(false).when(handler).seatsRemaining(course);
+        Mockito.doReturn(true).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        boolean success = handler.enrollStudentCourse(sid, cid);
+        assertFalse(success);
+    }
 }
