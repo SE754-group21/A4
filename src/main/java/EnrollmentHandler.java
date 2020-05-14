@@ -23,7 +23,8 @@ public class EnrollmentHandler {
     }
 
     public boolean enrollStudentCourse(String sid, String cid) {
-
+        Course course = courses.get(cid);
+        return true;
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
@@ -36,7 +37,7 @@ public class EnrollmentHandler {
         return studentTaken.containsAll(prereqs);
     }
 
-    public boolean seatsRemaining(String cid) {
+    public boolean seatsRemaining(Course course) {
         return true;
     }
 
