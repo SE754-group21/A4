@@ -17,8 +17,8 @@ public class CourseEnrollmentTest {
         Mockito.when(student.getSid()).thenReturn(sid);
         Mockito.when(student.getTakenCourses()).thenReturn(courses);
         Mockito.when(course.getPrerequisites()).thenReturn(courses);
-        CourseHandler handler = new CourseHandler();
-        boolean meets = handler.studentMeetsPrerequisites(student, course);
+        EnrollmentHandler handler = new EnrollmentHandler();
+        boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertTrue(meets);
 
     }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Student {
 
     public Student() {
@@ -9,6 +11,10 @@ public class Student {
     }
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
+        return null;
+    }
+
+    public List<Course> getTakenCourses() {
         return null;
     }
 

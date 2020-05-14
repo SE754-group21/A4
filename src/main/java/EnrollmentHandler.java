@@ -21,6 +21,10 @@ public class EnrollmentHandler {
         students.put(student.getSid(), student);
     }
 
+    public boolean studentMeetsPrerequisites(String sid, String cid) {
+        return false;
+    }
+
 
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {
