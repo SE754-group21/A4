@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
-public class testDegreeInformation {
+public class DegreeInformationTest {
 
     @Test
     public void testGetDegreeName() {

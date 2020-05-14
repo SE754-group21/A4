@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-public class testConcessionApplicationStatus {
+public class ConcessionApplicationStatusTest {
     Course course;
     Student student;
     EnrollmentHandler enrollmentHandler;
@@ -101,7 +101,7 @@ public class testConcessionApplicationStatus {
         enrollmentHandler.addStudent(student);
         String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
 
-        Assert.assertEquals("There is no concession for this course", concessionStatus);
+        Assert.assertEquals("The student has no concession for this course", concessionStatus);
     }
 
 }
