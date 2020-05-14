@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 
-public class testCourseInformation {
+public class CourseInformationTest {
     @Test
     public void testGetCourseName() {
         String cid = "SOFTENG754";

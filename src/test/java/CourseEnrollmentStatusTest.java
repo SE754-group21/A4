@@ -5,7 +5,7 @@ import org.mockito.Mockito;
 
 import java.util.NoSuchElementException;
 
-public class testCourseEnrollmentStatus {
+public class CourseEnrollmentStatusTest {
     Course course;
     Student student;
     EnrollmentHandler enrollmentHandler;
