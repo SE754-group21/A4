@@ -3,6 +3,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -44,5 +45,16 @@ public class CourseEnrollmentTest {
         handler.addStudent(student);
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertFalse(meets);
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testStudentNotMeetPrerequisitesInvalidCid() {
+        String cid = "SE754";
+        String sid = "12345";
+        Student student = Mockito.mock(Student.class);
+        Mockito.when(student.getSid()).thenReturn(sid);
+        EnrollmentHandler handler = new EnrollmentHandler();
+        handler.addStudent(student);
+        handler.studentMeetsPrerequisites(sid, cid);
     }
 }
