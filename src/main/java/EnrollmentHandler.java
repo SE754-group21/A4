@@ -5,33 +5,22 @@ import java.util.NoSuchElementException;
 
 public class EnrollmentHandler {
 
-    private Map<String, Student> students ;
-    private Map<String, Course> courses;
+    private Database db;
 
 
-    public EnrollmentHandler() {
-        students = new HashMap<String, Student>();
-        courses = new HashMap<String, Course>();
-    }
-
-    public void addCourse(Course course) {
-        courses.put(course.getCid(), course);
-    }
-
-    public void addStudent(Student student) {
-        students.put(student.getSid(), student);
+    public EnrollmentHandler(Database db) {
+        this.db = db;
     }
 
     public boolean enrollStudentCourse(String sid, String cid) {
-        Course course = courses.get(cid);
+        //Course course = db.getCourse(cid);
         return true;
+        //return seatsRemaining(course) && studentMeetsPrerequisites(sid, cid);
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        if (students.get(sid) == null) throw new NoSuchElementException("student with id not found");
-        Student student = students.get(sid);
-        Course course = courses.get(cid);
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
         List<Course> studentTaken = student.getTakenCourses();
         List<Course> prereqs = course.getPrerequisites();
         return studentTaken.containsAll(prereqs);
@@ -45,12 +34,12 @@ public class EnrollmentHandler {
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {
 
-        Student student = students.get(sid);
+        Student student = db.getStudent(sid);
         if (student == null) {
             throw new NoSuchElementException("Student with id not found");
         }
 
-        Course course = courses.get(cid);
+        Course course = db.getCourse(cid);
 
         EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
 
@@ -63,8 +52,8 @@ public class EnrollmentHandler {
     }
 
     public int getWaitingListPositionForStudent(String sid, String cid) {
-        Student student = students.get(sid);
-        Course course = courses.get(cid);
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
 
         EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
 
@@ -77,8 +66,8 @@ public class EnrollmentHandler {
     }
 
     public String getConcessionStatus(String sid, String cid) {
-        Student student = students.get(sid);
-        Course course = courses.get(cid);
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
 
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         ConcessionStatusEnum concessionStatus = concessionApplication.getConcessionStatus();
@@ -98,16 +87,16 @@ public class EnrollmentHandler {
     }
 
     public String getConcessionReason(String sid, String cid) {
-        Student student = students.get(sid);
-        Course course = courses.get(cid);
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
 
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         return concessionApplication.getConcessionReason();
     }
 
     public String getStatusReason(String sid, String cid) {
-        Student student = students.get(sid);
-        Course course = courses.get(cid);
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
 
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         return concessionApplication.getStatusReason();
