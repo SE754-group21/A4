@@ -13,9 +13,8 @@ public class EnrollmentHandler {
     }
 
     public boolean enrollStudentCourse(String sid, String cid) {
-        //Course course = db.getCourse(cid);
-        return true;
-        //return seatsRemaining(course) && studentMeetsPrerequisites(sid, cid);
+        Course course = db.getCourse(cid);
+        return seatsRemaining(course) && studentMeetsPrerequisites(sid, cid);
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
