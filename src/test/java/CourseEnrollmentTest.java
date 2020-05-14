@@ -57,4 +57,14 @@ public class CourseEnrollmentTest {
         handler.addStudent(student);
         handler.studentMeetsPrerequisites(sid, cid);
     }
+    @Test (expected = NoSuchElementException.class)
+    public void testStudentNotMeetPrerequisitesInvalidSid() {
+        String cid = "SE754";
+        String sid = "12345";
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        EnrollmentHandler handler = new EnrollmentHandler();
+        handler.addCourse(course);
+        handler.studentMeetsPrerequisites(sid, cid);
+    }
 }
