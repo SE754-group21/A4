@@ -53,4 +53,23 @@ public class SearchCoursesTest {
         assertEquals(0, searchedCoursesIncorrectSearch.size());
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
+
+    @Test
+    public void testSearchCourseDegree(){
+        CourseHandler courseHandler = new CourseHandler(db);
+        Course course = Mockito.mock(Course.class);
+        String cid = "SOFTENG 701";
+        String cDept = "Software Engineering";
+        Map<String, Course> courses = new HashMap<String, Course>();
+        courses.put(cid, course);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getCdept()).thenReturn(cDept);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getAllCourses()).thenReturn(courses);
+
+        List<Course> searchedCoursesCorrectSearch = courseHandler.search("software engineering");
+        List<Course> searchedCoursesIncorrectSearch = courseHandler.search("softwar enginering");
+        assertEquals(0, searchedCoursesIncorrectSearch.size());
+        assertEquals(1, searchedCoursesCorrectSearch.size());
+    }
 }
