@@ -72,4 +72,29 @@ public class SearchCoursesTest {
         assertEquals(0, searchedCoursesIncorrectSearch.size());
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
+
+    @Test
+    public void testSearchCourseStaffFirstName(){
+        CourseHandler courseHandler = new CourseHandler(db);
+        Course course = Mockito.mock(Course.class);
+        Staff staff = Mockito.mock(Staff.class);
+        String cid = "SOFTENG 701";
+        String firstName = "Kelly";
+        List<Staff> staffList = new ArrayList<>();
+        staffList.add(staff);
+        Map<String, Course> courses = new HashMap<String, Course>();
+        courses.put(cid, course);
+
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getStaff()).thenReturn(staffList);
+        Mockito.when(staff.getFirst()).thenReturn(firstName);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getAllCourses()).thenReturn(courses);
+
+        List<Course> searchedCoursesCorrectSearch = courseHandler.search("Kelly");
+        List<Course> searchedCoursesIncorrectSearch = courseHandler.search("klly");
+
+        assertEquals(0, searchedCoursesIncorrectSearch.size());
+        assertEquals(1, searchedCoursesCorrectSearch.size());
+    }
 }
