@@ -3,4 +3,5 @@ public abstract class User {
         return "";
     }
     public String getFirst() {return "";}
+    public String getLast() {return "";}
 }
