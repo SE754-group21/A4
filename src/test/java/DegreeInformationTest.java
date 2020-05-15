@@ -86,8 +86,8 @@ public class DegreeInformationTest {
         Mockito.when(degree.getDid()).thenReturn(did);
         Mockito.when(degree.getElectiveCourses()).thenReturn(electiveCourses);
         handler.addDegree(degree);
-        List<Course> courses = handler.getElectiveCourses(did);
-        assertEquals(electiveCourses, courses);
+        List<String> courses = handler.getElectiveCourses(did);
+        assertEquals(electiveCourses.get(0).getCid(), courses.get(0));
     }
 
     @Test (expected = NoSuchElementException.class)
@@ -106,7 +106,7 @@ public class DegreeInformationTest {
         Mockito.when(degree.getDid()).thenReturn(did);
         Mockito.when(degree.getElectiveCourses()).thenReturn(electiveCourses);
 
-        List<Course> courses = handler.getElectiveCourses(did);
+        List<String> courses = handler.getElectiveCourses(did);
     }
 
 
