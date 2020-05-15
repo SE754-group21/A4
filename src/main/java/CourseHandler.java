@@ -45,5 +45,14 @@ public class CourseHandler {
         return sids;
     }
 
-
+    public List<Course> search(String search) {
+        List<Course> searchedCourses = new ArrayList<>();
+        Map<String, Course> courses = db.getAllCourses();
+        for (Map.Entry<String, Course> e : courses.entrySet()) {
+            if (e.getValue().getCname() != null && e.getValue().getCname().toLowerCase().contains(search.toLowerCase())) {
+                searchedCourses.add(e.getValue());
+            }
+        }
+        return searchedCourses;
+    }
 }
