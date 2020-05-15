@@ -21,9 +21,5 @@ public class Database {
         return students.get(sid);
     }
 
-    public Map<String, Course> getAllCourses(){
-        return courses;
-    }
-
 
 }
