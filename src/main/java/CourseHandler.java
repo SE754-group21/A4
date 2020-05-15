@@ -52,6 +52,9 @@ public class CourseHandler {
             if (e.getValue().getCname() != null && e.getValue().getCname().toLowerCase().contains(search.toLowerCase())) {
                 searchedCourses.add(e.getValue());
             }
+            if(e.getValue().getCdesc() != null && e.getValue().getCdesc().toLowerCase().contains(search.toLowerCase())){
+                searchedCourses.add(e.getValue());
+            }
         }
         return searchedCourses;
     }
