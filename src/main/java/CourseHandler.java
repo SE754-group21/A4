@@ -58,6 +58,12 @@ public class CourseHandler {
             if(e.getValue().getCdept() != null && e.getValue().getCdept().toLowerCase().contains(search.toLowerCase())){
                 searchedCourses.add(e.getValue());
             }
+            List<Staff> staff = e.getValue().getStaff();
+            for(Staff s: staff) {
+                if (s.getFirst() != null && s.getFirst().toLowerCase().contains(search.toLowerCase())) {
+                    searchedCourses.add(e.getValue());
+                }
+            }
         }
         return searchedCourses;
     }
