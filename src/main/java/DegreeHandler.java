@@ -16,15 +16,25 @@ public class DegreeHandler {
         return degrees.get(did).getDname();
     }
 
-    public List<Course> getCompulsoryCourses(String did) {
+    public List<String> getCompulsoryCourses(String did) {
         if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
-        return degrees.get(did).getCompulsoryCourses();
+        List<String> courseIDs = new ArrayList<String>();
+        List<Course> courses = degrees.get(did).getCompulsoryCourses();
+        for (Course course: courses){
+            courseIDs.add(course.getCid());
+        }
+        return courseIDs;
     }
 
 
-    public List<Course> getElectiveCourses(String did) {
+    public List<String> getElectiveCourses(String did) {
         if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
-        return degrees.get(did).getElectiveCourses();
+        List<String> courseIDs = new ArrayList<String>();
+        List<Course> courses = degrees.get(did).getElectiveCourses();
+        for (Course course: courses){
+            courseIDs.add(course.getCid());
+        }
+        return courseIDs;
     }
 
 }
