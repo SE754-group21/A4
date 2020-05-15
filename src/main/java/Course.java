@@ -18,6 +18,8 @@ public class Course {
         return "";
     }
 
+    public String getCdept() {return "";}
+
     public List<Staff> getStaff() {
         return null;
     }
