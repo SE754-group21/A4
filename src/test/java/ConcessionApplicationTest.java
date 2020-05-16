@@ -1,20 +1,31 @@
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import static org.junit.Assert.assertEquals;
 
 public class ConcessionApplicationTest {
 
+    String cid;
+    String sid;
+    Database db;
+    Student student;
+    Course course;
+
+    @Before
+    public void setUp() {
+        cid = "SE754";
+        sid = "12345";
+        db = Mockito.mock(Database.class);
+
+        student = Mockito.mock(Student.class);
+        course = Mockito.mock(Course.class);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+    }
+
 
     @Test
     public void testStudentPrereqsMetConcessionApplication() {
-        String cid = "SE754";
-        String sid = "12345";
-        Database db = Mockito.mock(Database.class);
-
-        Student student = Mockito.mock(Student.class);
-        Course course = Mockito.mock(Course.class);
-        Mockito.when(db.getCourse(cid)).thenReturn(course);
-        Mockito.when(db.getStudent(sid)).thenReturn(student);
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.prerequisites_met);
 
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
@@ -27,14 +38,6 @@ public class ConcessionApplicationTest {
 
     @Test
     public void testStudentAwaitingConcessionConcessionApplication() {
-        String cid = "SE754";
-        String sid = "12345";
-        Database db = Mockito.mock(Database.class);
-
-        Student student = Mockito.mock(Student.class);
-        Course course = Mockito.mock(Course.class);
-        Mockito.when(db.getCourse(cid)).thenReturn(course);
-        Mockito.when(db.getStudent(sid)).thenReturn(student);
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.awaiting_concession);
 
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
@@ -47,15 +50,7 @@ public class ConcessionApplicationTest {
 
     @Test
     public void testStudentPrereqsNotMetConcessionApplication() {
-        String cid = "SE754";
-        String sid = "12345";
         ConcessionStatusEnum concessionStatus = ConcessionStatusEnum.pending;
-        Database db = Mockito.mock(Database.class);
-
-        Student student = Mockito.mock(Student.class);
-        Course course = Mockito.mock(Course.class);
-        Mockito.when(db.getCourse(cid)).thenReturn(course);
-        Mockito.when(db.getStudent(sid)).thenReturn(student);
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.prerequisites_not_met);
 
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
