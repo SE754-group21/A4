@@ -28,6 +28,7 @@ public class CourseHandler {
     }
 
     public int getTotalSeats(String cid) {
+        if (db.getCourse(cid) == null) throw new NoSuchElementException("course with id not found");
         return db.getCourse(cid).getTotalSeats();
     }
 
