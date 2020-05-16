@@ -29,6 +29,14 @@ public class NumberofSeatsTest {
         assertEquals(numSeats, actualNumSeats);
     }
 
+    @Test (expected = NoSuchElementException.class)
+    public void testGetTotalNumberOfSeatsInvalidCourse() {
+        CourseHandler handler = new CourseHandler(db);
+
+        int actualNumSeats = handler.getTotalSeats(null);
+    }
+
+
     @Test
     public void testGetNumberOfAvailableSeats() {
         String cid = "SOFTENG351";
