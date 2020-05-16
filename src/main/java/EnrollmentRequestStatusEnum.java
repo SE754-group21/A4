@@ -1,3 +1,4 @@
 public enum EnrollmentRequestStatusEnum {
-    prerequisites_met
+    prerequisites_met,
+    awaiting_concession
 }
