@@ -8,6 +8,10 @@ public class Student extends User {
 
     public void addEnrolledCourse(Course course) {}
 
+    public EnrollmentRequestStatusEnum getEnrollmentRequestStatusForCourse(Course course){
+        return null;
+    }
+
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
         return null;
     }
