@@ -17,6 +17,8 @@ public class ConcessionApplicationHandler {
 
         if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.prerequisites_met) {
             return "Students that meet prerequisites are not required to apply for a concession";
+        } else if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.awaiting_concession) {
+            return "Students may only submit one concession application for a course";
         }
         return null;
     }
