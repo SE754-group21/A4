@@ -13,6 +13,10 @@ public class ConcessionApplication {
         return null;
     }
 
+    public ConcessionApplication setConcessionStatus() {
+        return null;
+    }
+
     public String getStatusReason() {
         return "";
     }
