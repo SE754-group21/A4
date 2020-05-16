@@ -49,6 +49,7 @@ public class ConcessionApplicationTest {
     public void testStudentPrereqsNotMetConcessionApplication() {
         String cid = "SE754";
         String sid = "12345";
+        ConcessionStatusEnum concessionStatus = ConcessionStatusEnum.pending;
         Database db = Mockito.mock(Database.class);
 
         Student student = Mockito.mock(Student.class);
@@ -58,12 +59,12 @@ public class ConcessionApplicationTest {
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.prerequisites_not_met);
 
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
-        Mockito.when(concessionApp.setConcessionStatus()).thenCallRealMethod();
+        Mockito.when(concessionApp.setConcessionStatus(concessionStatus)).thenCallRealMethod();
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
 
-        String concessionStatus = handler.submitApplication(sid, cid, concessionApp);
+        String concessionApplicationResult = handler.submitApplication(sid, cid, concessionApp);
 
-        assertEquals("Concession application submitted", concessionStatus);
+        assertEquals("Concession application submitted", concessionApplicationResult);
     }
 
 }

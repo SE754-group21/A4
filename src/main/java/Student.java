@@ -27,4 +27,8 @@ public class Student extends User {
     public ConcessionApplication getConcessionApplication(Course course) {
         return null;
     }
+
+    public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
+
+    }
 }

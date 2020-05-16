@@ -25,4 +25,6 @@ public class Database {
         return courses;
     }
 
+    public void addConcessionApplication(String cid, String sid, ConcessionApplication concessionApp) {
+    }
 }
