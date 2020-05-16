@@ -25,4 +25,24 @@ public class ConcessionApplicationTest {
         assertEquals("Students that meet prerequisites are not required to apply for a concession", concessionStatus);
     }
 
+    @Test
+    public void testStudentAwaitingConcessionConcessionApplication() {
+        String cid = "SE754";
+        String sid = "12345";
+        Database db = Mockito.mock(Database.class);
+
+        Student student = Mockito.mock(Student.class);
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.awaiting_concession);
+
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+
+        String concessionStatus = handler.submitApplication(sid, cid, concessionApp);
+
+        assertEquals("Students may only submit one concession application for a course", concessionStatus);
+    }
+
 }
