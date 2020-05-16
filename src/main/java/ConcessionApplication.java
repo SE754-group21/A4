@@ -1,5 +1,6 @@
 public class ConcessionApplication {
 
+    ConcessionStatusEnum concessionStatus;
 
     public String getConcessionReason() {
         return "";
@@ -11,6 +12,11 @@ public class ConcessionApplication {
 
     public ConcessionStatusEnum getConcessionStatus() {
         return null;
+    }
+
+    public boolean setConcessionStatus(ConcessionStatusEnum concessionStatus) {
+        this.concessionStatus = concessionStatus;
+        return true;
     }
 
     public String getStatusReason() {

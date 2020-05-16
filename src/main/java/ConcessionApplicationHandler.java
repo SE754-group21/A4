@@ -20,6 +20,11 @@ public class ConcessionApplicationHandler {
         } else if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.awaiting_concession) {
             return "Students may only submit one concession application for a course";
         }
-        return null;
+
+        //Submit concession application
+        db.addConcessionApplication(cid, sid, concessionApp);
+        student.setEnrollmentRequestStatusForCourse(course, EnrollmentRequestStatusEnum.awaiting_concession);
+        concessionApp.setConcessionStatus(ConcessionStatusEnum.pending);
+        return "Concession application submitted";
     }
 }
