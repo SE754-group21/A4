@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertEquals;
 
 public class NumberofSeatsTest {
@@ -26,5 +28,21 @@ public class NumberofSeatsTest {
         int actualNumSeats = handler.getTotalSeats(cid);
         assertEquals(numSeats, actualNumSeats);
     }
+
+    @Test
+    public void testGetNumberOfAvailableSeats() {
+        String cid = "SOFTENG351";
+        int numSeats = 36;
+
+        CourseHandler handler = new CourseHandler(db);
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(course.getRemainingSeats()).thenReturn(numSeats);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+
+        int actualNumSeats = handler.getRemainingSeats(cid);
+        assertEquals(numSeats, actualNumSeats);
+    }
+
 
 }
