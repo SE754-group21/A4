@@ -65,6 +65,7 @@ public class CourseEnrollmentStatusTest {
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetAwaitingCourseEnrollmentStatus() {
         Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
