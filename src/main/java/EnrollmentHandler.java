@@ -104,4 +104,12 @@ public class EnrollmentHandler {
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         return concessionApplication.getStatusReason();
     }
+
+    public EnrollmentEvent concessionGetsApproved(String sid, String cid) {
+        return null;
+    }
+
+    public String notifyChange(String sid, String cid, EnrollmentEvent enrollmentEvent) {
+        return "";
+    }
 }
