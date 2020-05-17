@@ -1,6 +1,7 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 public class ConcessionApplicationStatusTest {
@@ -17,6 +18,7 @@ public class ConcessionApplicationStatusTest {
         enrollmentHandler =  new EnrollmentHandler(db);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetAwaitingConcessionApplicationStatus() {
 
@@ -40,6 +42,7 @@ public class ConcessionApplicationStatusTest {
         Assert.assertEquals("Pending - awaiting course approval", concessionStatus);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetDeniedConcessionApplicationStatusWithStatusReason() {
 
@@ -63,6 +66,7 @@ public class ConcessionApplicationStatusTest {
         Assert.assertEquals("Denied because the prerequisites do not match", statusReason);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetApprovedConcessionApplicationStatus() {
 
@@ -86,6 +90,7 @@ public class ConcessionApplicationStatusTest {
         Assert.assertEquals("Approved because the faculty agrees this covers the prerequisite", statusReason);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testInvalidConcessionStatus() {
 

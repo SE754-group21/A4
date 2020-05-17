@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -17,6 +18,8 @@ public class CourseEnrollmentTest {
     public void setUp() {
         db = Mockito.mock(Database.class);
     }
+
+    @Category(UnitTests.class)
     @Test
     public void testStudentMeetsPrerequisites() {
         String cid = "SE754";
@@ -55,6 +58,7 @@ public class CourseEnrollmentTest {
         assertFalse(meets);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testEnrolPrerequisitesMetSeatsAvailable() {
         String cid = "SE754";
@@ -73,6 +77,7 @@ public class CourseEnrollmentTest {
         assertTrue(success);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testEnrolPrerequisitesMetNoSeatsAvailable() {
         String cid = "SE754";
@@ -91,6 +96,7 @@ public class CourseEnrollmentTest {
         assertFalse(success);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testEnrolPrerequisitesNotMetSeatsAvailable() {
         String cid = "SE754";
@@ -109,6 +115,7 @@ public class CourseEnrollmentTest {
         assertFalse(success);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetSeatsAvailableNone() {
         String cid = "SE754";
@@ -123,6 +130,7 @@ public class CourseEnrollmentTest {
         assertFalse(remaining);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetSeatsAvailable() {
         String cid = "SE754";

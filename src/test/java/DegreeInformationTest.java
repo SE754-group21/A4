@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.NoSuchElementException;
 import static org.junit.Assert.assertEquals;
 public class DegreeInformationTest {
 
+    @Category(UnitTests.class)
     @Test
     public void testGetDegreeName() {
         String did = "SOFTENG";
@@ -21,6 +23,7 @@ public class DegreeInformationTest {
         assertEquals(dname, name);
     }
 
+    @Category(UnitTests.class)
     @Test(expected = NoSuchElementException.class)
     public void testGetDegreeNameInvalidID() {
         String did = "SOFTENG";
@@ -32,6 +35,7 @@ public class DegreeInformationTest {
         String name = handler.getDname(did);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetCompulsoryCourses() {
         String did = "SOFTENG";
@@ -52,6 +56,7 @@ public class DegreeInformationTest {
         assertEquals(compulsoryCourses.get(0).getCid(), courses.get(0));
     }
 
+    @Category(UnitTests.class)
     @Test(expected = NoSuchElementException.class)
     public void testGetCompulsoryCoursesInvalidID() {
         String did = "SOFTENG";
@@ -70,6 +75,7 @@ public class DegreeInformationTest {
         List<String> courses = handler.getCompulsoryCourses(did);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetElectiveCourses() {
         String did = "SOFTENG";
@@ -90,6 +96,7 @@ public class DegreeInformationTest {
         assertEquals(electiveCourses.get(0).getCid(), courses.get(0));
     }
 
+    @Category(UnitTests.class)
     @Test (expected = NoSuchElementException.class)
     public void testGetElectiveCoursesInvalidID() {
         String did = "SOFTENG";

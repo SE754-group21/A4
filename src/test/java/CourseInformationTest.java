@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class CourseInformationTest {
     public void setUp() {
         db = Mockito.mock(Database.class);
     }
+
+    @Category(UnitTests.class)
     @Test
     public void testGetCourseName() {
         String cid = "SOFTENG754";
@@ -27,6 +30,7 @@ public class CourseInformationTest {
         assertEquals(name, cname);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetCourseDescription() {
         String cid = "SOFTENG754";
@@ -40,8 +44,7 @@ public class CourseInformationTest {
         assertEquals(name, cdesc);
     }
 
-
-
+    @Category(UnitTests.class)
     @Test
     public void testGetStaff() {
         String cid = "SOFTENG754";
@@ -61,6 +64,7 @@ public class CourseInformationTest {
         assertEquals(staffnames.get(0), sid);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetCourseHours() {
         String cid = "SOFTENG754";
@@ -74,7 +78,7 @@ public class CourseInformationTest {
         assertEquals(h.size(), 0);
     }
 
-
+    @Category(UnitTests.class)
     @Test
     public void testGetTotalSets() {
         String cid = "SOFTENG754";
@@ -88,6 +92,7 @@ public class CourseInformationTest {
         assertEquals(name, total);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetSeatsRemaining() {
         String cid = "SOFTENG754";
@@ -101,6 +106,7 @@ public class CourseInformationTest {
         assertEquals(name, total);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testGetPrerequisites() {
         String cid = "SOFTENG754";
@@ -119,6 +125,5 @@ public class CourseInformationTest {
         List<String> cids = handler.getPrerequisites(cid);
         assertEquals(cids.get(0), sid);
     }
-
 
 }

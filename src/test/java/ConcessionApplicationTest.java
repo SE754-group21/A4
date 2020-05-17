@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +24,7 @@ public class ConcessionApplicationTest {
         Mockito.when(db.getStudent(sid)).thenReturn(student);
     }
 
-
+    @Category(UnitTests.class)
     @Test
     public void testStudentPrereqsMetConcessionApplication() {
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.prerequisites_met);
@@ -36,6 +37,7 @@ public class ConcessionApplicationTest {
         assertEquals("Students that meet prerequisites are not required to apply for a concession", concessionStatus);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testStudentAwaitingConcessionConcessionApplication() {
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.awaiting_concession);
@@ -48,6 +50,7 @@ public class ConcessionApplicationTest {
         assertEquals("Students may only submit one concession application for a course", concessionStatus);
     }
 
+    @Category(UnitTests.class)
     @Test
     public void testStudentPrereqsNotMetConcessionApplication() {
         ConcessionStatusEnum concessionStatus = ConcessionStatusEnum.pending;
