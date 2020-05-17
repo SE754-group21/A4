@@ -13,7 +13,7 @@ public class SSOIntegrationTest {
         String username = "ibea707";
         String password = "password";
 
-        Mockito.when(sso.verify()).thenReturn(true);
+        Mockito.when(sso.verify(username, password)).thenReturn(true);
 
         String login = auth.verifyLogin(username, password);
         assertEquals("Login successful", login);
