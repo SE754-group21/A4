@@ -6,6 +6,15 @@ public class Student extends User {
 
     }
 
+
+    public void setSid(String sid){
+
+    }
+
+    public void setTakenCourses(List<Course> courses){
+
+    }
+
     public void addEnrolledCourse(Course course) {}
 
     public EnrollmentRequestStatusEnum getEnrollmentRequestStatusForCourse(Course course){
@@ -31,4 +40,5 @@ public class Student extends User {
     public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
 
     }
+
 }

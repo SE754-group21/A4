@@ -1,9 +1,15 @@
 import java.util.List;
 
 public class Course {
-
+    
     public Course() {
 
+    }
+
+    public void setCid(String cid) {
+    }
+
+    public void setPrerequisites(List<Course> courses) {
     }
 
     public String getCname() {
@@ -41,5 +47,6 @@ public class Course {
     }
 
     public void addStudent() {}
+
 
 }
