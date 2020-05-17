@@ -2,17 +2,23 @@ import java.util.List;
 
 public class Student extends User {
 
+    String sid;
+    List<Course> courses;
+
     public Student() {
 
     }
 
-
     public void setSid(String sid){
+        this.sid = sid;
+    }
 
+    public String getSid(){
+        return this.sid;
     }
 
     public void setTakenCourses(List<Course> courses){
-
+        this.courses = courses;
     }
 
     public void addEnrolledCourse(Course course) {}
@@ -26,7 +32,7 @@ public class Student extends User {
     }
 
     public List<Course> getTakenCourses() {
-        return null;
+        return courses;
     }
 
     public int getWaitingListNumber(Course course) {

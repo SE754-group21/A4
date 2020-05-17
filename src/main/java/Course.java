@@ -1,15 +1,20 @@
 import java.util.List;
 
 public class Course {
-    
+
+    String cid;
+    List<Course> prerequisites;
+
     public Course() {
 
     }
 
     public void setCid(String cid) {
+        this.cid = cid;
     }
 
-    public void setPrerequisites(List<Course> courses) {
+    public void setPrerequisites(List<Course> prerequisites) {
+        this.prerequisites = prerequisites;
     }
 
     public String getCname() {
@@ -17,7 +22,7 @@ public class Course {
     }
 
     public String getCid() {
-        return "";
+        return this.cid;
     }
 
     public String getCdesc(){
@@ -31,7 +36,7 @@ public class Course {
     }
 
     public List<Course> getPrerequisites() {
-        return null;
+        return prerequisites;
     }
 
     public List<String> getCHours() {

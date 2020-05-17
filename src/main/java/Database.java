@@ -13,6 +13,7 @@ public class Database {
 
 
     public void addCourse(String cid, Course course) {
+        courses.put(cid, course);
     }
 
     public Course getCourse(String cid) {
@@ -21,10 +22,11 @@ public class Database {
     }
 
     public void addStudent(String sid, Student student) {
+        students.put(sid, student);
     }
 
     public Student getStudent(String sid) {
-        if (courses.get(sid) == null) throw new NoSuchElementException("student with id not found");
+        if (students.get(sid) == null) throw new NoSuchElementException("student with id not found");
         return students.get(sid);
     }
 
