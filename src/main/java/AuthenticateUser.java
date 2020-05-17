@@ -6,6 +6,9 @@ public class AuthenticateUser {
     }
 
     public String verifyLogin(String username, String password){
+        if(sso.verify(username, password).equals("Success")){
+            return "Login successful";
+        }
         return "";
     }
 }
