@@ -38,6 +38,38 @@ public class CourseEnrollmentTest {
         assertTrue(meets);
     }
 
+
+    @Category(IntegrationTests.class)
+    @Test
+    public void testStudentMeetsPrerequisitesIntegration() {
+        this.db = new Database();
+        String cid = "SE754";
+        String sid = "12345";
+
+        Course course = new Course();
+        course.setCid(cid);
+        Student student = new Student();
+        student.setSid(sid);
+
+        db.addCourse(cid, course);
+        db.addStudent(sid, student);
+
+        Course prerequisite1 = new Course();
+        Course prerequisite2 = new Course();
+        List<Course> courses = new ArrayList<>();
+        courses.add(prerequisite1);
+        courses.add(prerequisite2);
+
+        student.setTakenCourses(courses);
+        course.setPrerequisites(courses);
+
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        boolean meets = handler.studentMeetsPrerequisites(sid, cid);
+        assertTrue(meets);
+    }
+
+
+    @Category(UnitTests.class)
     @Test
     public void testStudentNotMeetPrerequisites() {
         String cid = "SE754";
