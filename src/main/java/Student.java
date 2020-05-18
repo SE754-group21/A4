@@ -47,4 +47,7 @@ public class Student extends User {
 
     }
 
+    public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
+
+    }
 }

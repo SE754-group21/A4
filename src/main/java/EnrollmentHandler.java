@@ -1,6 +1,4 @@
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class EnrollmentHandler {
@@ -47,7 +45,7 @@ public class EnrollmentHandler {
         EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
 
         if (status == null) {
-            throw new NoSuchElementException("Student not enrolled in this course");
+            throw new NoSuchElementException("Student not enrolled in this course and no attempt at enrolling made");
         }
 
         return status;
@@ -103,5 +101,25 @@ public class EnrollmentHandler {
 
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         return concessionApplication.getStatusReason();
+    }
+
+    public NotificationEvent concessionGetsApproved(Student student, Course course) {
+//        Student student = db.getStudent(sid);
+//        Course course = db.getCourse(cid);
+
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        concessionApplication.setConcessionStatus(ConcessionStatusEnum.approved);
+        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.enrolled);
+
+        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_approved);
+
+        return notificationEvent;
+    }
+
+    private void setEnrollmentStatusForCourse(Student student, Course course, EnrollmentStatusEnum status) {
+//        Student student = db.getStudent(sid);
+//        Course course = db.getCourse(cid);
+
+        student.setEnrollmentStatusForCourse(course, status);
     }
 }
