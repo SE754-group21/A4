@@ -122,4 +122,8 @@ public class EnrollmentHandler {
 
         student.setEnrollmentStatusForCourse(course, status);
     }
+
+    public NotificationEvent concessionGetsDeclined(Student student, Course course) {
+        return null;
+    }
 }
