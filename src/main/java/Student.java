@@ -31,4 +31,8 @@ public class Student extends User {
     public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
 
     }
+
+    public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
+
+    }
 }

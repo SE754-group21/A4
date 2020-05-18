@@ -1,12 +1,7 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 public class EnrollmentStatusNotificationTest {
     String cid;
@@ -31,11 +26,13 @@ public class EnrollmentStatusNotificationTest {
     @Test
     public void testGetEnrollmentStatusNotification() {
 
-        EnrollmentEvent enrollmentEvent = enrollmentHandler.concessionGetsApproved(student.getSid(), course.getCid());
-        EnrollmentStatusEnum newStatus = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
-        String notification = enrollmentHandler.notifyChange(student.getSid(), course.getCid(), enrollmentEvent);
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.awaiting_concession);
 
-        Assert.assertEquals(EnrollmentStatusEnum.enrolled, newStatus );
+        ConcessionApplication concessionApplication = new ConcessionApplication();
+        Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApplication);
+
+        NotificationEvent notificationEvent = enrollmentHandler.concessionGetsApproved(student, course);
+        String notification = notificationEvent.notifyChange();
 
         Assert.assertEquals("Your concession for course SOFTENG 754 has been approved.", notification );
 
