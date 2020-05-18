@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -8,12 +9,14 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 
+@Category(UnitTests.class)
 public class CourseInformationTest {
     private Database db;
     @Before
     public void setUp() {
         db = Mockito.mock(Database.class);
     }
+
     @Test
     public void testGetCourseName() {
         String cid = "SOFTENG754";
@@ -39,8 +42,6 @@ public class CourseInformationTest {
         String name = handler.getCdesc(cid);
         assertEquals(name, cdesc);
     }
-
-
 
     @Test
     public void testGetStaff() {
@@ -73,7 +74,6 @@ public class CourseInformationTest {
         List<String> h = handler.getCHours(cid);
         assertEquals(h.size(), 0);
     }
-
 
     @Test
     public void testGetTotalSets() {
@@ -119,6 +119,5 @@ public class CourseInformationTest {
         List<String> cids = handler.getPrerequisites(cid);
         assertEquals(cids.get(0), sid);
     }
-
 
 }

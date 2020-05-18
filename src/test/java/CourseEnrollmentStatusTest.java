@@ -1,10 +1,12 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.NoSuchElementException;
 
+@Category(UnitTests.class)
 public class CourseEnrollmentStatusTest {
     private Course course;
     private Student student;
@@ -35,7 +37,6 @@ public class CourseEnrollmentStatusTest {
 
         Assert.assertEquals(EnrollmentStatusEnum.enrolled, status);
     }
-
 
     @Test (expected = NoSuchElementException.class)
     public void testGetCourseEnrollmentStatusInvalidCourse() {

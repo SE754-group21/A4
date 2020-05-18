@@ -1,11 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 
+@Category(UnitTests.class)
 public class SSOIntegrationTest {
+
     @Test
     public void testSuccessfulLogIn(){
         SSOMock sso = Mockito.mock(SSOMock.class);

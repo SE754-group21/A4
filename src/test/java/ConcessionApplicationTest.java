@@ -1,8 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 import static org.junit.Assert.assertEquals;
 
+@Category(UnitTests.class)
 public class ConcessionApplicationTest {
 
     String cid;
@@ -22,7 +24,6 @@ public class ConcessionApplicationTest {
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
     }
-
 
     @Test
     public void testStudentPrereqsMetConcessionApplication() {
