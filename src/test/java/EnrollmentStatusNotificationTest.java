@@ -24,7 +24,7 @@ public class EnrollmentStatusNotificationTest {
         enrollmentHandler =  new EnrollmentHandler(db);
     }
     @Test
-    public void testGetEnrollmentStatusNotification() {
+    public void testGetEnrollmentStatusNotificationConcessionApproved() {
 
         Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.awaiting_concession);
 
