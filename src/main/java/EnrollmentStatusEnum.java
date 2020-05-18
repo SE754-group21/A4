@@ -1,5 +1,5 @@
 public enum EnrollmentStatusEnum {
-    waiting_list, enrolled,  awaiting_concession
+    waiting_list, enrolled, concession_denied, awaiting_concession
 
-    //completed, concession_denied,
+    //completed
 }
