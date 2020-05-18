@@ -22,4 +22,18 @@ public class SSOIntegrationTest {
         assertEquals("Login successful", login);
 
     }
+
+    @Test
+    public void testUnsuccessfulLogIn(){
+        SSOMock sso = Mockito.mock(SSOMock.class);
+        AuthenticateUser auth = new AuthenticateUser(sso);
+        String username = "ibea707";
+        String password = "wrongpassword";
+
+        Mockito.when(sso.verify(username, password)).thenReturn("Unsuccessful");
+
+        String login = auth.verifyLogin(username, password);
+        assertEquals("Login unsuccessful", login);
+
+    }
 }
