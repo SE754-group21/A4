@@ -29,4 +29,11 @@ public class NotificationEvent {
         return notification;
 
     }
+
+    public void changeNotificationSetting(NotificationSettingEnum notifSetting) {
+    }
+
+    public NotificationSettingEnum getNotificationSetting() {
+        return NotificationSettingEnum.email;
+    }
 }
