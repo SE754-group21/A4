@@ -1,3 +1,3 @@
 public enum NotificationSettingEnum {
-    mobile, email
+    mobile, none, email
 }

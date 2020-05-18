@@ -81,5 +81,21 @@ public class EnrollmentStatusNotificationTest {
         Assert.assertEquals(NotificationSettingEnum.mobile, newSetting);
     }
 
+    @Test
+    public void testChangeEnrollmentNotificationSettingsNone() {
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
+
+        ConcessionApplication concessionApplication = new ConcessionApplication();
+        Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApplication);
+
+        NotificationEvent notificationEvent = enrollmentHandler.moveOffWaitingList(student, course);
+        notificationEvent.changeNotificationSetting(NotificationSettingEnum.none);
+        NotificationSettingEnum newSetting = notificationEvent.getNotificationSetting();
+        String notification = notificationEvent.notifyChange();
+
+        Assert.assertEquals(null, notification);
+        Assert.assertEquals(NotificationSettingEnum.none, newSetting);
+    }
+
 
 }
