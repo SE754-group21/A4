@@ -21,6 +21,8 @@ public class EnrollmentStatusNotificationTest {
         course = Mockito.mock(Course.class);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
+        Mockito.when(course.getCname()).thenReturn("SOFTENG 754");
+
         enrollmentHandler =  new EnrollmentHandler(db);
     }
     @Test
@@ -63,7 +65,7 @@ public class EnrollmentStatusNotificationTest {
         NotificationEvent notificationEvent = enrollmentHandler.moveOffWaitingList(student, course);
         String notification = notificationEvent.notifyChange();
 
-        Assert.assertEquals("You have been moved off the waiting list for SE754 and are now enrolled.", notification );
+        Assert.assertEquals("You have been moved off the waiting list for SOFTENG 754 and are now enrolled.", notification );
     }
 
 
