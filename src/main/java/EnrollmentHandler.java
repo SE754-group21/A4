@@ -104,8 +104,6 @@ public class EnrollmentHandler {
     }
 
     public NotificationEvent concessionGetsApproved(Student student, Course course) {
-//        Student student = db.getStudent(sid);
-//        Course course = db.getCourse(cid);
 
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
         concessionApplication.setConcessionStatus(ConcessionStatusEnum.approved);
@@ -117,9 +115,17 @@ public class EnrollmentHandler {
     }
 
     private void setEnrollmentStatusForCourse(Student student, Course course, EnrollmentStatusEnum status) {
-//        Student student = db.getStudent(sid);
-//        Course course = db.getCourse(cid);
 
         student.setEnrollmentStatusForCourse(course, status);
+    }
+
+    public NotificationEvent concessionGetsDeclined(Student student, Course course) {
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        concessionApplication.setConcessionStatus(ConcessionStatusEnum.denied);
+        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.concession_denied);
+
+        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
+
+        return notificationEvent;
     }
 }

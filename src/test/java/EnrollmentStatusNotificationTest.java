@@ -38,5 +38,20 @@ public class EnrollmentStatusNotificationTest {
 
     }
 
+    @Test
+    public void testGetEnrollmentStatusNotificationConcessionDeclined() {
+
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.awaiting_concession);
+
+        ConcessionApplication concessionApplication = new ConcessionApplication();
+        Mockito.when(student.getConcessionApplication(course)).thenReturn(concessionApplication);
+
+        NotificationEvent notificationEvent = enrollmentHandler.concessionGetsDeclined(student, course);
+        String notification = notificationEvent.notifyChange();
+
+        Assert.assertEquals("Your concession for course SOFTENG 754 has been declined.", notification );
+
+    }
+
 
 }

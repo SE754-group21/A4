@@ -15,6 +15,9 @@ public class NotificationEvent {
         if (this.type == NotificationEventTypeEnum.concession_approved) {
             notification = "Your concession for course SOFTENG 754 has been approved.";
         }
+        if (this.type == NotificationEventTypeEnum.concession_denied) {
+            notification = "Your concession for course SOFTENG 754 has been declined.";
+        }
 
         return notification;
 
