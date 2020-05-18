@@ -14,6 +14,11 @@ public class NotificationEvent {
     }
 
     public String notifyChange() {
+
+        if (this.notifSetting == NotificationSettingEnum.none) {
+            return null;
+        }
+
         String notification = "";
 
         if (this.type == NotificationEventTypeEnum.concession_approved) {
