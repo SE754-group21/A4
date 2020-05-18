@@ -22,6 +22,9 @@ public class NotificationEvent {
         if (this.type == NotificationEventTypeEnum.concession_denied) {
             notification = "Your concession for course " + course.getCname() +" has been declined.";
         }
+        if (this.type == NotificationEventTypeEnum.moved_off_waiting_list) {
+            notification = "You have been moved off the waiting list for " + course.getCname() + " and are now enrolled.";
+        }
 
         return notification;
 

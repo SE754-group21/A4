@@ -130,7 +130,9 @@ public class EnrollmentHandler {
     }
 
     public NotificationEvent moveOffWaitingList(Student student, Course course) {
-        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
+
+        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.enrolled);
+        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.moved_off_waiting_list);
 
         return notificationEvent;
     }
