@@ -38,7 +38,6 @@ public class CourseEnrollmentTest {
         assertTrue(meets);
     }
 
-
     @Category(IntegrationTests.class)
     @Test
     public void testStudentMeetsPrerequisitesIntegration() {
@@ -68,7 +67,6 @@ public class CourseEnrollmentTest {
         assertTrue(meets);
     }
 
-
     @Category(UnitTests.class)
     @Test
     public void testStudentNotMeetPrerequisites() {
@@ -89,7 +87,6 @@ public class CourseEnrollmentTest {
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertFalse(meets);
     }
-
     @Category(UnitTests.class)
     @Test
     public void testEnrolPrerequisitesMetSeatsAvailable() {
@@ -177,3 +174,5 @@ public class CourseEnrollmentTest {
         assertTrue(remaining);
     }
 }
+
+

@@ -6,9 +6,9 @@ import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 
+@Category(UnitTests.class)
 public class SSOIntegrationTest {
 
-    @Category(UnitTests.class)
     @Test
     public void testSuccessfulLogIn(){
         SSOMock sso = Mockito.mock(SSOMock.class);

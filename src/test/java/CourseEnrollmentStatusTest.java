@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 
 import java.util.NoSuchElementException;
 
+@Category(UnitTests.class)
 public class CourseEnrollmentStatusTest {
     private Course course;
     private Student student;
@@ -20,7 +21,6 @@ public class CourseEnrollmentStatusTest {
         enrollmentHandler =  new EnrollmentHandler(db);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetEnrolledCourseEnrollmentStatus() {
 
@@ -38,7 +38,6 @@ public class CourseEnrollmentStatusTest {
         Assert.assertEquals(EnrollmentStatusEnum.enrolled, status);
     }
 
-    @Category(UnitTests.class)
     @Test (expected = NoSuchElementException.class)
     public void testGetCourseEnrollmentStatusInvalidCourse() {
 
@@ -53,7 +52,6 @@ public class CourseEnrollmentStatusTest {
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
     }
 
-    @Category(UnitTests.class)
     @Test (expected = NoSuchElementException.class)
     public void testGetCourseEnrollmentStatusInvalidStudent() {
 
@@ -65,7 +63,6 @@ public class CourseEnrollmentStatusTest {
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetAwaitingCourseEnrollmentStatus() {
         Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
@@ -86,7 +83,6 @@ public class CourseEnrollmentStatusTest {
         Assert.assertEquals(62, waitingListPosition);
     }
 
-    @Category(UnitTests.class)
     @Test (expected = NoSuchElementException.class)
     public void testGetWaitingListPositionInvalidCourseEnrollmentStatus() {
         Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.enrolled);

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+@Category(UnitTests.class)
 public class SearchCoursesTest {
     private Database db;
     @Before
@@ -17,7 +18,6 @@ public class SearchCoursesTest {
         db = Mockito.mock(Database.class);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testSearchCourseName(){
         CourseHandler courseHandler = new CourseHandler(db);
@@ -37,7 +37,6 @@ public class SearchCoursesTest {
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testSearchCourseDescription(){
         CourseHandler courseHandler = new CourseHandler(db);
@@ -57,7 +56,6 @@ public class SearchCoursesTest {
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testSearchCourseDegree(){
         CourseHandler courseHandler = new CourseHandler(db);
@@ -77,7 +75,6 @@ public class SearchCoursesTest {
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testSearchCourseStaffFirstName(){
         CourseHandler courseHandler = new CourseHandler(db);
@@ -103,7 +100,6 @@ public class SearchCoursesTest {
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testSearchCourseStaffLastName(){
         CourseHandler courseHandler = new CourseHandler(db);
@@ -129,7 +125,6 @@ public class SearchCoursesTest {
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testSearchCourseStaffFullName(){
         CourseHandler courseHandler = new CourseHandler(db);

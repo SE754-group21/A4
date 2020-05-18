@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 
+@Category(UnitTests.class)
 public class CourseInformationTest {
     private Database db;
     @Before
@@ -16,7 +17,6 @@ public class CourseInformationTest {
         db = Mockito.mock(Database.class);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetCourseName() {
         String cid = "SOFTENG754";
@@ -30,7 +30,6 @@ public class CourseInformationTest {
         assertEquals(name, cname);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetCourseDescription() {
         String cid = "SOFTENG754";
@@ -44,7 +43,6 @@ public class CourseInformationTest {
         assertEquals(name, cdesc);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetStaff() {
         String cid = "SOFTENG754";
@@ -64,7 +62,6 @@ public class CourseInformationTest {
         assertEquals(staffnames.get(0), sid);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetCourseHours() {
         String cid = "SOFTENG754";
@@ -78,7 +75,6 @@ public class CourseInformationTest {
         assertEquals(h.size(), 0);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetTotalSets() {
         String cid = "SOFTENG754";
@@ -92,7 +88,6 @@ public class CourseInformationTest {
         assertEquals(name, total);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetSeatsRemaining() {
         String cid = "SOFTENG754";
@@ -106,7 +101,6 @@ public class CourseInformationTest {
         assertEquals(name, total);
     }
 
-    @Category(UnitTests.class)
     @Test
     public void testGetPrerequisites() {
         String cid = "SOFTENG754";
