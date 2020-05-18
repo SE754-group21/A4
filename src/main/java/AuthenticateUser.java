@@ -9,6 +9,9 @@ public class AuthenticateUser {
         if(sso.verify(username, password).equals("Success")){
             return "Login successful";
         }
+        if(sso.verify(username, password).equals("Unsuccessful")){
+            return "Login unsuccessful";
+        }
         return "";
     }
 }
