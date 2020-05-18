@@ -29,4 +29,12 @@ public class NotificationEvent {
         return notification;
 
     }
+
+    public void changeNotificationSetting(NotificationSettingEnum notifSetting) {
+        this.notifSetting = notifSetting;
+    }
+
+    public NotificationSettingEnum getNotificationSetting() {
+        return notifSetting;
+    }
 }
