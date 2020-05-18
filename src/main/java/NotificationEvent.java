@@ -31,9 +31,10 @@ public class NotificationEvent {
     }
 
     public void changeNotificationSetting(NotificationSettingEnum notifSetting) {
+        this.notifSetting = notifSetting;
     }
 
     public NotificationSettingEnum getNotificationSetting() {
-        return NotificationSettingEnum.email;
+        return notifSetting;
     }
 }
