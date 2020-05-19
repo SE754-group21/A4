@@ -72,9 +72,14 @@ public class Course {
             waitingList.add(student);
         } else {
             enrolledList.add(student);
-            student.setEnrollmentStatusForCourse(this, EnrollmentStatusEnum.enrolled);
+            updateStudent(true, student);
         }
 
+    }
+
+    private void updateStudent(boolean enrolled, Student student) {
+        EnrollmentStatusEnum status = enrolled ? EnrollmentStatusEnum.enrolled : EnrollmentStatusEnum.waiting_list;
+        student.setEnrollmentStatusForCourse(this, status);
     }
 
     private boolean registeredStudent(Student student) {
