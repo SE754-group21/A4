@@ -15,6 +15,11 @@ public class Course {
         waitingList = new ArrayList<>();
     }
 
+    public Course(List<Student> wait, List<Student> en) {
+        this.enrolledList = en;
+        this.waitingList = wait;
+    }
+
 
     public void setCid(String cid) {
         this.cid = cid;
@@ -61,12 +66,17 @@ public class Course {
     }
 
     public void addStudent(Student student) {
+        if (registeredStudent(student)) return;
         if (enrolledList.size() == capacity) {
             waitingList.add(student);
         } else {
             enrolledList.add(student);
         }
 
+    }
+
+    private boolean registeredStudent(Student student) {
+        return enrolledList.contains(student) || waitingList.contains(student);
     }
 
     public void removeStudent() {}
