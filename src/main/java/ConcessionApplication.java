@@ -1,6 +1,6 @@
 public class ConcessionApplication {
 
-    ConcessionStatusEnum concessionStatus;
+    private ConcessionStatusEnum concessionStatus;
 
     public String getConcessionReason() {
         return "";
