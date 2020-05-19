@@ -70,6 +70,7 @@ public class Course {
         if (registeredStudent(student)) return;
         if (enrolledList.size() == capacity) {
             waitingList.add(student);
+            updateStudent(false, student);
         } else {
             enrolledList.add(student);
             updateStudent(true, student);
