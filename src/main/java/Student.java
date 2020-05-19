@@ -1,12 +1,21 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Student extends User {
 
     private String sid;
     private List<Course> courses;
+    private Map<Course, ConcessionApplication> applications;
 
     public Student() {
+        applications = new HashMap<>();
+        courses = new ArrayList<>();
+    }
 
+    public void addConcession(Course course, ConcessionApplication app) {
+        applications.put(course, app);
     }
 
     public void setSid(String sid){
@@ -40,7 +49,7 @@ public class Student extends User {
     }
 
     public ConcessionApplication getConcessionApplication(Course course) {
-        return null;
+        return applications.get(course);
     }
 
     public void removeCourse(Course course) {
