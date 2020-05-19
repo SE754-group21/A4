@@ -83,6 +83,8 @@ public class Student extends User {
         VirtualListEnum listEnum = getVirtualStatus(course);
         if (concessionEnum == ConcessionStatusEnum.denied)
             setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
+        else if (concessionEnum == ConcessionStatusEnum.pending)
+            setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
 
     }
 
