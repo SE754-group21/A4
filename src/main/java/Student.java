@@ -85,6 +85,12 @@ public class Student extends User {
             setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
         else if (concessionEnum == ConcessionStatusEnum.pending)
             setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
+            //if success
+        else {
+            if (listEnum == VirtualListEnum.enrolled_list) {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+            }
+        }
 
     }
 
