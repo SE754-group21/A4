@@ -13,6 +13,12 @@ public class ConcessionApplicationHandler {
         Course course = db.getCourse(cid);
         Student student = db.getStudent(sid);
 
+        EnrollmentStatusEnum enrollmentStatus = student.getEnrollmentStatusForCourse(course);
+
+        if(enrollmentStatus == EnrollmentStatusEnum.not_enrolled){
+            return "Student must enroll to apply for a concession";
+        }
+
         EnrollmentRequestStatusEnum enrolmentRequestStatus = student.getEnrollmentRequestStatusForCourse(course);
 
         if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.prerequisites_met) {
