@@ -14,4 +14,7 @@ public class AuthenticateUser {
         }
         return "";
     }
+    public boolean alreadyLoggedIn(){
+        return false; 
+    }
 }
