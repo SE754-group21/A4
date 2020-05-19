@@ -37,4 +37,8 @@ public class ConcessionApplicationHandler {
     public void approveConcession(ConcessionApplication app) {
         app.setConcessionStatus(ConcessionStatusEnum.approved);
     }
+
+    public void declineConcession(ConcessionApplication app) {
+        app.setConcessionStatus(ConcessionStatusEnum.denied);
+    }
 }
