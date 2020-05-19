@@ -1,5 +1,6 @@
 public enum ConcessionStatusEnum {
     pending,
     denied,
-    approved
+    approved,
+    not_applied
 }

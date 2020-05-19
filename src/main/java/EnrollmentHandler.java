@@ -13,7 +13,8 @@ public class EnrollmentHandler {
     public boolean enrollStudentCourse(String sid, String cid) {
         Course course = db.getCourse(cid);
         Student student = db.getStudent(sid);
-        boolean qualified = seatsRemaining(course) && studentMeetsPrerequisites(sid, cid);
+        ConcessionStatusEnum status = concessionStatus(student, course);
+        boolean qualified = seatsRemaining(course) && ( studentMeetsPrerequisites(sid, cid) || status == ConcessionStatusEnum.approved);
         if (!qualified) return false;
         //enroll student
         student.addEnrolledCourse(course);
@@ -74,22 +75,15 @@ public class EnrollmentHandler {
     public String getConcessionStatus(String sid, String cid) {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);
-
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        ConcessionStatusEnum concessionStatus = concessionApplication.getConcessionStatus();
-
-        if (concessionStatus == ConcessionStatusEnum.pending) {
+        ConcessionStatusEnum concessionStatus = concessionStatus(student, course);
+        if (concessionStatus == ConcessionStatusEnum.pending)
             return "Pending - awaiting course approval";
-        }
-        else if (concessionStatus == ConcessionStatusEnum.denied) {
+        else if (concessionStatus == ConcessionStatusEnum.denied)
             return "Denied - concession not approved";
-        }
-        else if (concessionStatus == ConcessionStatusEnum.approved) {
+        else if (concessionStatus == ConcessionStatusEnum.approved)
             return "Approved - concession accepted and enrollment complete";
-        }
-        else {
+        else
             return "The student has no concession for this course";
-        }
     }
 
     public String getConcessionReason(String sid, String cid) {

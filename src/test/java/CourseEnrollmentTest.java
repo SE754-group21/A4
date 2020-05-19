@@ -100,6 +100,7 @@ public class CourseEnrollmentTest {
         EnrollmentHandler handler = Mockito.spy(h);
         Mockito.doReturn(true).when(handler).seatsRemaining(course);
         Mockito.doReturn(true).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.doReturn(ConcessionStatusEnum.not_applied).when(handler).concessionStatus(student, course);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         boolean success = handler.enrollStudentCourse(sid, cid);
@@ -119,6 +120,7 @@ public class CourseEnrollmentTest {
         EnrollmentHandler handler = Mockito.spy(h);
         Mockito.doReturn(false).when(handler).seatsRemaining(course);
         Mockito.doReturn(true).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.doReturn(ConcessionStatusEnum.not_applied).when(handler).concessionStatus(student, course);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         boolean success = handler.enrollStudentCourse(sid, cid);
@@ -138,6 +140,7 @@ public class CourseEnrollmentTest {
         EnrollmentHandler handler = Mockito.spy(h);
         Mockito.doReturn(true).when(handler).seatsRemaining(course);
         Mockito.doReturn(false).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.doReturn(ConcessionStatusEnum.not_applied).when(handler).concessionStatus(student, course);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         boolean success = handler.enrollStudentCourse(sid, cid);
