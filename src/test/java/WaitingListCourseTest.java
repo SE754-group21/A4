@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class WaitingListCourseTest {
 
-    @Spy
-    private List<Student> students = new ArrayList<>();
+    @Spy private List<Student> waitingList = new ArrayList<>();
+    @Spy private List<Student> enrolledList = new ArrayList<>();
 
     @InjectMocks
     private Course course;
@@ -24,6 +24,14 @@ public class WaitingListCourseTest {
     @Test
     public void testAddStudent() {
         course.addStudent(student);
-        assertTrue(students.size() == 1);
+        assertTrue(enrolledList.size() == 1);
+    }
+
+    @Test
+    public void testAddStudentAtCapacity() {
+        course.setCapacity(0);
+        course.addStudent(student);
+        assertTrue(enrolledList.size() == 0);
+        assertTrue(waitingList.size() == 1);
     }
 }
