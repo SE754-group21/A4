@@ -101,6 +101,8 @@ public class Student extends User {
         if (concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+            }else {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
             }
         }
     }
