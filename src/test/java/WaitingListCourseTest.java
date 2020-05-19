@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 
+@Category(IntegrationTests.class)
 public class WaitingListCourseTest {
 
     private Queue<Student> waitingList;
@@ -58,6 +60,5 @@ public class WaitingListCourseTest {
         assertTrue(waitingList.size() == 0);
         assertFalse(enrolledList.contains(student1));
     }
-
 
 }
