@@ -61,10 +61,20 @@ public class WaitingListCourseTest {
     }
 
     @Test
-    public void testUpdateStudentCourse() {
+    public void testUpdateStudentCourseEnrollmentList() {
         Student student = Mockito.mock(Student.class);
         course.addStudent(student);
         verify(student, times(1)).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+    }
+
+    @Test
+    public void testUpdateStudentCourseWaitingList() {
+        Student student1 = Mockito.mock(Student.class);
+        Student student2 = Mockito.mock(Student.class);
+        course.setCapacity(1);
+        course.addStudent(student1);
+        course.addStudent(student2);
+        verify(student2, times(1)).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
     }
 
 }
