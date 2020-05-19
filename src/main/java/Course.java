@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
@@ -5,9 +6,14 @@ public class Course {
     private String cid;
     private List<Course> prerequisites;
     int capacity;
+    private List<Student> students;
 
     public Course() {
+        students = new ArrayList<>();
+    }
 
+    public Course(List<Student> students) {
+        this.students = students;
     }
 
     public void setCid(String cid) {
@@ -54,7 +60,9 @@ public class Course {
         return 0;
     }
 
-    public void addStudent() {}
+    public void addStudent(Student student) {
+        students.add(student);
+    }
 
     public void removeStudent() {}
 
