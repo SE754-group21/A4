@@ -77,4 +77,6 @@ public class WaitingListCourseTest {
         verify(student2, times(1)).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
     }
 
+
+
 }

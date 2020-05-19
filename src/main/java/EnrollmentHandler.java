@@ -16,7 +16,6 @@ public class EnrollmentHandler {
         boolean qualified = seatsRemaining(course) && (studentMeetsPrerequisites(sid, cid) || status == ConcessionStatusEnum.approved);
         if (!qualified) return false;
         //enroll student
-        student.addEnrolledCourse(course);
         course.addStudent(student);
         return qualified;
     }
@@ -48,7 +47,7 @@ public class EnrollmentHandler {
     public void dropCourse(String sid, String cid) {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);
-        student.removeCourse(course);
+        student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.not_enrolled);
         course.removeStudent(student);
     }
 
