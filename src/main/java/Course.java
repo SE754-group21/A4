@@ -84,6 +84,10 @@ public class Course {
             enrolledList.remove(student);
         else if (waitingList.contains(student))
             waitingList.remove(student);
+        if (enrolledList.size() < capacity && waitingList.size() > 0) {
+            Student studentNew = waitingList.remove(0);
+            enrolledList.add(studentNew);
+        }
 
     }
 
