@@ -5,7 +5,6 @@ public class EnrollmentHandler {
 
     private Database db;
 
-
     public EnrollmentHandler(Database db) {
         this.db = db;
     }
@@ -14,7 +13,7 @@ public class EnrollmentHandler {
         Course course = db.getCourse(cid);
         Student student = db.getStudent(sid);
         ConcessionStatusEnum status = concessionStatus(student, course);
-        boolean qualified = seatsRemaining(course) && ( studentMeetsPrerequisites(sid, cid) || status == ConcessionStatusEnum.approved);
+        boolean qualified = seatsRemaining(course) && (studentMeetsPrerequisites(sid, cid) || status == ConcessionStatusEnum.approved);
         if (!qualified) return false;
         //enroll student
         student.addEnrolledCourse(course);
@@ -37,20 +36,20 @@ public class EnrollmentHandler {
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(String sid, String cid) {
 
         Student student = db.getStudent(sid);
-        if (student == null) {
+        if (student == null)
             throw new NoSuchElementException("Student with id not found");
-        }
-
         Course course = db.getCourse(cid);
-
         EnrollmentStatusEnum status = student.getEnrollmentStatusForCourse(course);
-
-        if (status == null) {
+        if (status == null)
             throw new NoSuchElementException("Student not enrolled in this course and no attempt at enrolling made");
-        }
-
         return status;
+    }
 
+    public void dropCourse(String sid, String cid) {
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
+        student.removeCourse(course);
+        course.removeStudent();
     }
 
     public int getWaitingListPositionForStudent(String sid, String cid) {

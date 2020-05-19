@@ -196,6 +196,21 @@ public class CourseEnrollmentTest {
         boolean success = handler.enrollStudentCourse(sid, cid);
         assertTrue(success);
     }
+
+    @Category(UnitTests.class)
+    @Test
+    public void testStudentDropCourse() {
+        String cid = "SE754";
+        String sid = "12345";
+        Student student = Mockito.mock(Student.class);
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(student.getSid()).thenReturn(sid);
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        handler.dropCourse(sid, cid);
+    }
 }
 
 

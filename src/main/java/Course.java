@@ -56,5 +56,7 @@ public class Course {
 
     public void addStudent() {}
 
+    public void removeStudent() {}
+
 
 }
