@@ -39,4 +39,14 @@ public class StudentConcessionHandlerTest {
         verify(student).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
         verify(student).setEnrollmentStatusForCourse(Mockito.any(Course.class), Mockito.any(EnrollmentStatusEnum.class));
     }
+
+    @Test
+    public void testcheckConcessionSuccessAndEnrolledList() {
+        Course course = Mockito.mock(Course.class);
+        Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
+        Mockito.doReturn(VirtualListEnum.enrolled_list).when(student).getVirtualStatus(course);
+        student.updateConcession(course);
+        verify(student).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+        verify(student).setEnrollmentStatusForCourse(Mockito.any(Course.class), Mockito.any(EnrollmentStatusEnum.class));
+    }
 }
