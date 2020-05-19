@@ -72,6 +72,7 @@ public class Course {
             waitingList.add(student);
         } else {
             enrolledList.add(student);
+            student.setEnrollmentStatusForCourse(this, EnrollmentStatusEnum.enrolled);
         }
 
     }
