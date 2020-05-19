@@ -2,6 +2,7 @@ import java.util.*;
 
 public class CourseHandler {
     private Database db;
+    private static int maxCapacity = 1000;
     public CourseHandler(Database db) {
         this.db = db;
     }
@@ -24,7 +25,7 @@ public class CourseHandler {
     }
 
     public boolean setCapacity(String cid, int capacity) {
-        if (capacity < 0) return false;
+        if (capacity < 0 || capacity > maxCapacity) return false;
         Course course = db.getCourse(cid);
         course.setCapacity(capacity);
         return true;
