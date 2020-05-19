@@ -8,6 +8,8 @@ public class Student extends User {
     private String sid;
     private List<Course> courses;
     private Map<Course, ConcessionApplication> applications;
+    private Map<Course, VirtualListEnum> queues = new HashMap<>();
+    private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
 
     public Student() {
         applications = new HashMap<>();
@@ -61,10 +63,27 @@ public class Student extends User {
     }
 
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
-
+        enrollment.put(course, status);
     }
 
     public void setVirtualList(Course course, VirtualListEnum status) {
+        queues.put(course, status);
+    }
+
+    public ConcessionStatusEnum getConcessionStatus(Course course) {
+        return applications.get(course).getConcessionStatus();
+    }
+
+    public VirtualListEnum getVirtualStatus(Course course) {
+        return queues.get(course);
+    }
+
+    public void updateConcession(Course course) {
+        ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        VirtualListEnum listEnum = getVirtualStatus(course);
+        if (concessionEnum == ConcessionStatusEnum.denied)
+            setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
 
     }
+
 }
