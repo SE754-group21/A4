@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @Category(UnitTests.class)
 public class CourseInformationTest {
@@ -129,8 +128,20 @@ public class CourseInformationTest {
         Mockito.when(course.getCid()).thenReturn(cid);
         CourseHandler handler = new CourseHandler(db);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
-        boolean success = handler.setCapacity(cid, 1000);
+        boolean success = handler.setCapacity(cid, capacity);
         assertTrue(success);
+    }
+
+    @Test
+    public void testAddCourseSeatsNegative() {
+        String cid = "SOFTENG754";
+        int capacity = -1;
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        CourseHandler handler = new CourseHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        boolean success = handler.setCapacity(cid, capacity);
+        assertFalse(success);
     }
 
 }
