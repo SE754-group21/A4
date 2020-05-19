@@ -19,6 +19,9 @@ public class ConcessionApplication {
         return true;
     }
 
+    public Student getStudent() {return null; }
+    public Course getCourse() {return null; }
+
     public String getStatusReason() {
         return "";
     }

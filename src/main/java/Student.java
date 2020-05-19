@@ -64,6 +64,7 @@ public class Student extends User {
 
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
         enrollment.put(course, status);
+
     }
 
     public void setVirtualList(Course course, VirtualListEnum status) {
@@ -95,16 +96,19 @@ public class Student extends User {
         }
     }
 
-    public void updateVirtualList(Course course) {
+    public NotificationEvent updateVirtualList(Course course) {
+        NotificationEvent event = null;
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
         VirtualListEnum listEnum = getVirtualStatus(course);
         if (concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
-            }else {
+                event = new NotificationEvent(this, course, NotificationEventTypeEnum.moved_off_waiting_list);
+            } else {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
             }
         }
+        return event;
     }
 
 }

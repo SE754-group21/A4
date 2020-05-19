@@ -100,37 +100,8 @@ public class EnrollmentHandler {
         return concessionApplication.getStatusReason();
     }
 
-    public NotificationEvent concessionGetsApproved(Student student, Course course) {
-
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        concessionApplication.setConcessionStatus(ConcessionStatusEnum.approved);
-        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.enrolled);
-
-        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_approved);
-
-        return notificationEvent;
-    }
-
     private void setEnrollmentStatusForCourse(Student student, Course course, EnrollmentStatusEnum status) {
-
         student.setEnrollmentStatusForCourse(course, status);
     }
 
-    public NotificationEvent concessionGetsDeclined(Student student, Course course) {
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        concessionApplication.setConcessionStatus(ConcessionStatusEnum.denied);
-        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.concession_denied);
-
-        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
-
-        return notificationEvent;
-    }
-
-    public NotificationEvent moveOffWaitingList(Student student, Course course) {
-
-        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.enrolled);
-        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.moved_off_waiting_list);
-
-        return notificationEvent;
-    }
 }

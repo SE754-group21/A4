@@ -65,6 +65,8 @@ public class ConcessionApplicationTest {
     public void testAcceptConcession() {
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
         handler.approveConcession(concessionApp);
         verify(concessionApp, Mockito.times(1)).setConcessionStatus(ConcessionStatusEnum.approved);
     }
@@ -73,6 +75,8 @@ public class ConcessionApplicationTest {
     public void testDeclineConcession() {
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
         handler.declineConcession(concessionApp);
         verify(concessionApp, Mockito.times(1)).setConcessionStatus(ConcessionStatusEnum.denied);
     }
