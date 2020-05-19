@@ -33,11 +33,23 @@ public class ConcessionApplicationHandler {
         return "Concession application submitted";
     }
 
-    public void approveConcession(ConcessionApplication app) {
+    public NotificationEvent approveConcession(ConcessionApplication app) {
         app.setConcessionStatus(ConcessionStatusEnum.approved);
+        Student student = app.getStudent();
+        Course course = app.getCourse();
+        student.updateConcession(course);
+        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_approved);
+        return notificationEvent;
     }
 
-    public void declineConcession(ConcessionApplication app) {
+    public NotificationEvent declineConcession(ConcessionApplication app) {
         app.setConcessionStatus(ConcessionStatusEnum.denied);
+        Student student = app.getStudent();
+        Course course = app.getCourse();
+        student.updateConcession(course);
+        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
+        return notificationEvent;
     }
+
+
 }
