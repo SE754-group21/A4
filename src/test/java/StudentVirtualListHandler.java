@@ -14,7 +14,7 @@ public class StudentVirtualListHandler {
     }
 
     @Test
-    public void testcheckDenied() {
+    public void testCheckNotApprovedConcession() {
         Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.pending).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
