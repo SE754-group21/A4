@@ -15,6 +15,9 @@ public class AuthenticateUser {
         return "";
     }
     public boolean alreadyLoggedIn(){
-        return false; 
+        if(sso.loggedIn() == "Logged in"){
+            return true;
+        }
+        return false;
     }
 }
