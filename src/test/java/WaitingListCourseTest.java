@@ -34,5 +34,13 @@ public class WaitingListCourseTest {
         assert(enrolledList.size() == 1);
     }
 
+    @Test
+    public void removeStudent() {
+        Student student = Mockito.mock(Student.class);
+        course.addStudent(student);
+        course.removeStudent(student);
+        assert(enrolledList.size() == 0);
+    }
+
 
 }

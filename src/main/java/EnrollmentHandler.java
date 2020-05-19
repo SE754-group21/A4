@@ -49,7 +49,7 @@ public class EnrollmentHandler {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);
         student.removeCourse(course);
-        course.removeStudent();
+        course.removeStudent(student);
     }
 
     public int getWaitingListPositionForStudent(String sid, String cid) {
