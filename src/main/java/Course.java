@@ -79,8 +79,8 @@ public class Course {
     }
 
     private void updateStudent(boolean enrolled, Student student) {
-        EnrollmentStatusEnum status = enrolled ? EnrollmentStatusEnum.enrolled : EnrollmentStatusEnum.waiting_list;
-        student.setEnrollmentStatusForCourse(this, status);
+        VirtualListEnum status = enrolled ? VirtualListEnum.enrolled_list : VirtualListEnum.waiting_list;
+        student.setVirtualList(this, status);
     }
 
     private boolean registeredStudent(Student student) {

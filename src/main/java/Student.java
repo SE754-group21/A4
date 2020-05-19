@@ -63,4 +63,8 @@ public class Student extends User {
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
 
     }
+
+    public void setVirtualList(Course course, VirtualListEnum status) {
+
+    }
 }
