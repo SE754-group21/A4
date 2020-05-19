@@ -32,7 +32,7 @@ public class ConcessionApplicationTest {
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
 
-        String concessionStatus = handler.submitApplication(sid, cid, concessionApp);
+        String concessionStatus = handler.submitApplication(sid, cid);
 
         assertEquals("Student must enroll to apply for a concession", concessionStatus);
     }
