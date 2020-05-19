@@ -66,6 +66,11 @@ public class EnrollmentHandler {
         return waitingListPosition;
     }
 
+    public ConcessionStatusEnum concessionStatus(Student student, Course course) {
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        return concessionApplication.getConcessionStatus();
+    }
+
     public String getConcessionStatus(String sid, String cid) {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);

@@ -187,7 +187,7 @@ public class CourseEnrollmentTest {
         EnrollmentHandler handler = Mockito.spy(h);
         Mockito.doReturn(true).when(handler).seatsRemaining(course);
         Mockito.doReturn(false).when(handler).studentMeetsPrerequisites(sid, cid);
-        Mockito.doReturn(true).when(handler).concessionApproved(course, student);
+        Mockito.doReturn(ConcessionStatusEnum.approved).when(handler).concessionStatus(student, course);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         boolean success = handler.enrollStudentCourse(sid, cid);
