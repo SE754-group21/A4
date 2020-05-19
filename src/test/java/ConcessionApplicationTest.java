@@ -77,6 +77,15 @@ public class ConcessionApplicationTest {
         verify(concessionApp, Mockito.times(1)).setConcessionStatus(ConcessionStatusEnum.denied);
     }
 
+    @Test
+    public void addConcessionStudent() {
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        Student student = new Student();
+        student.addConcession(course, concessionApp);
+        ConcessionApplication app = student.getConcessionApplication(course);
+        assertEquals(concessionApp, app);
+    }
+
 
 
 }
