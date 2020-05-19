@@ -43,6 +43,10 @@ public class Student extends User {
         return null;
     }
 
+    public void removeCourse(Course course) {
+
+    }
+
     public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
 
     }
