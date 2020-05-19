@@ -19,7 +19,6 @@ public class ConcessionApplicationTest {
         cid = "SE754";
         sid = "12345";
         db = Mockito.mock(Database.class);
-
         student = Mockito.mock(Student.class);
         course = Mockito.mock(Course.class);
         Mockito.when(db.getCourse(cid)).thenReturn(course);
@@ -41,38 +40,24 @@ public class ConcessionApplicationTest {
     @Test
     public void testStudentPrereqsMetConcessionApplication() {
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.prerequisites_met);
-
-        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
-
-        String concessionStatus = handler.submitApplication(sid, cid, concessionApp);
-
+        String concessionStatus = handler.submitApplication(sid, cid);
         assertEquals("Students that meet prerequisites are not required to apply for a concession", concessionStatus);
     }
 
     @Test
     public void testStudentAwaitingConcessionConcessionApplication() {
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.awaiting_concession);
-
-        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
-
-        String concessionStatus = handler.submitApplication(sid, cid, concessionApp);
-
+        String concessionStatus = handler.submitApplication(sid, cid);
         assertEquals("Students may only submit one concession application for a course", concessionStatus);
     }
 
     @Test
     public void testStudentPrereqsNotMetConcessionApplication() {
-        ConcessionStatusEnum concessionStatus = ConcessionStatusEnum.pending;
         Mockito.when(student.getEnrollmentRequestStatusForCourse(course)).thenReturn(EnrollmentRequestStatusEnum.prerequisites_not_met);
-
-        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
-        Mockito.when(concessionApp.setConcessionStatus(concessionStatus)).thenCallRealMethod();
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
-
-        String concessionApplicationResult = handler.submitApplication(sid, cid, concessionApp);
-
+        String concessionApplicationResult = handler.submitApplication(sid, cid);
         assertEquals("Concession application submitted", concessionApplicationResult);
     }
 
