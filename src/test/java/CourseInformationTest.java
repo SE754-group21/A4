@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @Category(UnitTests.class)
 public class CourseInformationTest {
@@ -118,6 +119,18 @@ public class CourseInformationTest {
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         List<String> cids = handler.getPrerequisites(cid);
         assertEquals(cids.get(0), sid);
+    }
+
+    @Test
+    public void testAddCourseSeats() {
+        String cid = "SOFTENG754";
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.setCapacity()).thenReturn(true);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        CourseHandler handler = new CourseHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        boolean success = handler.setCapacity(cid, 1000);
+        assertTrue(success);
     }
 
 }
