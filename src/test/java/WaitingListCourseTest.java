@@ -8,7 +8,9 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -17,14 +19,14 @@ import static org.mockito.Mockito.times;
 
 public class WaitingListCourseTest {
 
-    private List<Student> waitingList;
-    private List<Student> enrolledList;
+    private Queue<Student> waitingList;
+    private Queue<Student> enrolledList;
     private Course course;
 
     @Before
     public void setUp(){
-        waitingList = spy(new ArrayList<>());
-        enrolledList = spy(new ArrayList<>());
+        waitingList = spy(new LinkedList<>());
+        enrolledList = spy(new LinkedList<>());
         course = new Course(waitingList, enrolledList);
     }
 

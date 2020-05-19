@@ -1,25 +1,26 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Course {
 
     private String cid;
     private List<Course> prerequisites;
-    int capacity = 1000;
-    private List<Student> enrolledList;
-    private List<Student> waitingList;
+    private int capacity = 1000;
+    private Queue<Student> enrolledList;
+    private Queue<Student> waitingList;
 
 
     public Course() {
-        enrolledList = new ArrayList<>();
-        waitingList = new ArrayList<>();
+        enrolledList = new LinkedList<>();
+        waitingList = new LinkedList<>();
     }
 
-    public Course(List<Student> wait, List<Student> en) {
+    public Course(Queue<Student> wait, Queue<Student> en) {
         this.enrolledList = en;
         this.waitingList = wait;
     }
-
 
     public void setCid(String cid) {
         this.cid = cid;
@@ -85,10 +86,9 @@ public class Course {
         else if (waitingList.contains(student))
             waitingList.remove(student);
         if (enrolledList.size() < capacity && waitingList.size() > 0) {
-            Student studentNew = waitingList.remove(0);
+            Student studentNew = waitingList.poll();
             enrolledList.add(studentNew);
         }
-
     }
 
 
