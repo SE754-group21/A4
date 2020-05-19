@@ -144,4 +144,16 @@ public class CourseInformationTest {
         assertFalse(success);
     }
 
+    @Test
+    public void testAddCourseSeatsPast1000() {
+        String cid = "SOFTENG754";
+        int capacity = 1001;
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        CourseHandler handler = new CourseHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        boolean success = handler.setCapacity(cid, capacity);
+        assertFalse(success);
+    }
+
 }
