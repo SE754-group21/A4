@@ -89,9 +89,10 @@ public class Student extends User {
         else {
             if (listEnum == VirtualListEnum.enrolled_list) {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+            } else {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
             }
         }
-
     }
 
 }
