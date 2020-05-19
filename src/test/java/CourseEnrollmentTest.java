@@ -173,6 +173,26 @@ public class CourseEnrollmentTest {
         boolean remaining = handler.seatsRemaining(course);
         assertTrue(remaining);
     }
+
+    @Category(UnitTests.class)
+    @Test
+    public void testStudentCanEnrollIfConcession() {
+        String cid = "SE754";
+        String sid = "12345";
+        Student student = Mockito.mock(Student.class);
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        Mockito.when(student.getSid()).thenReturn(sid);
+        EnrollmentHandler h = new EnrollmentHandler(db);
+        EnrollmentHandler handler = Mockito.spy(h);
+        Mockito.doReturn(true).when(handler).seatsRemaining(course);
+        Mockito.doReturn(false).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.doReturn(true).when(handler).concessionApproved(course, student);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        boolean success = handler.enrollStudentCourse(sid, cid);
+        assertTrue(success);
+    }
 }
 
 
