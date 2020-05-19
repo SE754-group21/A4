@@ -23,6 +23,12 @@ public class CourseHandler {
         return sids;
     }
 
+    public boolean setCapacity(String cid, int capacity) {
+        Course course = db.getCourse(cid);
+        course.setCapacity(capacity);
+        return true;
+    }
+
     public List<String> getCHours(String cid) {
         return db.getCourse(cid).getCHours();
     }

@@ -124,8 +124,8 @@ public class CourseInformationTest {
     @Test
     public void testAddCourseSeats() {
         String cid = "SOFTENG754";
+        int capacity = 1000;
         Course course = Mockito.mock(Course.class);
-        Mockito.when(course.setCapacity()).thenReturn(true);
         Mockito.when(course.getCid()).thenReturn(cid);
         CourseHandler handler = new CourseHandler(db);
         Mockito.when(db.getCourse(cid)).thenReturn(course);

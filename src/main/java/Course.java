@@ -2,8 +2,9 @@ import java.util.List;
 
 public class Course {
 
-    String cid;
-    List<Course> prerequisites;
+    private String cid;
+    private List<Course> prerequisites;
+    int capacity;
 
     public Course() {
 
@@ -12,6 +13,8 @@ public class Course {
     public void setCid(String cid) {
         this.cid = cid;
     }
+
+    public void setCapacity(int capacity) { this.capacity = capacity; }
 
     public void setPrerequisites(List<Course> prerequisites) {
         this.prerequisites = prerequisites;
