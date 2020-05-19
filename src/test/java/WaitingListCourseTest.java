@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -9,34 +10,29 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 
-@RunWith(MockitoJUnitRunner.class)
 public class WaitingListCourseTest {
 
-    @Mock(name = "waitingList") private List<Student> waitingList = new ArrayList<>();
-    @Mock(name = "enrolledList") private List<Student> enrolledList = new ArrayList<>();
-
-    @InjectMocks
+    private List<Student> waitingList;
+    private List<Student> enrolledList;
     private Course course;
 
-    @Mock
-    Student student;
-
-    @Test
-    public void testAddStudent() {
-        course.addStudent(student);
-        Mockito.verify(enrolledList, times(1)).add(student);
+    @Before
+    public void setUp(){
+        waitingList = spy(new ArrayList<>());
+        enrolledList = spy(new ArrayList<>());
+        course = new Course(waitingList, enrolledList);
     }
 
     @Test
-    public void testAddStudentAtCapacity() {
-        course.setCapacity(0);
+    public void testAddDupStudent() {
+        Student student = Mockito.mock(Student.class);
         course.addStudent(student);
-        Mockito.verify(enrolledList, times(0)).add(student);
-        Mockito.verify(waitingList, times(1)).add(student);
+        course.addStudent(student);
+        assert(enrolledList.size() == 1);
     }
-
 
 
 }
