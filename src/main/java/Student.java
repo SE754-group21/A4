@@ -2,8 +2,8 @@ import java.util.List;
 
 public class Student extends User {
 
-    String sid;
-    List<Course> courses;
+    private String sid;
+    private List<Course> courses;
 
     public Student() {
 

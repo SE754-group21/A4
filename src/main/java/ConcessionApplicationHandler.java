@@ -9,7 +9,7 @@ public class ConcessionApplicationHandler {
         this.db = db;
     }
 
-    public String submitApplication(String sid, String cid, ConcessionApplication concessionApp) {
+    public String submitApplication(String sid, String cid) {
         Course course = db.getCourse(cid);
         Student student = db.getStudent(sid);
 
@@ -20,14 +20,13 @@ public class ConcessionApplicationHandler {
         }
 
         EnrollmentRequestStatusEnum enrolmentRequestStatus = student.getEnrollmentRequestStatusForCourse(course);
-
         if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.prerequisites_met) {
             return "Students that meet prerequisites are not required to apply for a concession";
         } else if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.awaiting_concession) {
             return "Students may only submit one concession application for a course";
         }
-
         //Submit concession application
+        ConcessionApplication concessionApp = new ConcessionApplication();
         db.addConcessionApplication(cid, sid, concessionApp);
         student.setEnrollmentRequestStatusForCourse(course, EnrollmentRequestStatusEnum.awaiting_concession);
         concessionApp.setConcessionStatus(ConcessionStatusEnum.pending);
