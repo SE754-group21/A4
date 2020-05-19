@@ -95,6 +95,7 @@ public class Course {
         if (enrolledList.size() < capacity && waitingList.size() > 0) {
             Student studentNew = waitingList.poll();
             enrolledList.add(studentNew);
+            updateStudent(true, studentNew);
         }
     }
 
