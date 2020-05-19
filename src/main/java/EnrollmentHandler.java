@@ -5,7 +5,6 @@ public class EnrollmentHandler {
 
     private Database db;
 
-
     public EnrollmentHandler(Database db) {
         this.db = db;
     }
