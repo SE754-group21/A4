@@ -79,7 +79,13 @@ public class Course {
         return enrolledList.contains(student) || waitingList.contains(student);
     }
 
-    public void removeStudent() {}
+    public void removeStudent(Student student) {
+        if (enrolledList.contains(student))
+            enrolledList.remove(student);
+        else if (waitingList.contains(student))
+            waitingList.remove(student);
+
+    }
 
 
 }
