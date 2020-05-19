@@ -22,6 +22,11 @@ public class EnrollmentHandler {
         return qualified;
     }
 
+    public ConcessionStatusEnum concessionStatus(Student student, Course course) {
+        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        return concessionApplication.getConcessionStatus();
+    }
+
     public boolean studentMeetsPrerequisites(String sid, String cid) {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);
@@ -67,44 +72,10 @@ public class EnrollmentHandler {
         return waitingListPosition;
     }
 
-    public ConcessionStatusEnum concessionStatus(Student student, Course course) {
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        return concessionApplication.getConcessionStatus();
-    }
 
-    public String getConcessionStatus(String sid, String cid) {
-        Student student = db.getStudent(sid);
-        Course course = db.getCourse(cid);
-        ConcessionStatusEnum concessionStatus = concessionStatus(student, course);
-        if (concessionStatus == ConcessionStatusEnum.pending)
-            return "Pending - awaiting course approval";
-        else if (concessionStatus == ConcessionStatusEnum.denied)
-            return "Denied - concession not approved";
-        else if (concessionStatus == ConcessionStatusEnum.approved)
-            return "Approved - concession accepted and enrollment complete";
-        else
-            return "The student has no concession for this course";
-    }
 
-    public String getConcessionReason(String sid, String cid) {
-        Student student = db.getStudent(sid);
-        Course course = db.getCourse(cid);
 
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        return concessionApplication.getConcessionReason();
-    }
 
-    public String getStatusReason(String sid, String cid) {
-        Student student = db.getStudent(sid);
-        Course course = db.getCourse(cid);
-
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        return concessionApplication.getStatusReason();
-    }
-
-    private void setEnrollmentStatusForCourse(Student student, Course course, EnrollmentStatusEnum status) {
-        student.setEnrollmentStatusForCourse(course, status);
-    }
 
     public NotificationEvent concessionGetsDeclined(Student student, Course course) {
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);

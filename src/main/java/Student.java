@@ -31,8 +31,6 @@ public class Student extends User {
         this.courses = courses;
     }
 
-    public void addEnrolledCourse(Course course) {}
-
     public EnrollmentRequestStatusEnum getEnrollmentRequestStatusForCourse(Course course){
         return null;
     }
@@ -53,12 +51,7 @@ public class Student extends User {
         return applications.get(course);
     }
 
-    public void removeCourse(Course course) {
-
-    }
-
     public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
-
     }
 
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
