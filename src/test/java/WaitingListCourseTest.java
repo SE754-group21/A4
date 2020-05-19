@@ -15,8 +15,7 @@ import java.util.Queue;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 @Category(IntegrationTests.class)
 public class WaitingListCourseTest {
@@ -59,6 +58,13 @@ public class WaitingListCourseTest {
         assertTrue(enrolledList.size() == 1);
         assertTrue(waitingList.size() == 0);
         assertFalse(enrolledList.contains(student1));
+    }
+
+    @Test
+    public void testUpdateStudentCourse() {
+        Student student = Mockito.mock(Student.class);
+        course.addStudent(student);
+        verify(student, times(1)).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
     }
 
 }
