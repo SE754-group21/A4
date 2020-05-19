@@ -95,4 +95,9 @@ public class Student extends User {
         }
     }
 
+    public void updateVirtualList(Course course) {
+        ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        VirtualListEnum listEnum = getVirtualStatus(course);
+    }
+
 }
