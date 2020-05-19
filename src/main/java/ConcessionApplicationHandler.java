@@ -27,4 +27,8 @@ public class ConcessionApplicationHandler {
         concessionApp.setConcessionStatus(ConcessionStatusEnum.pending);
         return "Concession application submitted";
     }
+
+    public void approveConcession(ConcessionApplication app) {
+        app.setConcessionStatus(ConcessionStatusEnum.approved);
+    }
 }

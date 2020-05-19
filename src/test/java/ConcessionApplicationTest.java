@@ -69,7 +69,7 @@ public class ConcessionApplicationTest {
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
         handler.approveConcession(concessionApp);
-        verify(concessionApp.setConcessionStatus(ConcessionStatusEnum.approved), Mockito.times(1));
+        verify(concessionApp, Mockito.times(1)).setConcessionStatus(ConcessionStatusEnum.approved);
     }
 
 }
