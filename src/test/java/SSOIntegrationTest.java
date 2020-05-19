@@ -36,4 +36,14 @@ public class SSOIntegrationTest {
         assertEquals("Login unsuccessful", login);
 
     }
+    @Test
+    public void testAlreadyLoggedIn(){
+        SSOMock sso = Mockito.mock(SSOMock.class);
+        AuthenticateUser auth = new AuthenticateUser(sso);
+
+        Mockito.when(sso.loggedIn()).thenReturn("Logged in");
+
+        Boolean login = auth.alreadyLoggedIn();
+        assertTrue(login);
+    }
 }
