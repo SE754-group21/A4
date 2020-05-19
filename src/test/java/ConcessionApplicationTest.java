@@ -3,6 +3,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
 @Category(UnitTests.class)
 public class ConcessionApplicationTest {
@@ -61,6 +62,14 @@ public class ConcessionApplicationTest {
         String concessionApplicationResult = handler.submitApplication(sid, cid, concessionApp);
 
         assertEquals("Concession application submitted", concessionApplicationResult);
+    }
+
+    @Test
+    public void testAcceptConcession() {
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+        handler.approveConcession(concessionApp);
+        verify(concessionApp.setConcessionStatus(ConcessionStatusEnum.approved), Mockito.times(1));
     }
 
 }
