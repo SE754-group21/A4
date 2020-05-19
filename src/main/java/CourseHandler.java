@@ -24,6 +24,7 @@ public class CourseHandler {
     }
 
     public boolean setCapacity(String cid, int capacity) {
+        if (capacity < 0) return false;
         Course course = db.getCourse(cid);
         course.setCapacity(capacity);
         return true;
