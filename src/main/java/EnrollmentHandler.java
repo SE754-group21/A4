@@ -17,7 +17,7 @@ public class EnrollmentHandler {
         if (!qualified) return false;
         //enroll student
         student.addEnrolledCourse(course);
-        course.addStudent();
+        course.addStudent(student);
         return qualified;
     }
 
