@@ -5,16 +5,16 @@ public class Course {
 
     private String cid;
     private List<Course> prerequisites;
-    int capacity;
-    private List<Student> students;
+    int capacity = 1000;
+    private List<Student> enrolledList;
+    private List<Student> waitingList;
+
 
     public Course() {
-        students = new ArrayList<>();
+        enrolledList = new ArrayList<>();
+        waitingList = new ArrayList<>();
     }
 
-    public Course(List<Student> students) {
-        this.students = students;
-    }
 
     public void setCid(String cid) {
         this.cid = cid;
@@ -61,7 +61,12 @@ public class Course {
     }
 
     public void addStudent(Student student) {
-        students.add(student);
+        if (enrolledList.size() == capacity) {
+            waitingList.add(student);
+        } else {
+            enrolledList.add(student);
+        }
+
     }
 
     public void removeStudent() {}
