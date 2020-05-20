@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
 import java.util.Queue;
 
@@ -10,7 +11,6 @@ public class Course {
     private int capacity = 1000;
     private Queue<Student> enrolledList;
     private Queue<Student> waitingList;
-
 
     public Course() {
         enrolledList = new LinkedList<>();
