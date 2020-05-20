@@ -1,9 +1,12 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
@@ -121,6 +124,14 @@ public class CourseInformationTest {
         prereqlist.add(prereqid);
         handler.setPrerequisites(cid, prereqlist);
         verify(course).setPrerequisites(cprereq);
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testSetCoursePrerequisitesInvalidPrereq() {
+        String prereqid = "KEJ372";
+        List<String> prereqlist = new ArrayList<>();
+        prereqlist.add(prereqid);
+        handler.setPrerequisites(cid, prereqlist);
     }
 
 }
