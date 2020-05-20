@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -123,6 +124,7 @@ public class EnrollmentHandler {
     }
 
     public List<Course> getCoursesCompletedInYear(int year, String sid) {
-        return null;
+        List<Course> coursesCompletedInYear = new ArrayList<>();
+        return coursesCompletedInYear;
     }
 }
