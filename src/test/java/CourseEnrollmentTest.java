@@ -142,6 +142,17 @@ public class CourseEnrollmentTest {
         verify(course, never()).addStudent(student);
     }
 
+    @Test
+    public void testStudentEnrollmentConcessionNotApplied() {
+        EnrollmentHandler h = new EnrollmentHandler(db);
+        EnrollmentHandler handler = Mockito.spy(h);
+        Mockito.doReturn(true).when(handler).seatsRemaining(course);
+        Mockito.doReturn(false).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.doReturn(ConcessionStatusEnum.not_applied).when(handler).concessionStatus(student, course);
+        handler.enrollStudentCourse(sid, cid);
+        verify(course, never()).addStudent(student);
+    }
+
 
 }
 
