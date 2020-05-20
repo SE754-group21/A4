@@ -109,4 +109,12 @@ public class SearchCoursesTest {
         assertEquals(0, searchedCoursesIncorrectSearch.size());
         assertEquals(1, searchedCoursesCorrectSearch.size());
     }
+
+    @Test
+    public void testAddCourseToEnrolmentCart(){
+        Student student = new Student();
+        student.addCourseTonEnrolmentCart(course);
+        List<Course> enrolmentCart = student.getEnrolmentCart();
+        assertTrue(1, enrolmentCart.size());
+    }
 }
