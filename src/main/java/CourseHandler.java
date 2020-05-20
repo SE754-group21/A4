@@ -54,8 +54,13 @@ public class CourseHandler {
     }
 
     public void setPrerequisites(String cid, List<String> prereqsid) {
-
-
+        Course course = db.getCourse(cid);
+        List<Course> prereqs = new ArrayList<Course>();
+        for (String prereqid : prereqsid) {
+            Course prereq = db.getCourse(prereqid);
+            prereqs.add(prereq);
+        }
+        course.setPrerequisites(prereqs);
     }
 
     public List<Course> search(String search) {
