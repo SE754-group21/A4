@@ -105,8 +105,6 @@ public class CourseEnrollmentStatusTest {
 
     @Test
     public void testSortByYearEnrolled() {
-        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.enrolled);
-        Mockito.when(student.getEnrollmentStatusForCourse(course2)).thenReturn(EnrollmentStatusEnum.enrolled);
 
         Mockito.when(student.getYearEnrolled(course)).thenReturn(2016);
         Mockito.when(student.getYearEnrolled(course2)).thenReturn(2017);
@@ -123,7 +121,6 @@ public class CourseEnrollmentStatusTest {
         Mockito.when(course.getCid()).thenReturn(cid);
         String cid2 = "SE754";
         Mockito.when(course2.getCid()).thenReturn(cid);
-
 
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getCourse(cid2)).thenReturn(course2);
