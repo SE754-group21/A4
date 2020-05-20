@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Student extends User {
 
@@ -10,6 +8,7 @@ public class Student extends User {
     private Map<Course, ConcessionApplication> applications;
     private Map<Course, VirtualListEnum> queues = new HashMap<>();
     private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
+    private Map<Course, LocalDate> enrolledDates = new HashMap<>();
 
     public Student() {
         applications = new HashMap<>();
@@ -113,6 +112,12 @@ public class Student extends User {
 
 
     public int getYearEnrolled(Course course) {
+        LocalDate date = this.enrolledDates.get(course);
+        date.getYear();
         return 0;
+    }
+
+    public void setDateEnrolled(Course course, LocalDate date) {
+        this.enrolledDates.put(course, date);
     }
 }

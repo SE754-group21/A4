@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -124,7 +125,15 @@ public class EnrollmentHandler {
     }
 
     public List<Course> getCoursesCompletedInYear(int year, String sid) {
+        Student student = db.getStudent(sid);
         List<Course> coursesCompletedInYear = new ArrayList<>();
+
+        for (Course course :  student.getTakenCourses()) {
+            int enrolledYear = student.getYearEnrolled(course);
+            if (enrolledYear == year) {
+                coursesCompletedInYear.add(course);
+            }
+        }
         return coursesCompletedInYear;
     }
 }

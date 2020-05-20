@@ -12,8 +12,6 @@ public class Course {
     private Queue<Student> enrolledList;
     private Queue<Student> waitingList;
 
-
-    Date enrolledDate;
     public Course() {
         enrolledList = new LinkedList<>();
         waitingList = new LinkedList<>();
