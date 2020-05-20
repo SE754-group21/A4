@@ -19,21 +19,34 @@ import static org.mockito.Mockito.*;
 
 @Category(IntegrationTests.class)
 public class WaitingListCourseTest {
-
     private Queue<Student> waitingList;
     private Queue<Student> enrolledList;
     private Course course;
+    private Student student;
 
     @Before
     public void setUp(){
         waitingList = spy(new LinkedList<>());
         enrolledList = spy(new LinkedList<>());
         course = new Course(waitingList, enrolledList);
+        student = Mockito.mock(Student.class);
+    }
+
+    @Test
+    public void testAddStudentToCourse() {
+        course.addStudent(student);
+        assertTrue(enrolledList.size() == 1);
+    }
+
+    @Test
+    public void testAddStudentToFullCourse() {
+        course.setCapacity(0);
+        course.addStudent(student);
+        assertTrue(enrolledList.size() == 0);
     }
 
     @Test
     public void testAddDupStudent() {
-        Student student = Mockito.mock(Student.class);
         course.addStudent(student);
         course.addStudent(student);
         assertTrue(enrolledList.size() == 1);
@@ -41,7 +54,6 @@ public class WaitingListCourseTest {
 
     @Test
     public void removeStudent() {
-        Student student = Mockito.mock(Student.class);
         course.addStudent(student);
         course.removeStudent(student);
         assertTrue(enrolledList.size() == 0);
@@ -49,30 +61,27 @@ public class WaitingListCourseTest {
 
     @Test
     public void removeStudentWaitingList() {
-        Student student1 = Mockito.mock(Student.class);
         Student student2 = Mockito.mock(Student.class);
         course.setCapacity(1);
-        course.addStudent(student1);
+        course.addStudent(student);
         course.addStudent(student2);
-        course.removeStudent(student1);
+        course.removeStudent(student);
         assertTrue(enrolledList.size() == 1);
         assertTrue(waitingList.size() == 0);
-        assertFalse(enrolledList.contains(student1));
+        assertFalse(enrolledList.contains(student));
     }
 
     @Test
     public void testUpdateStudentCourseEnrollmentList() {
-        Student student = Mockito.mock(Student.class);
         course.addStudent(student);
         verify(student, times(1)).setVirtualList(course, VirtualListEnum.enrolled_list);
     }
 
     @Test
     public void testUpdateStudentCourseWaitingList() {
-        Student student1 = Mockito.mock(Student.class);
         Student student2 = Mockito.mock(Student.class);
         course.setCapacity(1);
-        course.addStudent(student1);
+        course.addStudent(student);
         course.addStudent(student2);
         verify(student2, times(1)).setVirtualList(course, VirtualListEnum.waiting_list);
     }

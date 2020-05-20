@@ -7,15 +7,16 @@ import static org.mockito.Mockito.verify;
 
 public class StudentVirtualListHandler {
     private Student student;
+    private Course course;
 
     @Before
     public void setUp(){
         student = Mockito.spy(new Student());
+        course = Mockito.mock(Course.class);
     }
 
     @Test
     public void testCheckNotApprovedConcession() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.pending).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateVirtualList(course);
@@ -24,7 +25,6 @@ public class StudentVirtualListHandler {
 
     @Test
     public void testCheckApprovedConcessionEnrolledList() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.enrolled_list).when(student).getVirtualStatus(course);
         student.updateVirtualList(course);
@@ -34,7 +34,6 @@ public class StudentVirtualListHandler {
 
     @Test
     public void testCheckApprovedConcessionWaitingList() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateVirtualList(course);
