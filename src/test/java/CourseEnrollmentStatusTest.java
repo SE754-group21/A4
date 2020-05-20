@@ -3,10 +3,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class CourseEnrollmentStatusTest {
     private Course course;
+    private Course course2;
     private Student student;
     private EnrollmentHandler enrollmentHandler;
     private Database db;
@@ -14,6 +17,7 @@ public class CourseEnrollmentStatusTest {
     @Before
     public void setUp() {
         course = Mockito.mock(Course.class);
+        course2 = Mockito.mock(Course.class);
         student = Mockito.mock(Student.class);
         db = Mockito.mock(Database.class);
         enrollmentHandler =  new EnrollmentHandler(db);
@@ -96,5 +100,39 @@ public class CourseEnrollmentStatusTest {
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
         enrollmentHandler.getWaitingListPositionForStudent(sid, cid);
+    }
+
+    @Test
+    public void testSortByYearEnrolled() {
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.enrolled);
+        Mockito.when(student.getEnrollmentStatusForCourse(course2)).thenReturn(EnrollmentStatusEnum.enrolled);
+
+        Mockito.when(student.getYearEnrolled(course)).thenReturn(2016);
+        Mockito.when(student.getYearEnrolled(course2)).thenReturn(2017);
+
+        List<Course> coursesTaken = new ArrayList<>();
+        coursesTaken.add(course);
+        coursesTaken.add(course2);
+
+        Mockito.when(student.getTakenCourses()).thenReturn(coursesTaken);
+
+        String sid = "A123";
+        Mockito.when(student.getSid()).thenReturn(sid);
+        String cid = "SE701";
+        Mockito.when(course.getCid()).thenReturn(cid);
+        String cid2 = "SE754";
+        Mockito.when(course2.getCid()).thenReturn(cid);
+
+
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getCourse(cid2)).thenReturn(course2);
+
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+
+        int year = 2016;
+        List<Course> courses = enrollmentHandler.getCoursesCompletedInYear(year, sid);
+
+        Assert.assertEquals(1, courses.size());
+        Assert.assertEquals(courses.get(0), course);
     }
 }

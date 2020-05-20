@@ -35,4 +35,8 @@ public class Student extends User {
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
 
     }
+
+    public int getYearEnrolled(Course course) {
+        return 0;
+    }
 }

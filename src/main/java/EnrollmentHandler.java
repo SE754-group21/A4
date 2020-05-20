@@ -136,4 +136,8 @@ public class EnrollmentHandler {
 
         return notificationEvent;
     }
+
+    public List<Course> getCoursesCompletedInYear(int year, String sid) {
+        return null;
+    }
 }

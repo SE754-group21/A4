@@ -1,6 +1,11 @@
+import java.util.Date;
 import java.util.List;
 
 public class Course {
+
+    String cid;
+    List<Course> prerequisites;
+    Date enrolledDate;
 
     public Course() {
 
