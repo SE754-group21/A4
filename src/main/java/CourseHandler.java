@@ -53,6 +53,11 @@ public class CourseHandler {
         return sids;
     }
 
+    public void setPrerequisites(String cid, List<String> prereqsid) {
+
+
+    }
+
     public List<Course> search(String search) {
         List<Course> searchedCourses = new ArrayList<>();
         Map<String, Course> courses = db.getAllCourses();
