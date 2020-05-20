@@ -72,29 +72,6 @@ public class EnrollmentHandler {
         return waitingListPosition;
     }
 
-
-
-
-
-
-    public NotificationEvent concessionGetsDeclined(Student student, Course course) {
-        ConcessionApplication concessionApplication = student.getConcessionApplication(course);
-        concessionApplication.setConcessionStatus(ConcessionStatusEnum.denied);
-        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.concession_denied);
-
-        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
-
-        return notificationEvent;
-    }
-
-    public NotificationEvent moveOffWaitingList(Student student, Course course) {
-
-        setEnrollmentStatusForCourse(student, course, EnrollmentStatusEnum.enrolled);
-        NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.moved_off_waiting_list);
-
-        return notificationEvent;
-    }
-
     public List<Course> getCoursesCompletedInYear(int year, String sid) {
         Student student = db.getStudent(sid);
         List<Course> coursesCompletedInYear = new ArrayList<>();
