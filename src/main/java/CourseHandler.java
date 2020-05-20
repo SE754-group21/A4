@@ -58,6 +58,8 @@ public class CourseHandler {
         List<Course> prereqs = new ArrayList<Course>();
         for (String prereqid : prereqsid) {
             Course prereq = db.getCourse(prereqid);
+            if (prereq == null)
+                throw new NoSuchElementException("Invalid prereq ID");
             prereqs.add(prereq);
         }
         course.setPrerequisites(prereqs);
