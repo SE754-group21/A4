@@ -105,31 +105,23 @@ public class CourseEnrollmentStatusTest {
 
     @Test
     public void testSortByYearEnrolled() {
+        List<Course> coursesTaken = new ArrayList<>();
+        coursesTaken.add(course);
+        coursesTaken.add(course2);
+        Mockito.when(student.getTakenCourses()).thenReturn(coursesTaken);
 
         Mockito.when(student.getYearEnrolled(course)).thenReturn(2016);
         Mockito.when(student.getYearEnrolled(course2)).thenReturn(2017);
 
-        List<Course> coursesTaken = new ArrayList<>();
-        coursesTaken.add(course);
-        coursesTaken.add(course2);
-
-        Mockito.when(student.getTakenCourses()).thenReturn(coursesTaken);
-
         String sid = "A123";
-        Mockito.when(student.getSid()).thenReturn(sid);
         String cid = "SE701";
-        Mockito.when(course.getCid()).thenReturn(cid);
         String cid2 = "SE754";
-        Mockito.when(course2.getCid()).thenReturn(cid);
-
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getCourse(cid2)).thenReturn(course2);
-
         Mockito.when(db.getStudent(sid)).thenReturn(student);
 
         int year = 2016;
         List<Course> courses = enrollmentHandler.getCoursesCompletedInYear(year, sid);
-
         Assert.assertEquals(1, courses.size());
         Assert.assertEquals(courses.get(0), course);
     }
