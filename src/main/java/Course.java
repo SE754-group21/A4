@@ -32,6 +32,10 @@ public class Course {
         this.prerequisites = prerequisites;
     }
 
+    public void addPrerequisites(Course prerequisites) {
+        this.prerequisites.add(prerequisites);
+    }
+
     public String getCname() {
         return "";
     }
