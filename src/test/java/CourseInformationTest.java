@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 
 @Category(UnitTests.class)
 public class CourseInformationTest {
@@ -107,6 +108,19 @@ public class CourseInformationTest {
         int capacity = 1001;
         boolean success = handler.setCapacity(cid, capacity);
         assertFalse(success);
+    }
+
+    @Test
+    public void testSetCoursePrerequisites() {
+        String prereqid = "KEJ372";
+        Course prereq = Mockito.mock(Course.class);
+        Mockito.when(db.getCourse(prereqid)).thenReturn(prereq);
+        List<Course> cprereq = new ArrayList<Course>();
+        cprereq.add(prereq);
+        List<String> prereqlist = new ArrayList<>();
+        prereqlist.add(prereqid);
+        handler.setPrerequisites(cid, prereqlist);
+        verify(course).setPrerequisites(cprereq);
     }
 
 }
