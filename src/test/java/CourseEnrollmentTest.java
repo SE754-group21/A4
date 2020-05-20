@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @Category(UnitTests.class)
@@ -128,6 +129,17 @@ public class CourseEnrollmentTest {
         Mockito.doReturn(ConcessionStatusEnum.pending).when(handler).concessionStatus(student, course);
         handler.enrollStudentCourse(sid, cid);
         verify(course).addStudent(student);
+    }
+
+    @Test
+    public void testStudentEnrollmentConcessionDenied() {
+        EnrollmentHandler h = new EnrollmentHandler(db);
+        EnrollmentHandler handler = Mockito.spy(h);
+        Mockito.doReturn(true).when(handler).seatsRemaining(course);
+        Mockito.doReturn(false).when(handler).studentMeetsPrerequisites(sid, cid);
+        Mockito.doReturn(ConcessionStatusEnum.denied).when(handler).concessionStatus(student, course);
+        handler.enrollStudentCourse(sid, cid);
+        verify(course, never()).addStudent(student);
     }
 
 
