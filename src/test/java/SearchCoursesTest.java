@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+@Category(UnitTests.class)
 public class SearchCoursesTest {
     private Database db;
     @Before

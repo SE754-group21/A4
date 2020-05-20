@@ -1,9 +1,35 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Student extends User {
 
-    public Student() {
+    private String sid;
+    private List<Course> courses;
+    private Map<Course, ConcessionApplication> applications;
+    private Map<Course, VirtualListEnum> queues = new HashMap<>();
+    private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
 
+    public Student() {
+        applications = new HashMap<>();
+        courses = new ArrayList<>();
+    }
+
+    public void addConcession(Course course, ConcessionApplication app) {
+        applications.put(course, app);
+    }
+
+    public void setSid(String sid){
+        this.sid = sid;
+    }
+
+    public String getSid(){
+        return this.sid;
+    }
+
+    public void setTakenCourses(List<Course> courses){
+        this.courses = courses;
     }
 
     public void addEnrolledCourse(Course course) {}
@@ -17,7 +43,7 @@ public class Student extends User {
     }
 
     public List<Course> getTakenCourses() {
-        return null;
+        return courses;
     }
 
     public int getWaitingListNumber(Course course) {
@@ -25,7 +51,11 @@ public class Student extends User {
     }
 
     public ConcessionApplication getConcessionApplication(Course course) {
-        return null;
+        return applications.get(course);
+    }
+
+    public void removeCourse(Course course) {
+
     }
 
     public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
@@ -33,8 +63,54 @@ public class Student extends User {
     }
 
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
+        enrollment.put(course, status);
 
     }
+
+    public void setVirtualList(Course course, VirtualListEnum status) {
+        queues.put(course, status);
+    }
+
+    public ConcessionStatusEnum getConcessionStatus(Course course) {
+        return applications.get(course).getConcessionStatus();
+    }
+
+    public VirtualListEnum getVirtualStatus(Course course) {
+        return queues.get(course);
+    }
+
+    public void updateConcession(Course course) {
+        ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        VirtualListEnum listEnum = getVirtualStatus(course);
+        if (concessionEnum == ConcessionStatusEnum.denied)
+            setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
+        else if (concessionEnum == ConcessionStatusEnum.pending)
+            setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
+            //if success
+        else {
+            if (listEnum == VirtualListEnum.enrolled_list) {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+            } else {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
+            }
+        }
+    }
+
+    public NotificationEvent updateVirtualList(Course course) {
+        NotificationEvent event = null;
+        ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        VirtualListEnum listEnum = getVirtualStatus(course);
+        if (concessionEnum == ConcessionStatusEnum.approved) {
+            if (listEnum == VirtualListEnum.enrolled_list) {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+                event = new NotificationEvent(this, course, NotificationEventTypeEnum.moved_off_waiting_list);
+            } else {
+                setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
+            }
+        }
+        return event;
+    }
+
 
     public int getYearEnrolled(Course course) {
         return 0;

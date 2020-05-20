@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -6,6 +7,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
+
+@Category(UnitTests.class)
 public class DegreeInformationTest {
 
     @Test

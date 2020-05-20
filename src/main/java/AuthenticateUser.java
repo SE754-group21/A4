@@ -9,6 +9,15 @@ public class AuthenticateUser {
         if(sso.verify(username, password).equals("Success")){
             return "Login successful";
         }
+        if(sso.verify(username, password).equals("Unsuccessful")){
+            return "Login unsuccessful";
+        }
         return "";
+    }
+    public boolean alreadyLoggedIn(){
+        if(sso.loggedIn() == "Logged in"){
+            return true;
+        }
+        return false;
     }
 }

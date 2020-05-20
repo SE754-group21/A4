@@ -1,19 +1,22 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+@Category(UnitTests.class)
 public class CourseInformationTest {
     private Database db;
     @Before
     public void setUp() {
         db = Mockito.mock(Database.class);
     }
+
     @Test
     public void testGetCourseName() {
         String cid = "SOFTENG754";
@@ -39,8 +42,6 @@ public class CourseInformationTest {
         String name = handler.getCdesc(cid);
         assertEquals(name, cdesc);
     }
-
-
 
     @Test
     public void testGetStaff() {
@@ -73,7 +74,6 @@ public class CourseInformationTest {
         List<String> h = handler.getCHours(cid);
         assertEquals(h.size(), 0);
     }
-
 
     @Test
     public void testGetTotalSets() {
@@ -120,5 +120,40 @@ public class CourseInformationTest {
         assertEquals(cids.get(0), sid);
     }
 
+    @Test
+    public void testAddCourseSeats() {
+        String cid = "SOFTENG754";
+        int capacity = 1000;
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        CourseHandler handler = new CourseHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        boolean success = handler.setCapacity(cid, capacity);
+        assertTrue(success);
+    }
+
+    @Test
+    public void testAddCourseSeatsNegative() {
+        String cid = "SOFTENG754";
+        int capacity = -1;
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        CourseHandler handler = new CourseHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        boolean success = handler.setCapacity(cid, capacity);
+        assertFalse(success);
+    }
+
+    @Test
+    public void testAddCourseSeatsPast1000() {
+        String cid = "SOFTENG754";
+        int capacity = 1001;
+        Course course = Mockito.mock(Course.class);
+        Mockito.when(course.getCid()).thenReturn(cid);
+        CourseHandler handler = new CourseHandler(db);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        boolean success = handler.setCapacity(cid, capacity);
+        assertFalse(success);
+    }
 
 }
