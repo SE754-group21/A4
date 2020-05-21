@@ -106,6 +106,20 @@ public class WaitingListCourseTest {
         assertEquals(value, 0);
     }
 
+    @Test
+    public void testWaitingListPositionSecond() {
+        Student student2 = Mockito.mock(Student.class);
+        Student student3 = Mockito.mock(Student.class);
+        course.setCapacity(1);
+        enrolledList.add(student);
+        waitingList.add(student2);
+        waitingList.add(student3);
+        int value = course.getWaitingListPosition(student3);
+        assertEquals(value, 1);
+    }
+
+
+
 
 
 
