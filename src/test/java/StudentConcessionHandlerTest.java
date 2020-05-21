@@ -1,28 +1,21 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class StudentConcessionHandlerTest {
-
     private Student student;
+    private Course course;
 
     @Before
     public void setUp(){
         student = Mockito.spy(new Student());
+        course = Mockito.mock(Course.class);
     }
 
     @Test
     public void testcheckDenied() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.denied).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateConcession(course);
@@ -32,7 +25,6 @@ public class StudentConcessionHandlerTest {
 
     @Test
     public void testcheckPending() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.pending).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateConcession(course);
@@ -42,7 +34,6 @@ public class StudentConcessionHandlerTest {
 
     @Test
     public void testcheckConcessionSuccessAndEnrolledList() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.enrolled_list).when(student).getVirtualStatus(course);
         student.updateConcession(course);
@@ -52,7 +43,6 @@ public class StudentConcessionHandlerTest {
 
     @Test
     public void testcheckConcessionSuccessAndWaitingList() {
-        Course course = Mockito.mock(Course.class);
         Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateConcession(course);

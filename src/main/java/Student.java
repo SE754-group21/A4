@@ -5,14 +5,16 @@ public class Student extends User {
 
     private String sid;
     private List<Course> courses;
+    private List<Course> enrollmentCart = new ArrayList<>();
     private Map<Course, ConcessionApplication> applications;
-    private Map<Course, VirtualListEnum> queues = new HashMap<>();
+    Map<Course, VirtualListEnum> queues;
     private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
     private Map<Course, LocalDate> enrolledDates = new HashMap<>();
 
     public Student() {
         applications = new HashMap<>();
         courses = new ArrayList<>();
+        queues = new HashMap<>();
     }
 
     public void addConcession(Course course, ConcessionApplication app) {
@@ -31,14 +33,14 @@ public class Student extends User {
         this.courses = courses;
     }
 
-    public void addEnrolledCourse(Course course) {}
-
     public EnrollmentRequestStatusEnum getEnrollmentRequestStatusForCourse(Course course){
         return null;
     }
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
-        return null;
+        if (enrollment.get(course) == null)
+            return EnrollmentStatusEnum.not_enrolled;
+        return enrollment.get(course);
     }
 
     public List<Course> getTakenCourses() {
@@ -53,12 +55,7 @@ public class Student extends User {
         return applications.get(course);
     }
 
-    public void removeCourse(Course course) {
-
-    }
-
     public void setEnrollmentRequestStatusForCourse(Course course, EnrollmentRequestStatusEnum enrollmentRequestStatus){
-
     }
 
     public void setEnrollmentStatusForCourse(Course course, EnrollmentStatusEnum status) {
@@ -68,14 +65,23 @@ public class Student extends User {
 
     public void setVirtualList(Course course, VirtualListEnum status) {
         queues.put(course, status);
+        updateVirtualList(course);
     }
 
     public ConcessionStatusEnum getConcessionStatus(Course course) {
-        return applications.get(course).getConcessionStatus();
+        ConcessionApplication app = applications.get(course);
+        if (app == null) return ConcessionStatusEnum.not_applied;
+        return app.getConcessionStatus();
     }
 
     public VirtualListEnum getVirtualStatus(Course course) {
         return queues.get(course);
+    }
+
+    public boolean meetsPrereqs(Course course) {
+        List<Course> studentTaken = getTakenCourses();
+        List<Course> prereqs = course.getPrerequisites();
+        return studentTaken.containsAll(prereqs);
     }
 
     public void updateConcession(Course course) {
@@ -98,8 +104,9 @@ public class Student extends User {
     public NotificationEvent updateVirtualList(Course course) {
         NotificationEvent event = null;
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        boolean prereqs = meetsPrereqs(course);
         VirtualListEnum listEnum = getVirtualStatus(course);
-        if (concessionEnum == ConcessionStatusEnum.approved) {
+        if (prereqs || concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
                 event = new NotificationEvent(this, course, NotificationEventTypeEnum.moved_off_waiting_list);
@@ -116,6 +123,12 @@ public class Student extends User {
         date.getYear();
         return 0;
     }
+
+    public void addCourseToEnrollmentCart(Course course){
+        enrollmentCart.add(course);
+    }
+
+    public List<Course> getEnrollmentCart(){return enrollmentCart;};
 
     public void setDateEnrolled(Course course, LocalDate date) {
         this.enrolledDates.put(course, date);
