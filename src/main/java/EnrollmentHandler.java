@@ -85,4 +85,8 @@ public class EnrollmentHandler {
         }
         return coursesCompletedInYear;
     }
+
+    public void addCourseToEnrollmentCart(String sid, String cid){
+
+    }
 }

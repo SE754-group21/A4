@@ -110,6 +110,8 @@ public class Student extends User {
         return 0;
     }
 
+    public void addCourseToEnrollmentCart(Course course){}
+
     public void setDateEnrolled(Course course, LocalDate date) {
         this.enrolledDates.put(course, date);
     }
