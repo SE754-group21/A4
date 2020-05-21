@@ -33,4 +33,9 @@ public class DegreeHandler {
         return courseIDs;
     }
 
+
+    public List<Integer> getDegreePoints(String did){
+        return null;
+    }
+
 }

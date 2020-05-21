@@ -78,7 +78,7 @@ public class DegreeInformationTest {
 
         DegreeHandler handler = new DegreeHandler(db);
         Mockito.when(degree.getDegreePoints()).thenReturn(degreePointsAtEachStage);
-        List<Integer> points = handler.getDegreePoints(did;
+        List<Integer> points = handler.getDegreePoints(did);
         assertEquals(degreePointsAtEachStage.get(0), points.get(0));
     }
 
