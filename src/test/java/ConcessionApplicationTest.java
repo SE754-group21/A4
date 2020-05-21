@@ -61,25 +61,26 @@ public class ConcessionApplicationTest {
 
     @Test
     public void testAcceptConcession() {
+        String cid = "24";
         ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
         ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
         Mockito.when(concessionApp.getStudent()).thenReturn(student);
         Mockito.when(concessionApp.getCourse()).thenReturn(course);
-        handler.approveConcession(concessionApp);
+        handler.approveConcession(cid);
         verify(concessionApp, Mockito.times(1)).setConcessionStatus(ConcessionStatusEnum.approved);
     }
 
     @Test
     public void testDeclineConcession() {
-        ConcessionApplication concessionApp =
-                Mockito.mock(ConcessionApplication.class);
-        ConcessionApplicationHandler handler =
-                new ConcessionApplicationHandler(db);
-        Mockito.when(concessionApp.getStudent()).
-                thenReturn(student);
-        Mockito.when(concessionApp.getCourse()).
-                thenReturn(course);
-        handler.declineConcession(concessionApp);
+
+        String cid = "24";
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
+        handler.declineConcession(cid);
         verify(concessionApp,
                 Mockito.times(1)).
                 setConcessionStatus(ConcessionStatusEnum.denied);
