@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Date;
 import java.util.List;
 import java.util.Queue;
 
@@ -30,10 +28,6 @@ public class Course {
 
     public void setPrerequisites(List<Course> prerequisites) {
         this.prerequisites = prerequisites;
-    }
-
-    public void addPrerequisites(Course prerequisites) {
-        this.prerequisites.add(prerequisites);
     }
 
     public String getCname() {
@@ -79,7 +73,6 @@ public class Course {
             enrolledList.add(student);
             updateStudent(true, student);
         }
-
     }
 
     private void updateStudent(boolean enrolled, Student student) {
