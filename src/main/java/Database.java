@@ -1,16 +1,20 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 public class Database {
     private Map<String, Course> courses;
     private Map<String, Degree> degrees;
     private Map<String, Student> students;
+    private Map<String, ConcessionApplication> concessions;
+    private int concessionVal;
 
     public Database() {
         courses = new HashMap<String, Course>();
         degrees = new HashMap<String, Degree>();
         students = new HashMap<String, Student>();
+        concessions = new HashMap<String, ConcessionApplication>();
     }
 
 
@@ -41,7 +45,10 @@ public class Database {
         return courses;
     }
 
-    public void addConcessionApplication(String cid, String sid, ConcessionApplication concessionApp) {
+    public String addConcessionApplication(ConcessionApplication concessionApp) {
+        String uniqueID = UUID.randomUUID().toString();
+        concessions.put(uniqueID, concessionApp);
+        return uniqueID;
     }
 
 }

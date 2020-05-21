@@ -15,16 +15,16 @@ public class ConcessionApplicationHandler {
 
         EnrollmentRequestStatusEnum enrolmentRequestStatus = student.getEnrollmentRequestStatusForCourse(course);
         if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.prerequisites_met) {
-            return "Students that meet prerequisites are not required to apply for a concession";
+            throw new IllegalStateException("Students that meet prerequisites are not required to apply for a concession");
         } else if (enrolmentRequestStatus == EnrollmentRequestStatusEnum.awaiting_concession) {
-            return "Students may only submit one concession application for a course";
+            throw new IllegalStateException("Students may only submit one concession application for a course");
         }
         //Submit concession application
         ConcessionApplication concessionApp = new ConcessionApplication();
-        db.addConcessionApplication(cid, sid, concessionApp);
+        String concessionID = db.addConcessionApplication(concessionApp);
         student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
         concessionApp.setConcessionStatus(ConcessionStatusEnum.pending);
-        return "Concession application submitted";
+        return concessionID;
     }
 
     public NotificationEvent approveConcession(ConcessionApplication app) {
