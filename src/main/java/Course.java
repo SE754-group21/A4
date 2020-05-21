@@ -98,6 +98,7 @@ public class Course {
     }
 
     public int getWaitingListPosition(Student student) {
+        if (!registeredStudent(student)) return -1;
         if (waitingList.contains(student)) {
             return waitingList.indexOf(student);
         }
