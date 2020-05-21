@@ -68,6 +68,19 @@ public class WaitingListCourseTest {
     }
 
     @Test
+    public void removeStudentWaitingListFIFO() {
+        Student student2 = Mockito.mock(Student.class);
+        Student student3 = Mockito.mock(Student.class);
+        course.setCapacity(1);
+        enrolledList.add(student);
+        waitingList.add(student2);
+        waitingList.add(student3);
+        course.removeStudent(student);
+        assertTrue(enrolledList.contains(student2));
+        assertTrue(waitingList.contains(student3));
+    }
+
+    @Test
     public void testUpdateStudentCourseEnrollmentList() {
         course.addStudent(student);
         verify(student, times(1))
@@ -83,6 +96,9 @@ public class WaitingListCourseTest {
         verify(student2, times(1))
                 .setVirtualList(course, VirtualListEnum.waiting_list);
     }
+
+
+
 
 
 
