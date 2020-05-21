@@ -36,7 +36,9 @@ public class Student extends User {
     }
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
-        return null;
+        if (enrollment.get(course) == null)
+            return EnrollmentStatusEnum.not_enrolled;
+        return enrollment.get(course);
     }
 
     public List<Course> getTakenCourses() {
@@ -61,6 +63,7 @@ public class Student extends User {
 
     public void setVirtualList(Course course, VirtualListEnum status) {
         queues.put(course, status);
+        updateVirtualList(course);
     }
 
     public ConcessionStatusEnum getConcessionStatus(Course course) {
@@ -97,9 +100,12 @@ public class Student extends User {
     }
 
     public NotificationEvent updateVirtualList(Course course) {
+        System.out.println("SJKLJKLJKj");
         NotificationEvent event = null;
+
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
         boolean prereqs = meetsPrereqs(course);
+        System.out.println(prereqs);
         VirtualListEnum listEnum = getVirtualStatus(course);
         if (prereqs || concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {
