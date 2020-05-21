@@ -66,6 +66,10 @@ public class Course {
         return capacity - enrolledList.size();
     }
 
+    public int getCoursePoints() {
+        return 0;
+    }
+
     public void addStudent(Student student) {
 
         if (registeredStudent(student)) return;
@@ -109,6 +113,5 @@ public class Course {
         }
         return 0;
     }
-
 
 }

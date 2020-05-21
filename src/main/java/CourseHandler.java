@@ -43,6 +43,10 @@ public class CourseHandler {
         return db.getCourse(cid).getRemainingSeats();
     }
 
+    public int getCoursePoints(String cid) {
+        return 0;
+    }
+
     public List<String> getPrerequisites(String cid) {
         List<String> sids = new ArrayList<>();
         Course course = db.getCourse(cid);
@@ -96,4 +100,5 @@ public class CourseHandler {
         }
         return searchedCourses;
     }
+
 }
