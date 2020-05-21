@@ -32,9 +32,7 @@ public class EnrollmentHandler {
     public boolean studentMeetsPrerequisites(String sid, String cid) {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);
-        List<Course> studentTaken = student.getTakenCourses();
-        List<Course> prereqs = course.getPrerequisites();
-        return studentTaken.containsAll(prereqs);
+        return student.meetsPrereqs(course);
     }
 
     public boolean seatsRemaining(Course course) {

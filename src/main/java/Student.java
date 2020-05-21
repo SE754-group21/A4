@@ -71,6 +71,12 @@ public class Student extends User {
         return queues.get(course);
     }
 
+    public boolean meetsPrereqs(Course course) {
+        List<Course> studentTaken = getTakenCourses();
+        List<Course> prereqs = course.getPrerequisites();
+        return studentTaken.containsAll(prereqs);
+    }
+
     public void updateConcession(Course course) {
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
         VirtualListEnum listEnum = getVirtualStatus(course);
