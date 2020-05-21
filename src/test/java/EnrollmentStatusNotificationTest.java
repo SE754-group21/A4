@@ -1,10 +1,7 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import static org.mockito.Mockito.verify;
 
 public class EnrollmentStatusNotificationTest {
     private String cid;
@@ -34,7 +31,8 @@ public class EnrollmentStatusNotificationTest {
         Mockito.when(concessionApp.getCourse()).thenReturn(course);
         NotificationEvent notificationEvent = concessionHandler.approveConcession(cid);
         String notification = notificationEvent.notifyChange();
-        Assert.assertEquals("Your concession for course SOFTENG 754 has been approved.", notification );
+        Assert.assertEquals("Your concession for course SOFTENG 754 has been approved.",
+                notification );
 
     }
 
@@ -48,7 +46,8 @@ public class EnrollmentStatusNotificationTest {
         Mockito.when(concessionApp.getCourse()).thenReturn(course);
         NotificationEvent notificationEvent = concessionHandler.declineConcession(cid);
         String notification = notificationEvent.notifyChange();
-        Assert.assertEquals("Your concession for course SOFTENG 754 has been declined.", notification );
+        Assert.assertEquals("Your concession for course SOFTENG 754 " +
+                "has been declined.", notification );
     }
 
     @Test
@@ -56,11 +55,14 @@ public class EnrollmentStatusNotificationTest {
         Student student = Mockito.spy(new Student());
         Course course = Mockito.mock(Course.class);
         Mockito.when(course.getCname()).thenReturn("SOFTENG 754");
-        Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
-        Mockito.doReturn(VirtualListEnum.enrolled_list).when(student).getVirtualStatus(course);
+        Mockito.doReturn(ConcessionStatusEnum.approved).when(student)
+                .getConcessionStatus(course);
+        Mockito.doReturn(VirtualListEnum.enrolled_list).when(student)
+                .getVirtualStatus(course);
         NotificationEvent notificationEvent = student.updateVirtualList(course);
         String notification = notificationEvent.notifyChange();
-        Assert.assertEquals("You have been moved off the waiting list for SOFTENG 754 and are now enrolled.", notification );
+        Assert.assertEquals("You have been moved off the waiting list for " +
+                "SOFTENG 754 and are now enrolled.", notification );
     }
 
     @Test
@@ -70,8 +72,8 @@ public class EnrollmentStatusNotificationTest {
         Mockito.when(concessionApp.getStudent()).thenReturn(student);
         Mockito.when(concessionApp.getCourse()).thenReturn(course);
         NotificationEvent notificationEvent = concessionHandler.approveConcession(cid);
-        NotificationSettingEnum newSetting = notificationEvent.getNotificationSetting();
-
+        NotificationSettingEnum defaultSetting = notificationEvent.getNotificationSetting();
+        Assert.assertEquals(NotificationSettingEnum.email, defaultSetting);
     }
 
 
