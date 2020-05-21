@@ -44,7 +44,7 @@ public class CourseHandler {
     }
 
     public int getCoursePoints(String cid) {
-        return 0;
+        return db.getCourse(cid).getCoursePoints();
     }
 
     public List<String> getPrerequisites(String cid) {
