@@ -2,6 +2,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
+
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
@@ -100,8 +103,14 @@ public class ConcessionApplicationTest {
         Mockito.when(db.getConcessionApplication(cid)).thenReturn(app);
         ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
         assertEquals(app, handler.getConcession(cid));
+    }
 
-
+    @Test (expected = NoSuchElementException.class)
+    public void getConcessionFromIDInvalidID() {
+        String cid = "24";
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(null);
+        ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
+        handler.getConcession(cid);
     }
 
 }
