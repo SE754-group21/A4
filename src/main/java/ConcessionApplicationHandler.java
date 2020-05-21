@@ -45,6 +45,7 @@ public class ConcessionApplicationHandler {
         app.setConcessionStatus(ConcessionStatusEnum.denied);
         Student student = app.getStudent();
         Course course = app.getCourse();
+        student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
         student.updateConcession(course);
         NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
         return notificationEvent;
