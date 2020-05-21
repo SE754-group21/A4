@@ -4,10 +4,12 @@ import java.util.NoSuchElementException;
 
 public class Database {
     private Map<String, Course> courses;
+    private Map<String, Degree> degrees;
     private Map<String, Student> students;
 
     public Database() {
         courses = new HashMap<String, Course>();
+        degrees = new HashMap<String, Degree>();
         students = new HashMap<String, Student>();
     }
 
@@ -19,6 +21,11 @@ public class Database {
     public Course getCourse(String cid) {
         if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         return courses.get(cid);
+    }
+
+    public Degree getDegree(String did) {
+        if (degrees.get(did) == null) throw new NoSuchElementException("course with id not found");
+        return degrees.get(did);
     }
 
     public void addStudent(String sid, Student student) {

@@ -1,25 +1,21 @@
 import java.util.*;
 
 public class DegreeHandler {
-    private Map<String, Degree> degrees;
+    private Database db;
 
-    public DegreeHandler() {
-        degrees = new HashMap<String, Degree>();
+    public DegreeHandler(Database db) {
+        this.db = db;
     }
 
-    public void addDegree(Degree degree) {
-        degrees.put(degree.getDid(), degree);
-    }
 
     public String getDname(String did){
-        if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
-        return degrees.get(did).getDname();
+        return db.getDegree(did).getDname();
     }
 
     public List<String> getCompulsoryCourses(String did) {
-        if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
         List<String> courseIDs = new ArrayList<String>();
-        List<Course> courses = degrees.get(did).getCompulsoryCourses();
+        Degree degree = db.getDegree(did);
+        List<Course> courses = degree.getCompulsoryCourses();
         for (Course course: courses){
             courseIDs.add(course.getCid());
         }
@@ -28,9 +24,9 @@ public class DegreeHandler {
 
 
     public List<String> getElectiveCourses(String did) {
-        if (degrees.get(did) == null) throw new NoSuchElementException("degree with id not found");
         List<String> courseIDs = new ArrayList<String>();
-        List<Course> courses = degrees.get(did).getElectiveCourses();
+        Degree degree = db.getDegree(did);
+        List<Course> courses = degree.getElectiveCourses();
         for (Course course: courses){
             courseIDs.add(course.getCid());
         }
