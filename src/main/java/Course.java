@@ -96,5 +96,9 @@ public class Course {
         }
     }
 
+    public int getWaitingListPosition(Student student) {
+        return 0;
+    }
+
 
 }
