@@ -81,7 +81,10 @@ public class ConcessionApplicationHandler {
     }
 
     public ConcessionApplication getConcession(String cid) {
-        return db.getConcessionApplication(cid);
+        ConcessionApplication app = db.getConcessionApplication(cid);
+        if (app == null)
+            throw new NoSuchElementException("Invalid cid");
+        return app;
     }
 
 
