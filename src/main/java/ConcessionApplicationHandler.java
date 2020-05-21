@@ -27,7 +27,8 @@ public class ConcessionApplicationHandler {
     }
 
 
-    public NotificationEvent approveConcession(ConcessionApplication app) {
+    public NotificationEvent approveConcession(String cid) {
+        ConcessionApplication app = db.getConcessionApplication(cid);
         app.setConcessionStatus(ConcessionStatusEnum.approved);
         Student student = app.getStudent();
         Course course = app.getCourse();
@@ -36,7 +37,8 @@ public class ConcessionApplicationHandler {
         return notificationEvent;
     }
 
-    public NotificationEvent declineConcession(ConcessionApplication app) {
+    public NotificationEvent declineConcession(String cid) {
+        ConcessionApplication app = db.getConcessionApplication(cid);
         app.setConcessionStatus(ConcessionStatusEnum.denied);
         Student student = app.getStudent();
         Course course = app.getCourse();
