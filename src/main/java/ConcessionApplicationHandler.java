@@ -20,7 +20,10 @@ public class ConcessionApplicationHandler {
         }
         //Submit concession application
         ConcessionApplication concessionApp = new ConcessionApplication();
+        concessionApp.addInfo(course, student);
+
         String concessionID = db.addConcessionApplication(concessionApp);
+        student.addConcession(course, concessionApp);
         student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
         concessionApp.setConcessionStatus(ConcessionStatusEnum.pending);
         return concessionID;

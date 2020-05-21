@@ -1,17 +1,16 @@
 public class ConcessionApplication {
 
+    private Student student;
+    private Course course;
+
     private ConcessionStatusEnum concessionStatus;
 
     public String getConcessionReason() {
         return "";
     }
 
-    public boolean isConcessionApproved() {
-        return false;
-    }
-
     public ConcessionStatusEnum getConcessionStatus() {
-        return null;
+        return concessionStatus;
     }
 
     public boolean setConcessionStatus(ConcessionStatusEnum concessionStatus) {
@@ -19,8 +18,14 @@ public class ConcessionApplication {
         return true;
     }
 
-    public Student getStudent() {return null; }
-    public Course getCourse() {return null; }
+    public void addInfo(Course c, Student s){
+        this.student = s;
+        this.course = c;
+        this.concessionStatus = ConcessionStatusEnum.pending;
+    }
+
+    public Student getStudent() {return student; }
+    public Course getCourse() {return course; }
 
     public String getStatusReason() {
         return "";
