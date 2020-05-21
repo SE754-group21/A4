@@ -15,6 +15,7 @@ public class EnrollmentHandler {
         Course course = db.getCourse(cid);
         Student student = db.getStudent(sid);
         ConcessionStatusEnum status = concessionStatus(student, course);
+        System.out.println(seatsRemaining(course));
         if (!studentMeetsPrerequisites(sid, cid) &&
                 (status == ConcessionStatusEnum.denied || status == ConcessionStatusEnum.not_applied))
             return false;
@@ -26,15 +27,15 @@ public class EnrollmentHandler {
 
     public ConcessionStatusEnum concessionStatus(Student student, Course course) {
         ConcessionApplication concessionApplication = student.getConcessionApplication(course);
+        if (concessionApplication == null)
+            return ConcessionStatusEnum.not_applied;
         return concessionApplication.getConcessionStatus();
     }
 
     public boolean studentMeetsPrerequisites(String sid, String cid) {
         Student student = db.getStudent(sid);
         Course course = db.getCourse(cid);
-        List<Course> studentTaken = student.getTakenCourses();
-        List<Course> prereqs = course.getPrerequisites();
-        return studentTaken.containsAll(prereqs);
+        return student.meetsPrereqs(course);
     }
 
     public boolean seatsRemaining(Course course) {
@@ -69,8 +70,7 @@ public class EnrollmentHandler {
         if (status != EnrollmentStatusEnum.waiting_list) {
             throw new NoSuchElementException("student is not on the waiting list for this course");
         }
-        int waitingListPosition = student.getWaitingListNumber(course);
-
+        int waitingListPosition = course.getWaitingListPosition(student);
         return waitingListPosition;
     }
 
@@ -85,5 +85,11 @@ public class EnrollmentHandler {
             }
         }
         return coursesCompletedInYear;
+    }
+
+    public void addCourseToEnrollmentCart(String sid, String cid){
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
+        student.addCourseToEnrollmentCart(course);
     }
 }

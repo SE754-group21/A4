@@ -6,8 +6,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -33,22 +32,15 @@ public class CourseEnrollmentTest {
 
     @Test
     public void testStudentMeetsPrerequisites() {
-        List<Course> courses = new ArrayList<>();
-        Mockito.when(student.getTakenCourses()).thenReturn(courses);
-        Mockito.when(course.getPrerequisites()).thenReturn(courses);
+        Mockito.when(student.meetsPrereqs(course)).thenReturn(true);
         EnrollmentHandler handler = new EnrollmentHandler(db);
-
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertTrue(meets);
     }
 
     @Test
     public void testStudentNotMeetPrerequisites() {
-       Course prereq = Mockito.mock(Course.class);
-        List<Course> courses = new ArrayList<>();
-        courses.add(prereq);
-        Mockito.when(student.getTakenCourses()).thenReturn(new ArrayList<>());
-        Mockito.when(course.getPrerequisites()).thenReturn(courses);
+        Mockito.when(student.meetsPrereqs(course)).thenReturn(false);
         EnrollmentHandler handler = new EnrollmentHandler(db);
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertFalse(meets);
@@ -151,6 +143,16 @@ public class CourseEnrollmentTest {
         Mockito.doReturn(ConcessionStatusEnum.not_applied).when(handler).concessionStatus(student, course);
         handler.enrollStudentCourse(sid, cid);
         verify(course, never()).addStudent(student);
+    }
+
+    @Test
+    public void testGetPositionWaitingList() {
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        Mockito.when(course.getWaitingListPosition(student)).thenReturn(0);
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
+        int position = handler.getWaitingListPositionForStudent(sid, cid);
+        assertEquals(position, 0);
+        verify(course).getWaitingListPosition(student);
     }
 
 
