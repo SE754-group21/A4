@@ -68,4 +68,18 @@ public class DegreeInformationTest {
         assertEquals(electiveCourses.get(0).getCid(), courses.get(0));
     }
 
+    @Test
+    public void testGetDegreePoints(){
+        List<Integer> degreePointsAtEachStage = new ArrayList<Integer>();
+        degreePointsAtEachStage.add(120);
+        degreePointsAtEachStage.add(120);
+        degreePointsAtEachStage.add(120);
+        degreePointsAtEachStage.add(120);
+
+        DegreeHandler handler = new DegreeHandler(db);
+        Mockito.when(degree.getDegreePoints()).thenReturn(degreePointsAtEachStage);
+        List<Integer> points = handler.getDegreePoints(did);
+        assertEquals(degreePointsAtEachStage.get(0), points.get(0));
+    }
+
 }
