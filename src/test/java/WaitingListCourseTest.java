@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class WaitingListCourseTest {
-    private Queue<Student> waitingList;
-    private Queue<Student> enrolledList;
+    private List<Student> waitingList;
+    private List<Student> enrolledList;
     private Course course;
     private Student student;
     @Before
