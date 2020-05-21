@@ -81,10 +81,8 @@ public class CourseEnrollmentStatusTest {
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
-        int waitingListPosition = enrollmentHandler.getWaitingListPositionForStudent(sid, cid);
 
         Assert.assertEquals(EnrollmentStatusEnum.waiting_list, status);
-        Assert.assertEquals(62, waitingListPosition);
     }
 
     @Test (expected = NoSuchElementException.class)

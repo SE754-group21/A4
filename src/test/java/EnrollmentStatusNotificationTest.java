@@ -28,11 +28,12 @@ public class EnrollmentStatusNotificationTest {
     }
     @Test
     public void testGetEnrollmentStatusNotificationConcessionApproved() {
-
-        ConcessionApplication concessionApplication = Mockito.mock(ConcessionApplication.class);
-        Mockito.when(concessionApplication.getStudent()).thenReturn(student);
-        Mockito.when(concessionApplication.getCourse()).thenReturn(course);
-        NotificationEvent notificationEvent = concessionHandler.approveConcession(concessionApplication);
+        String cid = "24";
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
+        NotificationEvent notificationEvent = concessionHandler.approveConcession(cid);
         String notification = notificationEvent.notifyChange();
         Assert.assertEquals("Your concession for course SOFTENG 754 has been approved.", notification );
 
@@ -41,10 +42,14 @@ public class EnrollmentStatusNotificationTest {
     @Test
     public void testGetEnrollmentStatusNotificationConcessionDeclined() {
 
-        ConcessionApplication concessionApplication = Mockito.mock(ConcessionApplication.class);
-        Mockito.when(concessionApplication.getStudent()).thenReturn(student);
-        Mockito.when(concessionApplication.getCourse()).thenReturn(course);
-        NotificationEvent notificationEvent = concessionHandler.declineConcession(concessionApplication);
+        String cid = "24";
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        ConcessionApplicationHandler handler =  new ConcessionApplicationHandler(db);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
+
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
+        NotificationEvent notificationEvent = concessionHandler.declineConcession(cid);
         String notification = notificationEvent.notifyChange();
         Assert.assertEquals("Your concession for course SOFTENG 754 has been declined.", notification );
     }
@@ -74,10 +79,12 @@ public class EnrollmentStatusNotificationTest {
 
     @Test
     public void testChangeEnrollmentNotificationSettingsMobile() {
-        ConcessionApplication concessionApplication = Mockito.mock(ConcessionApplication.class);
-        Mockito.when(concessionApplication.getStudent()).thenReturn(student);
-        Mockito.when(concessionApplication.getCourse()).thenReturn(course);
-        NotificationEvent notificationEvent = concessionHandler.approveConcession(concessionApplication);
+        String cid = "24";
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
+        NotificationEvent notificationEvent = concessionHandler.approveConcession(cid);
         notificationEvent.changeNotificationSetting(NotificationSettingEnum.mobile);
         NotificationSettingEnum newSetting = notificationEvent.getNotificationSetting();
         Assert.assertEquals(NotificationSettingEnum.mobile, newSetting);
@@ -85,10 +92,12 @@ public class EnrollmentStatusNotificationTest {
 
     @Test
     public void testChangeEnrollmentNotificationSettingsNone() {
-        ConcessionApplication concessionApplication = Mockito.mock(ConcessionApplication.class);
-        Mockito.when(concessionApplication.getStudent()).thenReturn(student);
-        Mockito.when(concessionApplication.getCourse()).thenReturn(course);
-        NotificationEvent notificationEvent = concessionHandler.approveConcession(concessionApplication);
+        String cid = "24";
+        ConcessionApplication concessionApp = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
+        Mockito.when(concessionApp.getStudent()).thenReturn(student);
+        Mockito.when(concessionApp.getCourse()).thenReturn(course);
+        NotificationEvent notificationEvent = concessionHandler.approveConcession(cid);
         notificationEvent.changeNotificationSetting(NotificationSettingEnum.none);
         NotificationSettingEnum newSetting = notificationEvent.getNotificationSetting();
         String notification = notificationEvent.notifyChange();
