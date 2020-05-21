@@ -51,4 +51,9 @@ public class Database {
         return uniqueID;
     }
 
+    public ConcessionApplication getConcessionApplication(String cid) {
+        return null;
+    }
+
+
 }

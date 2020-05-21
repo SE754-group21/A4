@@ -93,4 +93,15 @@ public class ConcessionApplicationTest {
         assertEquals(concessionApp, app);
     }
 
+    @Test
+    public void getConcessionFromID() {
+        String cid = "24";
+        ConcessionApplication app = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(db.getConcessionApplication(cid)).thenReturn(app);
+        ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
+        assertEquals(app, handler.getConcession(cid));
+
+
+    }
+
 }
