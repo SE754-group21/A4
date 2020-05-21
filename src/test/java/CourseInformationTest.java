@@ -81,6 +81,14 @@ public class CourseInformationTest {
     }
 
     @Test
+    public void testGetCoursePoints() {
+        int points = 15;
+        Mockito.when(course.getCoursePoints()).thenReturn(points);
+        int returnedPoints = handler.getCoursePoints(cid);
+        assertEquals(points, returnedPoints);
+    }
+
+    @Test
     public void testGetPrerequisites() {
         String sid = "KEJ372";
         List<Course> prereqlist = new ArrayList<Course>();
