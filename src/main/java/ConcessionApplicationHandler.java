@@ -19,7 +19,7 @@ public class ConcessionApplicationHandler {
             throw new IllegalStateException("Students may only submit one concession application for a course");
         }
         //Submit concession application
-        ConcessionApplication concessionApp = new ConcessionApplication();
+        ConcessionApplication concessionApp = new ConcessionApplication(student, course);
         concessionApp.addInfo(course, student);
 
         String concessionID = db.addConcessionApplication(concessionApp);
@@ -40,11 +40,13 @@ public class ConcessionApplicationHandler {
         return notificationEvent;
     }
 
-    public NotificationEvent declineConcession(String cid) {
+    public NotificationEvent declineConcession(String cid, String reason) {
         ConcessionApplication app = db.getConcessionApplication(cid);
         app.setConcessionStatus(ConcessionStatusEnum.denied);
+        app.setStatusReason(reason);
         Student student = app.getStudent();
         Course course = app.getCourse();
+        student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
         student.updateConcession(course);
         NotificationEvent notificationEvent = new NotificationEvent(student, course, NotificationEventTypeEnum.concession_denied);
         return notificationEvent;

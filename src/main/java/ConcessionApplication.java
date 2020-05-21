@@ -2,8 +2,15 @@ public class ConcessionApplication {
 
     private Student student;
     private Course course;
-
+    private String statusReason;
     private ConcessionStatusEnum concessionStatus;
+
+    public ConcessionApplication(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+        this.concessionStatus = ConcessionStatusEnum.pending;
+        this.student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
+    }
 
     public String getConcessionReason() {
         return "";
@@ -28,6 +35,10 @@ public class ConcessionApplication {
     public Course getCourse() {return course; }
 
     public String getStatusReason() {
-        return "";
+        return this.statusReason;
+    }
+
+    public void setStatusReason(String s) {
+        this.statusReason = s;
     }
 }

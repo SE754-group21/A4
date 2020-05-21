@@ -30,6 +30,9 @@ public class Student extends User {
     }
 
     public void setTakenCourses(List<Course> courses){
+        for (Course course : courses) {
+            setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.completed);
+        }
         this.courses = courses;
     }
 

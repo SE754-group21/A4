@@ -80,7 +80,7 @@ public class ConcessionApplicationTest {
         Mockito.when(db.getConcessionApplication(cid)).thenReturn(concessionApp);
         Mockito.when(concessionApp.getStudent()).thenReturn(student);
         Mockito.when(concessionApp.getCourse()).thenReturn(course);
-        handler.declineConcession(cid);
+        handler.declineConcession(cid, "Don't meet prerequsities");
         verify(concessionApp,
                 Mockito.times(1)).
                 setConcessionStatus(ConcessionStatusEnum.denied);
