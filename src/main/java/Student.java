@@ -5,7 +5,7 @@ public class Student extends User {
 
     private String sid;
     private List<Course> courses;
-    private List<Course> enrollmentCart;
+    private List<Course> enrollmentCart = new ArrayList<>();
     private Map<Course, ConcessionApplication> applications;
     private Map<Course, VirtualListEnum> queues = new HashMap<>();
     private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
@@ -111,7 +111,9 @@ public class Student extends User {
         return 0;
     }
 
-    public void addCourseToEnrollmentCart(Course course){}
+    public void addCourseToEnrollmentCart(Course course){
+        enrollmentCart.add(course);
+    }
 
     public List<Course> getEnrollmentCart(){return enrollmentCart;};
 
