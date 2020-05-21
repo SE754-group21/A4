@@ -5,7 +5,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @Category(IntegrationTests.class)
 public class EnrollmentIntegrationTest {
@@ -36,5 +36,50 @@ public class EnrollmentIntegrationTest {
         EnrollmentHandler handler = new EnrollmentHandler(db);
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertTrue(meets);
+    }
+
+    @Test
+    public void testStudentEnrollment() {
+        Database db = new Database();
+        String cid = "SE754", sid = "12345";
+
+        Course course = new Course();
+        course.setCid(cid);
+        Student student = new Student();
+        student.setSid(sid);
+        db.addCourse(cid, course);
+        db.addStudent(sid, student);
+
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        boolean success = handler.enrollStudentCourse(sid, cid);
+        assertTrue(success);
+        EnrollmentStatusEnum status = handler.getEnrollmentStatusForCourse(sid, cid);
+        assertEquals(status, EnrollmentStatusEnum.enrolled);
+    }
+
+    @Test
+    public void testStudentEnrollmentPrereqsNotMetNoConcessionApplied() {
+        Database db = new Database();
+        String cid = "SE754", sid = "12345";
+
+        Course course = new Course();
+        course.setCid(cid);
+        Student student = new Student();
+        student.setSid(sid);
+        db.addCourse(cid, course);
+        db.addStudent(sid, student);
+
+        Course prerequisite1 = new Course();
+        List<Course> courses = new ArrayList<>();
+        courses.add(prerequisite1);
+        course.setPrerequisites(courses);
+
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        boolean success = handler.enrollStudentCourse(sid, cid);
+        assertFalse(success);
+
+        EnrollmentStatusEnum status = handler.getEnrollmentStatusForCourse(sid, cid);
+        assertEquals(status, EnrollmentStatusEnum.not_enrolled);
+
     }
 }

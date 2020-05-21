@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -13,6 +14,7 @@ public class Course {
     public Course() {
         enrolledList = new LinkedList<>();
         waitingList = new LinkedList<>();
+        prerequisites = new ArrayList<>();
     }
 
     public Course(List<Student> wait, List<Student> en) {
@@ -61,7 +63,7 @@ public class Course {
     }
 
     public int getRemainingSeats() {
-        return 0;
+        return capacity - enrolledList.size();
     }
 
     public void addStudent(Student student) {
@@ -78,6 +80,7 @@ public class Course {
     private void updateStudent(boolean enrolled, Student student) {
         VirtualListEnum status = enrolled ? VirtualListEnum.enrolled_list : VirtualListEnum.waiting_list;
         student.setVirtualList(this, status);
+
     }
 
     private boolean registeredStudent(Student student) {

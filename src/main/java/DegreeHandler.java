@@ -33,4 +33,10 @@ public class DegreeHandler {
         return courseIDs;
     }
 
+
+    public List<Integer> getDegreePoints(String did){
+        Degree degree = db.getDegree(did);
+        return degree.getDegreePoints();
+    }
+
 }

@@ -22,4 +22,8 @@ public class Degree {
         return null;
     }
 
+    public List<Integer> getDegreePoints() {
+        return null;
+    }
+
 }

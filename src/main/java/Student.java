@@ -37,7 +37,9 @@ public class Student extends User {
     }
 
     public EnrollmentStatusEnum getEnrollmentStatusForCourse(Course course) {
-        return null;
+        if (enrollment.get(course) == null)
+            return EnrollmentStatusEnum.not_enrolled;
+        return enrollment.get(course);
     }
 
     public List<Course> getTakenCourses() {
@@ -62,14 +64,23 @@ public class Student extends User {
 
     public void setVirtualList(Course course, VirtualListEnum status) {
         queues.put(course, status);
+        updateVirtualList(course);
     }
 
     public ConcessionStatusEnum getConcessionStatus(Course course) {
-        return applications.get(course).getConcessionStatus();
+        ConcessionApplication app = applications.get(course);
+        if (app == null) return ConcessionStatusEnum.not_applied;
+        return app.getConcessionStatus();
     }
 
     public VirtualListEnum getVirtualStatus(Course course) {
         return queues.get(course);
+    }
+
+    public boolean meetsPrereqs(Course course) {
+        List<Course> studentTaken = getTakenCourses();
+        List<Course> prereqs = course.getPrerequisites();
+        return studentTaken.containsAll(prereqs);
     }
 
     public void updateConcession(Course course) {
@@ -90,10 +101,14 @@ public class Student extends User {
     }
 
     public NotificationEvent updateVirtualList(Course course) {
+        System.out.println("SJKLJKLJKj");
         NotificationEvent event = null;
+
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        boolean prereqs = meetsPrereqs(course);
+        System.out.println(prereqs);
         VirtualListEnum listEnum = getVirtualStatus(course);
-        if (concessionEnum == ConcessionStatusEnum.approved) {
+        if (prereqs || concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
                 event = new NotificationEvent(this, course, NotificationEventTypeEnum.moved_off_waiting_list);
