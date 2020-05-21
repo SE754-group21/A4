@@ -81,7 +81,7 @@ public class ConcessionApplicationHandler {
     }
 
     public ConcessionApplication getConcession(String cid) {
-        return null;
+        return db.getConcessionApplication(cid);
     }
 
 
