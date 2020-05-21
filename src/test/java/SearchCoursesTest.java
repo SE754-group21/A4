@@ -120,4 +120,12 @@ public class SearchCoursesTest {
         enrollmentHandler.addCourseToEnrollmentCart(sid, cid);
         verify(student).addCourseToEnrollmentCart(course);
     }
+
+    @Test
+    public void testCourseAddedToEnrolmentCart(){
+        Student student = new Student();
+        student.addCourseToEnrollmentCart(course);
+        List<Course> courses = student.getEnrollmentCart();
+        assertEquals(1, courses.size());
+    }
 }
