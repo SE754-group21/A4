@@ -1,6 +1,6 @@
 public class NotificationEvent {
 
-    // Email by default
+    // Email is set by default
     private NotificationSettingEnum notifSetting = NotificationSettingEnum.email;
     private NotificationEventTypeEnum type;
     private Student student;

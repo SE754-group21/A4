@@ -68,7 +68,7 @@ public class CourseEnrollmentStatusTest {
     }
 
     @Test
-    public void testGetAwaitingCourseEnrollmentStatus() {
+    public void testGetWaitingListEnrollmentStatus() {
         Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
 
         Mockito.when(student.getWaitingListNumber(course)).thenReturn(62);
