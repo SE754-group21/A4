@@ -42,6 +42,28 @@ public class CourseEnrollmentStatusTest {
         Assert.assertEquals(EnrollmentStatusEnum.enrolled, status);
     }
 
+    @Test
+    public void testGetConcessionDeniedCourseEnrollmentStatus() {
+        Student student = new Student();
+        Course course = new Course();
+        ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
+        String concessionid = "124342";
+        ConcessionApplication ca = new ConcessionApplication();
+        Mockito.when(db.getConcessionApplication(concessionid)).thenReturn(ca);
+
+        String sid = "A123";
+        String cid = "SE754";
+
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+
+        ca.addInfo(course, student);
+        student.addConcession(course, ca);
+        handler.declineConcession(concessionid);
+        EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
+        Assert.assertEquals(EnrollmentStatusEnum.concession_denied, status);
+    }
+
     @Test (expected = NoSuchElementException.class)
     public void testGetCourseEnrollmentStatusInvalidCourse() {
 
@@ -85,8 +107,8 @@ public class CourseEnrollmentStatusTest {
 
     @Test
     public void testGetWaitingListPosition() {
-        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
-
+        Mockito.when(student.getEnrollmentStatusForCourse(course))
+                .thenReturn(EnrollmentStatusEnum.waiting_list);
         Mockito.when(course.getWaitingListPosition(student)).thenReturn(62);
 
         String sid = "A123";
