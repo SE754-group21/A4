@@ -13,11 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-@Category(IntegrationTests.class)
 public class WaitingListCourseTest {
     private Queue<Student> waitingList;
     private Queue<Student> enrolledList;
@@ -96,6 +94,16 @@ public class WaitingListCourseTest {
         course.addStudent(student2);
         verify(student2, times(1))
                 .setVirtualList(course, VirtualListEnum.waiting_list);
+    }
+
+    @Test
+    public void testWaitingListPositionFront() {
+        Student student2 = Mockito.mock(Student.class);
+        course.setCapacity(1);
+        enrolledList.add(student);
+        waitingList.add(student2);
+        int value = course.getWaitingListPosition(student2);
+        assertEquals(value, 0);
     }
 
 
