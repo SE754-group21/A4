@@ -99,7 +99,6 @@ public class WaitingListCourseTest {
     @Test
     public void testWaitingListPositionFront() {
         Student student2 = Mockito.mock(Student.class);
-        course.setCapacity(1);
         enrolledList.add(student);
         waitingList.add(student2);
         int value = course.getWaitingListPosition(student2);
@@ -110,7 +109,6 @@ public class WaitingListCourseTest {
     public void testWaitingListPositionSecond() {
         Student student2 = Mockito.mock(Student.class);
         Student student3 = Mockito.mock(Student.class);
-        course.setCapacity(1);
         enrolledList.add(student);
         waitingList.add(student2);
         waitingList.add(student3);

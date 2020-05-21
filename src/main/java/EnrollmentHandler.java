@@ -69,8 +69,7 @@ public class EnrollmentHandler {
         if (status != EnrollmentStatusEnum.waiting_list) {
             throw new NoSuchElementException("student is not on the waiting list for this course");
         }
-        int waitingListPosition = student.getWaitingListNumber(course);
-
+        int waitingListPosition = course.getWaitingListPosition(student);
         return waitingListPosition;
     }
 
