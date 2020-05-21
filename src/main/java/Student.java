@@ -5,6 +5,7 @@ public class Student extends User {
 
     private String sid;
     private List<Course> courses;
+    private List<Course> enrollmentCart;
     private Map<Course, ConcessionApplication> applications;
     private Map<Course, VirtualListEnum> queues = new HashMap<>();
     private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
@@ -111,6 +112,8 @@ public class Student extends User {
     }
 
     public void addCourseToEnrollmentCart(Course course){}
+
+    public List<Course> getEnrollmentCart(){return enrollmentCart;};
 
     public void setDateEnrolled(Course course, LocalDate date) {
         this.enrolledDates.put(course, date);
