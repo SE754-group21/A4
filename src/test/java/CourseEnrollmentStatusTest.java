@@ -68,21 +68,39 @@ public class CourseEnrollmentStatusTest {
     public void testGetAwaitingConcessionCourseEnrollmentStatus() {
         Student student = new Student();
         Course course = new Course();
-        ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
         String concessionid = "124342";
         ConcessionApplication ca = new ConcessionApplication(student, course);
         Mockito.when(db.getConcessionApplication(concessionid)).thenReturn(ca);
 
         String sid = "A123";
         String cid = "SE754";
-
         Mockito.when(db.getCourse(cid)).thenReturn(course);
         Mockito.when(db.getStudent(sid)).thenReturn(student);
 
         ca.addInfo(course, student);
         student.addConcession(course, ca);
-        EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
+        EnrollmentStatusEnum status = enrollmentHandler
+                .getEnrollmentStatusForCourse(sid, cid);
         Assert.assertEquals(EnrollmentStatusEnum.awaiting_concession, status);
+    }
+
+    @Test
+    public void testGetCompletedCourseEnrollmentStatus() {
+        Student student = new Student();
+        Course course = new Course();
+
+        String sid = "A123";
+        String cid = "SE754";
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(course);
+        student.setTakenCourses(courses);
+
+        EnrollmentStatusEnum status = enrollmentHandler
+                .getEnrollmentStatusForCourse(sid, cid);
+        Assert.assertEquals(EnrollmentStatusEnum.completed, status);
     }
 
     @Test (expected = NoSuchElementException.class)
