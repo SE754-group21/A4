@@ -8,7 +8,6 @@ public class Database {
     private Map<String, Degree> degrees;
     private Map<String, Student> students;
     private Map<String, ConcessionApplication> concessions;
-    private int concessionVal;
 
     public Database() {
         courses = new HashMap<String, Course>();
@@ -52,7 +51,7 @@ public class Database {
     }
 
     public ConcessionApplication getConcessionApplication(String cid) {
-        return null;
+        return concessions.get(cid);
     }
 
 

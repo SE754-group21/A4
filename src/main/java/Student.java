@@ -7,13 +7,14 @@ public class Student extends User {
     private List<Course> courses;
     private List<Course> enrollmentCart = new ArrayList<>();
     private Map<Course, ConcessionApplication> applications;
-    private Map<Course, VirtualListEnum> queues = new HashMap<>();
+    Map<Course, VirtualListEnum> queues;
     private Map<Course, EnrollmentStatusEnum> enrollment = new HashMap<>();
     private Map<Course, LocalDate> enrolledDates = new HashMap<>();
 
     public Student() {
         applications = new HashMap<>();
         courses = new ArrayList<>();
+        queues = new HashMap<>();
     }
 
     public void addConcession(Course course, ConcessionApplication app) {
@@ -101,12 +102,9 @@ public class Student extends User {
     }
 
     public NotificationEvent updateVirtualList(Course course) {
-        System.out.println("SJKLJKLJKj");
         NotificationEvent event = null;
-
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
         boolean prereqs = meetsPrereqs(course);
-        System.out.println(prereqs);
         VirtualListEnum listEnum = getVirtualStatus(course);
         if (prereqs || concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {

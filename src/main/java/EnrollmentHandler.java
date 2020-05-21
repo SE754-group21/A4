@@ -15,10 +15,10 @@ public class EnrollmentHandler {
         Course course = db.getCourse(cid);
         Student student = db.getStudent(sid);
         ConcessionStatusEnum status = concessionStatus(student, course);
-        System.out.println(seatsRemaining(course));
         if (!studentMeetsPrerequisites(sid, cid) &&
                 (status == ConcessionStatusEnum.denied || status == ConcessionStatusEnum.not_applied))
             return false;
+
         course.addStudent(student);
         boolean qualified = seatsRemaining(course) &&
                 (studentMeetsPrerequisites(sid, cid) || status == ConcessionStatusEnum.approved);

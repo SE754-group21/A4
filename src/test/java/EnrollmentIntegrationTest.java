@@ -82,4 +82,36 @@ public class EnrollmentIntegrationTest {
         assertEquals(status, EnrollmentStatusEnum.not_enrolled);
 
     }
+
+    @Test
+    public void testStudentEnrollmentPrereqsConcessionFlow() {
+        Database db = new Database();
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        ConcessionApplicationHandler chandler = new ConcessionApplicationHandler(db);
+
+        String cid = "SE754", sid = "12345";
+        Course course = new Course();
+        course.setCid(cid);
+        Student student = new Student();
+        student.setSid(sid);
+        db.addCourse(cid, course);
+        db.addStudent(sid, student);
+
+        Course prerequisite1 = new Course();
+        List<Course> courses = new ArrayList<>();
+        courses.add(prerequisite1);
+        course.setPrerequisites(courses);
+
+        EnrollmentStatusEnum status = handler.getEnrollmentStatusForCourse(sid, cid);
+        assertEquals(status, EnrollmentStatusEnum.not_enrolled);
+
+        String ccid = chandler.submitApplication(sid, cid);
+        handler.enrollStudentCourse(sid, cid);
+        assertEquals(handler.getEnrollmentStatusForCourse(sid, cid), EnrollmentStatusEnum.awaiting_concession);
+        assertEquals(ConcessionStatusEnum.pending, student.getConcessionStatus(course));
+
+        chandler.approveConcession(ccid);
+        assertEquals(student.getConcessionStatus(course), ConcessionStatusEnum.approved);
+        assertEquals(handler.getEnrollmentStatusForCourse(sid, cid), EnrollmentStatusEnum.enrolled);
+    }
 }

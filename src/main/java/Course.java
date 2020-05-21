@@ -67,6 +67,7 @@ public class Course {
     }
 
     public void addStudent(Student student) {
+
         if (registeredStudent(student)) return;
         if (enrolledList.size() == capacity) {
             waitingList.add(student);
@@ -78,6 +79,7 @@ public class Course {
     }
 
     private void updateStudent(boolean enrolled, Student student) {
+
         VirtualListEnum status = enrolled ? VirtualListEnum.enrolled_list : VirtualListEnum.waiting_list;
         student.setVirtualList(this, status);
 
