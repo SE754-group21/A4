@@ -40,4 +40,13 @@ public class StudentVirtualListHandler {
         verify(student).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.waiting_list);
         verify(student).setEnrollmentStatusForCourse(Mockito.any(Course.class), Mockito.any(EnrollmentStatusEnum.class));
     }
+
+    @Test
+    public void testCheckPrerequisitesMetEnrolledList() {
+        Mockito.doReturn(true).when(student).meetsPrereqs(course);
+        Mockito.doReturn(VirtualListEnum.enrolled_list).when(student).getVirtualStatus(course);
+        student.updateVirtualList(course);
+        verify(student).setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
+        verify(student).setEnrollmentStatusForCourse(Mockito.any(Course.class), Mockito.any(EnrollmentStatusEnum.class));
+    }
 }
