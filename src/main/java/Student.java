@@ -64,7 +64,9 @@ public class Student extends User {
     }
 
     public ConcessionStatusEnum getConcessionStatus(Course course) {
-        return applications.get(course).getConcessionStatus();
+        ConcessionApplication app = applications.get(course);
+        if (app == null) return ConcessionStatusEnum.not_applied;
+        return app.getConcessionStatus();
     }
 
     public VirtualListEnum getVirtualStatus(Course course) {
@@ -97,8 +99,9 @@ public class Student extends User {
     public NotificationEvent updateVirtualList(Course course) {
         NotificationEvent event = null;
         ConcessionStatusEnum concessionEnum = getConcessionStatus(course);
+        boolean prereqs = meetsPrereqs(course);
         VirtualListEnum listEnum = getVirtualStatus(course);
-        if (concessionEnum == ConcessionStatusEnum.approved) {
+        if (prereqs || concessionEnum == ConcessionStatusEnum.approved) {
             if (listEnum == VirtualListEnum.enrolled_list) {
                 setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.enrolled);
                 event = new NotificationEvent(this, course, NotificationEventTypeEnum.moved_off_waiting_list);

@@ -17,6 +17,7 @@ public class StudentVirtualListHandler {
 
     @Test
     public void testCheckNotApprovedConcession() {
+        Mockito.doReturn(false).when(student).meetsPrereqs(course);
         Mockito.doReturn(ConcessionStatusEnum.pending).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateVirtualList(course);
@@ -25,6 +26,7 @@ public class StudentVirtualListHandler {
 
     @Test
     public void testCheckApprovedConcessionEnrolledList() {
+        Mockito.doReturn(false).when(student).meetsPrereqs(course);
         Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.enrolled_list).when(student).getVirtualStatus(course);
         student.updateVirtualList(course);
@@ -34,6 +36,7 @@ public class StudentVirtualListHandler {
 
     @Test
     public void testCheckApprovedConcessionWaitingList() {
+        Mockito.doReturn(false).when(student).meetsPrereqs(course);
         Mockito.doReturn(ConcessionStatusEnum.approved).when(student).getConcessionStatus(course);
         Mockito.doReturn(VirtualListEnum.waiting_list).when(student).getVirtualStatus(course);
         student.updateVirtualList(course);
