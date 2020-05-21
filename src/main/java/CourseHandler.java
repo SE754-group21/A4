@@ -1,59 +1,104 @@
 import java.util.*;
 
 public class CourseHandler {
-    private Map<String, Course> courses;
-    public CourseHandler() {
-        courses = new HashMap<String, Course>();
-    }
-
-    public void addCourse(Course course) {
-        courses.put(course.getCid(), course);
+    private Database db;
+    private static int maxCapacity = 1000;
+    public CourseHandler(Database db) {
+        this.db = db;
     }
 
     public String getCname(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getCname();
+        return db.getCourse(cid).getCname();
     }
 
     public String getCdesc(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getCdesc();
+        return db.getCourse(cid).getCdesc();
     }
 
     public List<String> getStaff(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         List<String> sids = new ArrayList<>();
-        List<Staff> allstaff = courses.get(cid).getStaff();
+        List<Staff> allstaff = db.getCourse(cid).getStaff();
         for (Staff s : allstaff) {
-            sids.add(s.getID());
+            sids.add(s.getSid());
         }
         return sids;
     }
 
+    public boolean setCapacity(String cid, int capacity) {
+        if (capacity < 0 || capacity > maxCapacity) return false;
+        Course course = db.getCourse(cid);
+        course.setCapacity(capacity);
+        return true;
+    }
+
     public List<String> getCHours(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getCHours();
+        return db.getCourse(cid).getCHours();
     }
 
     public int getTotalSeats(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getTotalSeats();
+        return db.getCourse(cid).getTotalSeats();
     }
 
     public int getRemainingSeats(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
-        return courses.get(cid).getRemainingSeats();
+        return db.getCourse(cid).getRemainingSeats();
+    }
+
+    public int getCoursePoints(String cid) {
+        return db.getCourse(cid).getCoursePoints();
     }
 
     public List<String> getPrerequisites(String cid) {
-        if (courses.get(cid) == null) throw new NoSuchElementException("course with id not found");
         List<String> sids = new ArrayList<>();
-        List<Course> prereqs = courses.get(cid).getPrerequisites();
+        Course course = db.getCourse(cid);
+        List<Course> prereqs = course.getPrerequisites();
         for (Course s : prereqs) {
             sids.add(s.getCid());
         }
         return sids;
     }
 
+    public void setPrerequisites(String cid, List<String> prereqsid) {
+        Course course = db.getCourse(cid);
+        List<Course> prereqs = new ArrayList<Course>();
+        for (String prereqid : prereqsid) {
+            Course prereq = db.getCourse(prereqid);
+            if (prereq == null)
+                throw new NoSuchElementException("Invalid prereq ID");
+            prereqs.add(prereq);
+        }
+        course.setPrerequisites(prereqs);
+    }
+
+    public List<Course> search(String search) {
+        List<Course> searchedCourses = new ArrayList<>();
+        Map<String, Course> courses = db.getAllCourses();
+        for (Map.Entry<String, Course> e : courses.entrySet()) {
+            if (e.getValue().getCname() != null && e.getValue().getCname().toLowerCase().contains(search.toLowerCase())) {
+                searchedCourses.add(e.getValue());
+            }
+            if(e.getValue().getCdesc() != null && e.getValue().getCdesc().toLowerCase().contains(search.toLowerCase())){
+                searchedCourses.add(e.getValue());
+            }
+            if(e.getValue().getCdept() != null && e.getValue().getCdept().toLowerCase().contains(search.toLowerCase())){
+                searchedCourses.add(e.getValue());
+            }
+            List<Staff> staff = e.getValue().getStaff();
+            for(Staff s: staff) {
+                if (s.getFirst() != null && s.getFirst().toLowerCase().contains(search.toLowerCase())) {
+                    searchedCourses.add(e.getValue());
+                }
+                if(s.getLast() != null && s.getLast().toLowerCase().contains(search.toLowerCase())){
+                    searchedCourses.add(e.getValue());
+                }
+                if(s.getFirst() != null && s.getLast() != null ){
+                    String fullName = s.getFirst() + " " + s.getLast();
+                    if(fullName.toLowerCase().contains(search.toLowerCase())){
+                        searchedCourses.add(e.getValue());
+                    }
+                }
+            }
+        }
+        return searchedCourses;
+    }
 
 }

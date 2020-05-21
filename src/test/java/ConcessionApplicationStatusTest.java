@@ -1,18 +1,22 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
-public class testConcessionApplicationStatus {
-    Course course;
-    Student student;
-    EnrollmentHandler enrollmentHandler;
+@Category(UnitTests.class)
+public class ConcessionApplicationStatusTest {
+    private Course course;
+    private Student student;
+    private ConcessionApplicationHandler concessionHandler;
+    private Database db;
 
     @Before
     public void setUp() {
         course = Mockito.mock(Course.class);
         student = Mockito.mock(Student.class);
-        enrollmentHandler =  new EnrollmentHandler();
+        db = Mockito.mock(Database.class);
+        concessionHandler  =  new ConcessionApplicationHandler(db);
     }
 
     @Test
@@ -29,10 +33,10 @@ public class testConcessionApplicationStatus {
         Mockito.when(concessionApp.getConcessionReason()).thenReturn("Class is full");
         Mockito.when(concessionApp.getConcessionStatus()).thenReturn(ConcessionStatusEnum.pending);
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
-        String concessionReason = enrollmentHandler.getConcessionReason(sid, cid);
-        String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        String concessionReason = concessionHandler.getConcessionReason(sid, cid);
+        String concessionStatus = concessionHandler.getConcessionStatus(sid, cid);
 
         Assert.assertEquals("Class is full", concessionReason);
         Assert.assertEquals("Pending - awaiting course approval", concessionStatus);
@@ -52,10 +56,10 @@ public class testConcessionApplicationStatus {
         Mockito.when(concessionApp.getConcessionStatus()).thenReturn(ConcessionStatusEnum.denied);
         Mockito.when(concessionApp.getStatusReason()).thenReturn("Denied because the prerequisites do not match");
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
-        String statusReason = enrollmentHandler.getStatusReason(sid, cid);
-        String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        String statusReason = concessionHandler.getStatusReason(sid, cid);
+        String concessionStatus = concessionHandler.getConcessionStatus(sid, cid);
 
         Assert.assertEquals("Denied - concession not approved", concessionStatus);
         Assert.assertEquals("Denied because the prerequisites do not match", statusReason);
@@ -75,10 +79,10 @@ public class testConcessionApplicationStatus {
         Mockito.when(concessionApp.getConcessionStatus()).thenReturn(ConcessionStatusEnum.approved);
         Mockito.when(concessionApp.getStatusReason()).thenReturn("Approved because the faculty agrees this covers the prerequisite");
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
-        String statusReason = enrollmentHandler.getStatusReason(sid, cid);
-        String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        String statusReason = concessionHandler.getStatusReason(sid, cid);
+        String concessionStatus = concessionHandler.getConcessionStatus(sid, cid);
 
         Assert.assertEquals("Approved - concession accepted and enrollment complete", concessionStatus);
         Assert.assertEquals("Approved because the faculty agrees this covers the prerequisite", statusReason);
@@ -97,11 +101,11 @@ public class testConcessionApplicationStatus {
 
         Mockito.when(concessionApp.getConcessionStatus()).thenReturn(null);
 
-        enrollmentHandler.addCourse(course);
-        enrollmentHandler.addStudent(student);
-        String concessionStatus = enrollmentHandler.getConcessionStatus(sid, cid);
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        String concessionStatus = concessionHandler.getConcessionStatus(sid, cid);
 
-        Assert.assertEquals("There is no concession for this course", concessionStatus);
+        Assert.assertEquals("The student has no concession for this course", concessionStatus);
     }
 
 }

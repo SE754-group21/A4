@@ -1,6 +1,3 @@
-public class Staff {
+public class Staff extends User {
 
-    public String getID() {
-        return "";
-    }
 }
