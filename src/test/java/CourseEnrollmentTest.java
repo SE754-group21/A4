@@ -32,22 +32,15 @@ public class CourseEnrollmentTest {
 
     @Test
     public void testStudentMeetsPrerequisites() {
-        List<Course> courses = new ArrayList<>();
-        Mockito.when(student.getTakenCourses()).thenReturn(courses);
-        Mockito.when(course.getPrerequisites()).thenReturn(courses);
+        Mockito.when(student.meetsPrereqs(course)).thenReturn(true);
         EnrollmentHandler handler = new EnrollmentHandler(db);
-
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertTrue(meets);
     }
 
     @Test
     public void testStudentNotMeetPrerequisites() {
-       Course prereq = Mockito.mock(Course.class);
-        List<Course> courses = new ArrayList<>();
-        courses.add(prereq);
-        Mockito.when(student.getTakenCourses()).thenReturn(new ArrayList<>());
-        Mockito.when(course.getPrerequisites()).thenReturn(courses);
+        Mockito.when(student.meetsPrereqs(course)).thenReturn(false);
         EnrollmentHandler handler = new EnrollmentHandler(db);
         boolean meets = handler.studentMeetsPrerequisites(sid, cid);
         assertFalse(meets);
