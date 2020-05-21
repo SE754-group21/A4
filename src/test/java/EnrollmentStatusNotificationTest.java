@@ -45,7 +45,7 @@ public class EnrollmentStatusNotificationTest {
 
         Mockito.when(concessionApp.getStudent()).thenReturn(student);
         Mockito.when(concessionApp.getCourse()).thenReturn(course);
-        NotificationEvent notificationEvent = concessionHandler.declineConcession(concessionId);
+        NotificationEvent notificationEvent = concessionHandler.declineConcession(concessionId, "Don't meet prerequsities");
         String notification = notificationEvent.notifyChange();
         Assert.assertEquals("Your concession for course SOFTENG 754 " +
                 "has been declined.", notification );

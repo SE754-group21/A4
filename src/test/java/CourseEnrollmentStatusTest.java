@@ -59,7 +59,7 @@ public class CourseEnrollmentStatusTest {
 
         ca.addInfo(course, student);
         student.addConcession(course, ca);
-        handler.declineConcession(concessionid);
+        handler.declineConcession(concessionid, "Don't meet prerequsities");
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
         Assert.assertEquals(EnrollmentStatusEnum.concession_denied, status);
     }

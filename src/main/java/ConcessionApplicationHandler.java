@@ -40,9 +40,10 @@ public class ConcessionApplicationHandler {
         return notificationEvent;
     }
 
-    public NotificationEvent declineConcession(String cid) {
+    public NotificationEvent declineConcession(String cid, String reason) {
         ConcessionApplication app = db.getConcessionApplication(cid);
         app.setConcessionStatus(ConcessionStatusEnum.denied);
+        app.setStatusReason(reason);
         Student student = app.getStudent();
         Course course = app.getCourse();
         student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.concession_denied);
