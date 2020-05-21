@@ -6,8 +6,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -151,6 +150,15 @@ public class CourseEnrollmentTest {
         Mockito.doReturn(ConcessionStatusEnum.not_applied).when(handler).concessionStatus(student, course);
         handler.enrollStudentCourse(sid, cid);
         verify(course, never()).addStudent(student);
+    }
+
+    @Test
+    public void testGetPositionWaitingList() {
+        EnrollmentHandler handler = new EnrollmentHandler(db);
+        Mockito.when(course.getWaitingListPosition(student)).thenReturn(0);
+        int position = handler.getWaitingListPositionForStudent(sid, cid);
+        assertEquals(position, 0);
+        verify(course).getWaitingListPosition(student);
     }
 
 
