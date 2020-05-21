@@ -35,7 +35,8 @@ public class DegreeHandler {
 
 
     public List<Integer> getDegreePoints(String did){
-        return null;
+        Degree degree = db.getDegree(did);
+        return degree.getDegreePoints();
     }
 
 }
