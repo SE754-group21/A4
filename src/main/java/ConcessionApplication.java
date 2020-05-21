@@ -5,6 +5,13 @@ public class ConcessionApplication {
 
     private ConcessionStatusEnum concessionStatus;
 
+    public ConcessionApplication(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+        this.concessionStatus = ConcessionStatusEnum.pending;
+        this.student.setEnrollmentStatusForCourse(course, EnrollmentStatusEnum.awaiting_concession);
+    }
+
     public String getConcessionReason() {
         return "";
     }

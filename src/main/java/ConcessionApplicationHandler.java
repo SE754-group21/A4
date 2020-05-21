@@ -19,7 +19,7 @@ public class ConcessionApplicationHandler {
             throw new IllegalStateException("Students may only submit one concession application for a course");
         }
         //Submit concession application
-        ConcessionApplication concessionApp = new ConcessionApplication();
+        ConcessionApplication concessionApp = new ConcessionApplication(student, course);
         concessionApp.addInfo(course, student);
 
         String concessionID = db.addConcessionApplication(concessionApp);
