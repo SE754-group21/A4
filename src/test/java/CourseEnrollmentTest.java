@@ -156,6 +156,7 @@ public class CourseEnrollmentTest {
     public void testGetPositionWaitingList() {
         EnrollmentHandler handler = new EnrollmentHandler(db);
         Mockito.when(course.getWaitingListPosition(student)).thenReturn(0);
+        Mockito.when(student.getEnrollmentStatusForCourse(course)).thenReturn(EnrollmentStatusEnum.waiting_list);
         int position = handler.getWaitingListPositionForStudent(sid, cid);
         assertEquals(position, 0);
         verify(course).getWaitingListPosition(student);
