@@ -80,6 +80,10 @@ public class ConcessionApplicationHandler {
         return concessionApplication.getConcessionStatus();
     }
 
+    public ConcessionApplication getConcession(String cid) {
+        return null;
+    }
+
 
 
 }
