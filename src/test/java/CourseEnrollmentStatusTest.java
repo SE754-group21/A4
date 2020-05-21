@@ -48,7 +48,7 @@ public class CourseEnrollmentStatusTest {
         Course course = new Course();
         ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
         String concessionid = "124342";
-        ConcessionApplication ca = new ConcessionApplication();
+        ConcessionApplication ca = new ConcessionApplication(student, course);
         Mockito.when(db.getConcessionApplication(concessionid)).thenReturn(ca);
 
         String sid = "A123";
@@ -62,6 +62,27 @@ public class CourseEnrollmentStatusTest {
         handler.declineConcession(concessionid);
         EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
         Assert.assertEquals(EnrollmentStatusEnum.concession_denied, status);
+    }
+
+    @Test
+    public void testGetAwaitingConcessionCourseEnrollmentStatus() {
+        Student student = new Student();
+        Course course = new Course();
+        ConcessionApplicationHandler handler = new ConcessionApplicationHandler(db);
+        String concessionid = "124342";
+        ConcessionApplication ca = new ConcessionApplication(student, course);
+        Mockito.when(db.getConcessionApplication(concessionid)).thenReturn(ca);
+
+        String sid = "A123";
+        String cid = "SE754";
+
+        Mockito.when(db.getCourse(cid)).thenReturn(course);
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+
+        ca.addInfo(course, student);
+        student.addConcession(course, ca);
+        EnrollmentStatusEnum status = enrollmentHandler.getEnrollmentStatusForCourse(sid, cid);
+        Assert.assertEquals(EnrollmentStatusEnum.awaiting_concession, status);
     }
 
     @Test (expected = NoSuchElementException.class)
