@@ -87,6 +87,8 @@ public class EnrollmentHandler {
     }
 
     public void addCourseToEnrollmentCart(String sid, String cid){
-
+        Student student = db.getStudent(sid);
+        Course course = db.getCourse(cid);
+        student.addCourseToEnrollmentCart(course);
     }
 }
