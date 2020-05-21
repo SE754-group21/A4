@@ -44,6 +44,7 @@ public class WaitingListCourseTest {
 
     @Test
     public void testAddDupStudent() {
+        enrolledList.add(student);
         course.addStudent(student);
         assertTrue(enrolledList.size() == 1);
     }
