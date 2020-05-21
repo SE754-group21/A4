@@ -53,6 +53,18 @@ public class CourseHandler {
         return sids;
     }
 
+    public void setPrerequisites(String cid, List<String> prereqsid) {
+        Course course = db.getCourse(cid);
+        List<Course> prereqs = new ArrayList<Course>();
+        for (String prereqid : prereqsid) {
+            Course prereq = db.getCourse(prereqid);
+            if (prereq == null)
+                throw new NoSuchElementException("Invalid prereq ID");
+            prereqs.add(prereq);
+        }
+        course.setPrerequisites(prereqs);
+    }
+
     public List<Course> search(String search) {
         List<Course> searchedCourses = new ArrayList<>();
         Map<String, Course> courses = db.getAllCourses();
