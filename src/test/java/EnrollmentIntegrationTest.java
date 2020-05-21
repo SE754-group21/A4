@@ -5,8 +5,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @Category(IntegrationTests.class)
 public class EnrollmentIntegrationTest {
@@ -57,4 +56,5 @@ public class EnrollmentIntegrationTest {
         EnrollmentStatusEnum status = handler.getEnrollmentStatusForCourse(sid, cid);
         assertEquals(status, EnrollmentStatusEnum.enrolled);
     }
+
 }
