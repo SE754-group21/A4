@@ -1,5 +1,4 @@
-
-
+import java.util.NoSuchElementException;
 
 public class ConcessionApplicationHandler {
 
@@ -26,6 +25,7 @@ public class ConcessionApplicationHandler {
         concessionApp.setConcessionStatus(ConcessionStatusEnum.pending);
         return concessionID;
     }
+
 
     public NotificationEvent approveConcession(ConcessionApplication app) {
         app.setConcessionStatus(ConcessionStatusEnum.approved);
