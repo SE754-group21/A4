@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 
 @Category(UnitTests.class)
 public class SearchCoursesTest {
@@ -112,9 +113,11 @@ public class SearchCoursesTest {
 
     @Test
     public void testAddCourseToEnrolmentCart(){
-        Student student = new Student();
-        student.addCourseTonEnrolmentCart(course);
-        List<Course> enrolmentCart = student.getEnrolmentCart();
-        assertTrue(1, enrolmentCart.size());
+        EnrollmentHandler enrollmentHandler = new EnrollmentHandler(db);
+        Student student = Mockito.mock(Student.class);
+        String sid = "12345";
+        Mockito.when(db.getStudent(sid)).thenReturn(student);
+        enrollmentHandler.addCourseToEnrollmentCart(sid, cid);
+        verify(student).addCourseToEnrollmentCart(course);
     }
 }
