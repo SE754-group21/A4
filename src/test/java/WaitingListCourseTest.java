@@ -23,7 +23,6 @@ public class WaitingListCourseTest {
     private Queue<Student> enrolledList;
     private Course course;
     private Student student;
-
     @Before
     public void setUp(){
         waitingList = spy(new LinkedList<>());
@@ -31,13 +30,11 @@ public class WaitingListCourseTest {
         course = new Course(waitingList, enrolledList);
         student = Mockito.mock(Student.class);
     }
-
     @Test
     public void testAddStudentToCourse() {
         course.addStudent(student);
         assertTrue(enrolledList.size() == 1);
     }
-
     @Test
     public void testAddStudentToFullCourse() {
         course.setCapacity(0);
@@ -48,13 +45,12 @@ public class WaitingListCourseTest {
     @Test
     public void testAddDupStudent() {
         course.addStudent(student);
-        course.addStudent(student);
         assertTrue(enrolledList.size() == 1);
     }
 
     @Test
     public void removeStudent() {
-        course.addStudent(student);
+        enrolledList.add(student);
         course.removeStudent(student);
         assertTrue(enrolledList.size() == 0);
     }
@@ -63,8 +59,8 @@ public class WaitingListCourseTest {
     public void removeStudentWaitingList() {
         Student student2 = Mockito.mock(Student.class);
         course.setCapacity(1);
-        course.addStudent(student);
-        course.addStudent(student2);
+        enrolledList.add(student);
+        waitingList.add(student2);
         course.removeStudent(student);
         assertTrue(enrolledList.size() == 1);
         assertTrue(waitingList.size() == 0);
@@ -74,16 +70,18 @@ public class WaitingListCourseTest {
     @Test
     public void testUpdateStudentCourseEnrollmentList() {
         course.addStudent(student);
-        verify(student, times(1)).setVirtualList(course, VirtualListEnum.enrolled_list);
+        verify(student, times(1))
+                .setVirtualList(course, VirtualListEnum.enrolled_list);
     }
 
     @Test
     public void testUpdateStudentCourseWaitingList() {
         Student student2 = Mockito.mock(Student.class);
         course.setCapacity(1);
-        course.addStudent(student);
+        enrolledList.add(student);
         course.addStudent(student2);
-        verify(student2, times(1)).setVirtualList(course, VirtualListEnum.waiting_list);
+        verify(student2, times(1))
+                .setVirtualList(course, VirtualListEnum.waiting_list);
     }
 
 
