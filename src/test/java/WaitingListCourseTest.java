@@ -118,6 +118,12 @@ public class WaitingListCourseTest {
         assertEquals(value, 1);
     }
 
+    @Test
+    public void testWaitingListPositionNotEnrolled() {
+        int value = course.getWaitingListPosition(student);
+        assertEquals(value, -1);
+    }
+
 
 
 
