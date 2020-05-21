@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class WaitingListCourseTest {
-    private Queue<Student> waitingList;
-    private Queue<Student> enrolledList;
+    private List<Student> waitingList;
+    private List<Student> enrolledList;
     private Course course;
     private Student student;
     @Before
@@ -105,6 +105,20 @@ public class WaitingListCourseTest {
         int value = course.getWaitingListPosition(student2);
         assertEquals(value, 0);
     }
+
+    @Test
+    public void testWaitingListPositionSecond() {
+        Student student2 = Mockito.mock(Student.class);
+        Student student3 = Mockito.mock(Student.class);
+        course.setCapacity(1);
+        enrolledList.add(student);
+        waitingList.add(student2);
+        waitingList.add(student3);
+        int value = course.getWaitingListPosition(student3);
+        assertEquals(value, 1);
+    }
+
+
 
 
 

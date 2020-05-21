@@ -7,15 +7,15 @@ public class Course {
     private String cid;
     private List<Course> prerequisites;
     private int capacity = 1000;
-    private Queue<Student> enrolledList;
-    private Queue<Student> waitingList;
+    private List<Student> enrolledList;
+    private List<Student> waitingList;
 
     public Course() {
         enrolledList = new LinkedList<>();
         waitingList = new LinkedList<>();
     }
 
-    public Course(Queue<Student> wait, Queue<Student> en) {
+    public Course(List<Student> wait, List<Student> en) {
         this.enrolledList = en;
         this.waitingList = wait;
     }
@@ -90,13 +90,17 @@ public class Course {
         else if (waitingList.contains(student))
             waitingList.remove(student);
         if (enrolledList.size() < capacity && waitingList.size() > 0) {
-            Student studentNew = waitingList.poll();
+            Student studentNew = waitingList.get(0);
+            waitingList.remove(0);
             enrolledList.add(studentNew);
             updateStudent(true, studentNew);
         }
     }
 
     public int getWaitingListPosition(Student student) {
+        if (waitingList.contains(student)) {
+            return waitingList.indexOf(student);
+        }
         return 0;
     }
 
