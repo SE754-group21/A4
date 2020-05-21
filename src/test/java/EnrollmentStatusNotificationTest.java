@@ -61,6 +61,16 @@ public class EnrollmentStatusNotificationTest {
         Assert.assertEquals("You have been moved off the waiting list for SOFTENG 754 and are now enrolled.", notification );
     }
 
+    @Test
+    public void testDefaultEnrollmentNotificationSetting() {
+        ConcessionApplication concessionApplication = Mockito.mock(ConcessionApplication.class);
+        Mockito.when(concessionApplication.getStudent()).thenReturn(student);
+        Mockito.when(concessionApplication.getCourse()).thenReturn(course);
+        NotificationEvent notificationEvent = concessionHandler.approveConcession(concessionApplication);
+        NotificationSettingEnum setting = notificationEvent.getNotificationSetting();
+        Assert.assertEquals(NotificationSettingEnum.email, setting);
+    }
+
 
     @Test
     public void testChangeEnrollmentNotificationSettingsMobile() {
